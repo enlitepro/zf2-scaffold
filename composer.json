@@ -8,7 +8,13 @@
         }
     ],
     "require": {
-        "zendframework/zendframework": "2.2.1",
+        "zendframework/zend-code": "2.2.1",
+        "zendframework/zend-stdlib": "2.2.1",
         "symfony/console": "2.0.7"
+    },
+    "autoload": {
+        "psr-0": {
+            "Scaffold": "src/"
+        }
     }
 }
