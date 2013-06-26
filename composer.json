@@ -1,6 +1,6 @@
 {
     "name": "ftdebugger/scaffolder",
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "authors": [
         {
             "name": "Evgeny Shpilevsky",
@@ -8,9 +8,9 @@
         }
     ],
     "require": {
-        "zendframework/zend-code": "2.2.1",
-        "zendframework/zend-stdlib": "2.2.1",
-        "symfony/console": "2.0.7"
+        "zendframework/zend-code": ">=2.2.1",
+        "zendframework/zend-stdlib": ">=2.2.1",
+        "symfony/console": ">=2.0.7"
     },
     "autoload": {
         "psr-0": {
