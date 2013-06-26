@@ -95,4 +95,21 @@ class Model
         return array_pop($parts);
     }
 
+    /**
+     * @return string
+     */
+    public function getServiceName()
+    {
+        $parts = explode('\\', $this->getName());
+
+        $module = array_shift($parts);
+        $name = array_pop($parts);
+
+        if ($module == substr($name, 0, -7)) {
+            return $name;
+        }
+
+        return $module . $name;
+    }
+
 }

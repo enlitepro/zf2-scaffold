@@ -43,6 +43,7 @@ class EntityBuilder extends AbstractBuilder
         $model->setName($name);
         $model->setPath($path);
         $state->setEntityModel($model);
+        $state->addModel($model);
     }
 
 

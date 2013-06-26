@@ -28,6 +28,21 @@ class State extends AbstractState
     protected $serviceModel;
 
     /**
+     * @var Model
+     */
+    protected $controllerModel;
+
+    /**
+     * @var Model
+     */
+    protected $runtimeException;
+
+    /**
+     * @var Model[]
+     */
+    protected $models = [];
+
+    /**
      * Set value of EntityModel
      *
      * @param \Scaffold\Model $entityModel
@@ -88,17 +103,61 @@ class State extends AbstractState
     }
 
     /**
+     * Set value of ControllerModel
+     *
+     * @param \Scaffold\Model $controllerModel
+     */
+    public function setControllerModel($controllerModel)
+    {
+        $this->controllerModel = $controllerModel;
+    }
+
+    /**
+     * Return value of ControllerModel
+     *
+     * @return \Scaffold\Model
+     */
+    public function getControllerModel()
+    {
+        return $this->controllerModel;
+    }
+
+    /**
+     * Set value of RuntimeException
+     *
+     * @param \Scaffold\Model $runtimeException
+     */
+    public function setRuntimeException($runtimeException)
+    {
+        $this->runtimeException = $runtimeException;
+    }
+
+    /**
+     * Return value of RuntimeException
+     *
+     * @return \Scaffold\Model
+     */
+    public function getRuntimeException()
+    {
+        return $this->runtimeException;
+    }
+
+    /**
      * Return all models
      *
      * @return Model[]
      */
     public function getModels()
     {
-        return array(
-            $this->getEntityModel(),
-            $this->getRepositoryModel(),
-            $this->getServiceModel()
-        );
+        return $this->models;
+    }
+
+    /**
+     * @param Model $model
+     */
+    public function addModel(Model $model)
+    {
+        $this->models[] = $model;
     }
 
 }

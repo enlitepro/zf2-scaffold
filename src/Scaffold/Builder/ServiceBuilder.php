@@ -47,6 +47,7 @@ class ServiceBuilder extends AbstractBuilder
         $model->setName($name);
         $model->setPath($path);
         $state->setServiceModel($model);
+        $state->addModel($model);
     }
 
     /**
@@ -63,6 +64,7 @@ class ServiceBuilder extends AbstractBuilder
         $generator->addUse('Zend\ServiceManager\ServiceManager');
         $generator->addUse('Doctrine\ORM\EntityManager');
         $generator->addUse($state->getRepositoryModel()->getName());
+        $generator->addUse($state->getRuntimeException()->getName());
 
 
         $this->addProperty($generator, 'serviceManager', 'ServiceManager');

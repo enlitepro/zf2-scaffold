@@ -98,6 +98,16 @@ abstract class AbstractBuilder implements BuilderInterface
     }
 
     /**
+     * @param ClassGenerator $generator
+     * @param string $name
+     * @param string $type
+     */
+    public function addGetter(ClassGenerator $generator, $name, $type)
+    {
+        $generator->addMethodFromGenerator($this->getGetter($name, $type));
+    }
+
+    /**
      * @param string $name
      * @param string $type
      * @return \Zend\Code\Generator\MethodGenerator
@@ -113,6 +123,17 @@ abstract class AbstractBuilder implements BuilderInterface
     }
 
     /**
+     * @param ClassGenerator $generator
+     * @param string $name
+     * @param string $type
+     * @param string $lazy
+     */
+    public function addLazyGetter(ClassGenerator $generator, $name, $type, $lazy)
+    {
+        $generator->addMethodFromGenerator($this->getLazyGetter($name, $type, $lazy));
+    }
+
+    /**
      * @param string $name
      * @param string $type
      * @param string $lazy
@@ -121,7 +142,8 @@ abstract class AbstractBuilder implements BuilderInterface
     protected function getLazyGetter($name, $type, $lazy)
     {
         $method = $this->getGetter($name, $type);
-        $body = <<<EOF
+        $body
+            = <<<EOF
 if (null === \$this->$name) {
     \$this->$name = $lazy;
 }
@@ -132,6 +154,16 @@ EOF;
         $method->setBody($body);
 
         return $method;
+    }
+
+    /**
+     * @param ClassGenerator $generator
+     * @param string $name
+     * @param string $type
+     */
+    public function addSetter(ClassGenerator $generator, $name, $type)
+    {
+        $generator->addMethodFromGenerator($this->getSetter($name, $type));
     }
 
     /**

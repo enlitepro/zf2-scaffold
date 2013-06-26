@@ -12,7 +12,7 @@ use Scaffold\Entity\State;
 use Scaffold\Model;
 use Zend\Code\Generator\ClassGenerator;
 
-class RepositoryBuilder extends AbstractBuilder
+class ExceptionBuilder extends AbstractBuilder
 {
     /**
      * @var Config
@@ -29,19 +29,19 @@ class RepositoryBuilder extends AbstractBuilder
         $model = new Model();
         $name = $this->buildNamespace()
             ->addPart($this->config->getModule())
-            ->addPart('Repository')
-            ->addPart($this->config->getName() . 'Repository')
+            ->addPart('Exception')
+            ->addPart('RuntimeException')
             ->getNamespace();
 
         $path = $this->buildPath()
             ->setModule($this->config->getModule())
-            ->addPart('Repository')
-            ->addPart($this->config->getName() . 'Repository')
+            ->addPart('Exception')
+            ->addPart('RuntimeException')
             ->getPath();
 
         $model->setName($name);
         $model->setPath($path);
-        $state->setRepositoryModel($model);
+        $state->setRuntimeException($model);
         $state->addModel($model);
     }
 
@@ -53,12 +53,10 @@ class RepositoryBuilder extends AbstractBuilder
      */
     public function build(AbstractState $state)
     {
-        $model = $state->getRepositoryModel();
+        $model = $state->getRuntimeException();
         $generator = new ClassGenerator($model->getName());
-        $generator->addUse('Doctrine\ORM\EntityRepository');
-        $generator->setExtendedClass('EntityRepository');
+        $generator->setExtendedClass('\RuntimeException');
 
         $model->setGenerator($generator);
     }
-
 }
