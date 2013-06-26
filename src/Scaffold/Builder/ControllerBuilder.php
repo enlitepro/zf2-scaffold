@@ -95,7 +95,7 @@ class ControllerBuilder extends AbstractBuilder
     {
         $this->addSetter($generator, 'entityManager', 'EntityManager');
 
-        $body = '$this->serviceManager->get(\'entity_manager\')';
+        $body = '$this->getServiceLocator()->get(\'entity_manager\')';
         $this->addLazyGetter($generator, 'entityManager', 'EntityManager', $body);
     }
 

@@ -82,6 +82,7 @@ class ServiceBuilder extends AbstractBuilder
         $generator->addUse('Doctrine\ORM\EntityManager');
         $generator->addUse($state->getRepositoryModel()->getName());
         $generator->addUse($state->getRuntimeException()->getName());
+        $generator->addUse($state->getEntityModel()->getName());
 
 
         $this->addProperty($generator, 'serviceManager', 'ServiceManager');
