@@ -1,0 +1,14 @@
+{
+    "name": "ftdebugger/scaffolder",
+    "minimum-stability": "dev",
+    "authors": [
+        {
+            "name": "Evgeny Shpilevsky",
+            "email": "evgeny@shpilevsky.com"
+        }
+    ],
+    "require": {
+        "zendframework/zendframework": "2.2.1",
+        "symfony/console": "2.0.7"
+    }
+}
