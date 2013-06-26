@@ -63,6 +63,7 @@ class ControllerBuilder extends AbstractBuilder
         $generator->addUse('Zend\Mvc\Controller\AbstractActionController');
         $generator->addUse('Doctrine\ORM\EntityManager');
         $generator->addUse($state->getServiceModel()->getName());
+        $generator->addUse($state->getFormModel()->getName());
 
         $this->addProperty(
             $generator,
@@ -148,7 +149,8 @@ EOF
         $method->setBody(<<<EOF
 \$id = \$this->params()->fromRoute('id');
 \$$name = \$this->$service()->loadById(\$id);
-\$form = new \Zend\Form\Form('$name');
+/** @var {$state->getFormModel()->getClassName()} \$form */
+\$form = \$this->getServiceLocator()->get('{$state->getFormModel()->getServiceName()}');
 \$form->bind(\$$name);
 
 if (\$this->getRequest()->isPost()) {

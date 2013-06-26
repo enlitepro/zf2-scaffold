@@ -105,8 +105,12 @@ class Model
         $module = array_shift($parts);
         $name = array_pop($parts);
 
-        if ($module == substr($name, 0, -7)) {
-            return $name;
+        foreach (['Service', 'Form'] as $postfix) {
+            if (substr($name, -strlen($postfix)) == $postfix) {
+                if ($module == substr($name, 0, -strlen($postfix))) {
+                    return $name;
+                }
+            }
         }
 
         return $module . $name;

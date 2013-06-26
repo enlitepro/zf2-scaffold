@@ -35,6 +35,11 @@ class State extends AbstractState
     /**
      * @var Model
      */
+    protected $formModel;
+
+    /**
+     * @var Model
+     */
     protected $runtimeException;
 
     /**
@@ -140,6 +145,26 @@ class State extends AbstractState
     public function getRuntimeException()
     {
         return $this->runtimeException;
+    }
+
+    /**
+     * Set value of FormModel
+     *
+     * @param \Scaffold\Model $formModel
+     */
+    public function setFormModel($formModel)
+    {
+        $this->formModel = $formModel;
+    }
+
+    /**
+     * Return value of FormModel
+     *
+     * @return \Scaffold\Model
+     */
+    public function getFormModel()
+    {
+        return $this->formModel;
     }
 
     /**

@@ -9,6 +9,7 @@ use Scaffold\Builder\Container;
 use Scaffold\Builder\ControllerBuilder;
 use Scaffold\Builder\EntityBuilder;
 use Scaffold\Builder\ExceptionBuilder;
+use Scaffold\Builder\FormBuilder;
 use Scaffold\Builder\RepositoryBuilder;
 use Scaffold\Builder\ServiceBuilder;
 use Scaffold\Entity\Config;
@@ -43,6 +44,7 @@ class EntityCommand extends Command
         $builder->addBuilder(new ServiceBuilder($config));
         $builder->addBuilder(new ExceptionBuilder($config));
         $builder->addBuilder(new ControllerBuilder($config));
+        $builder->addBuilder(new FormBuilder($config));
         $builder->prepare($state);
         $builder->build($state);
 
