@@ -8,7 +8,7 @@ namespace Scaffold;
 
 use Symfony\Component\Console\Output\OutputInterface;
 
-class Writer
+abstract class AbstractWriter
 {
 
     /**
@@ -25,29 +25,19 @@ class Writer
     }
 
     /**
-     * @param AbstractState $state
-     * @param OutputInterface $output
-     */
-    public function write(AbstractState $state, OutputInterface $output)
-    {
-        foreach ($state->getModels() as $model) {
-            $this->writeModel($model, $output);
-        }
-    }
-
-    /**
-     * @param Model $model
+     * @param $pathToWrite
+     * @param string $data
      * @param OutputInterface $output
      * @throws \RuntimeException
      */
-    public function writeModel(Model $model, OutputInterface $output)
+    public function writeData($pathToWrite, $data, OutputInterface $output)
     {
-        $path = realpath($this->config->getBasePath());
+        $path = realpath($pathToWrite);
+
         if (!$path) {
             throw new \RuntimeException('Basepath not specify');
         }
 
-        $path .= '/' . $model->getPath();
         $directory = dirname($path);
 
         if (!file_exists($directory)) {
@@ -60,16 +50,10 @@ class Writer
             throw new \RuntimeException('Can\'t write to directory "' . $directory . '"');
         }
 
-        $data = $model->getGenerator()->generate();
-        $data = '<?php' . PHP_EOL . PHP_EOL . $data;
-
-        echo $data;
-
         if (file_put_contents($path, $data) === false) {
             throw new \RuntimeException('Can\'t write to file "' . $path . '"');
         }
 
-        $output->writeln('<info>' . $model->getName() . '</info>: ' . $path);
+        $output->writeln('<info>write</info>: ' . $path);
     }
-
 }

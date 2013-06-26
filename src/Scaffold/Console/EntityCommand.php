@@ -14,7 +14,8 @@ use Scaffold\Builder\RepositoryBuilder;
 use Scaffold\Builder\ServiceBuilder;
 use Scaffold\Entity\Config;
 use Scaffold\Entity\State;
-use Scaffold\Writer;
+use Scaffold\ConfigWriter;
+use Scaffold\ModelWriter;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -37,6 +38,8 @@ class EntityCommand extends Command
         $config->setBasePath(getcwd());
         $config->setFromArray($input->getArguments());
 
+        $moduleConfig = new ConfigWriter($config);
+
         $state = new State();
         $builder = new Container();
         $builder->addBuilder(new EntityBuilder($config));
@@ -48,7 +51,7 @@ class EntityCommand extends Command
         $builder->prepare($state);
         $builder->build($state);
 
-        $writer = new Writer($config);
+        $writer = new ModelWriter($config);
         $writer->write($state, $output);
     }
 
