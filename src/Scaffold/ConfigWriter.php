@@ -38,8 +38,7 @@ class ConfigWriter extends AbstractWriter
      */
     protected function getPath()
     {
-        return $this->config->getBasePath() . '/module/' . ucfirst($this->config->getModule())
-        . '/config/service.config.php';
+        return 'module/' . ucfirst($this->config->getModule()) . '/config/service.config.php';
     }
 
     /**
@@ -68,6 +67,8 @@ class ConfigWriter extends AbstractWriter
     public function save(OutputInterface $output)
     {
         $config = new ValueGenerator($this->moduleConfig);
+        $config->setOutputMode($config::OUTPUT_MULTIPLE_LINE);
+
         $data = '<?php' . PHP_EOL . PHP_EOL . 'return ' . $config->generate() . ';';
 
         $this->writeData($this->getPath(), $data, $output);

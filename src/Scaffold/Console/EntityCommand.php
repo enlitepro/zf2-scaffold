@@ -40,7 +40,8 @@ class EntityCommand extends Command
 
         $moduleConfig = new ConfigWriter($config);
 
-        $state = new State();
+        $state = new State($moduleConfig);
+
         $builder = new Container();
         $builder->addBuilder(new EntityBuilder($config));
         $builder->addBuilder(new RepositoryBuilder($config));
@@ -53,6 +54,8 @@ class EntityCommand extends Command
 
         $writer = new ModelWriter($config);
         $writer->write($state, $output);
+
+        $moduleConfig->save($output);
     }
 
 

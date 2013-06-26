@@ -6,6 +6,7 @@
 namespace Scaffold\Builder;
 
 
+use Scaffold\AbstractConfig;
 use Scaffold\AbstractState;
 use Scaffold\Entity\Config;
 use Scaffold\Entity\State;
@@ -23,6 +24,20 @@ class ServiceBuilder extends AbstractBuilder
      * @var Config
      */
     protected $config;
+
+    /**
+     * @var ServiceFactoryBuilder
+     */
+    protected $factory;
+
+    /**
+     * @param AbstractConfig $config
+     */
+    public function __construct(AbstractConfig $config)
+    {
+        $this->factory = new ServiceFactoryBuilder($config);
+        parent::__construct($config);
+    }
 
     /**
      * Prepare models
@@ -48,6 +63,8 @@ class ServiceBuilder extends AbstractBuilder
         $model->setPath($path);
         $state->setServiceModel($model);
         $state->addModel($model);
+
+        $this->factory->prepare($state);
     }
 
     /**
@@ -80,6 +97,7 @@ class ServiceBuilder extends AbstractBuilder
         $this->buildRepository($generator, $state);
 
         $model->setGenerator($generator);
+        $this->factory->build($state);
     }
 
     protected function buildConstructor(ClassGenerator $generator)
@@ -95,7 +113,8 @@ class ServiceBuilder extends AbstractBuilder
 
     protected function buildLoadById(ClassGenerator $generator, State $state)
     {
-        $body = <<<EOF
+        $body
+            = <<<EOF
 \$model = \$this->getRepository()->find(\$id);
 if (!\$model) {
     throw new RuntimeException('Cannot load model (' . \$id . ')');
@@ -109,7 +128,9 @@ EOF;
         $method->setDocBlock(new DocBlockGenerator());
         $method->getDocBlock()->setTag(new Tag(['name' => 'param', 'description' => 'int $id']));
         $method->getDocBlock()->setTag(new Tag(['name' => 'throws', 'description' => 'RuntimeException']));
-        $method->getDocBlock()->setTag(new Tag(['name' => 'return', 'description' => $state->getEntityModel()->getClassName()]));
+        $method->getDocBlock()->setTag(
+            new Tag(['name' => 'return', 'description' => $state->getEntityModel()->getClassName()])
+        );
         $method->setBody($body);
 
         $generator->addMethodFromGenerator($method);
@@ -123,7 +144,9 @@ EOF;
         $method->setParameter(new ParameterGenerator('criteria', 'array', []));
         $method->setDocBlock(new DocBlockGenerator());
         $method->getDocBlock()->setTag(new Tag(['name' => 'param', 'description' => 'array $criteria']));
-        $method->getDocBlock()->setTag(new Tag(['name' => 'return', 'description' => $state->getEntityModel()->getClassName() . '[]']));
+        $method->getDocBlock()->setTag(
+            new Tag(['name' => 'return', 'description' => $state->getEntityModel()->getClassName() . '[]'])
+        );
         $method->setBody($body);
 
         $generator->addMethodFromGenerator($method);
@@ -136,7 +159,9 @@ EOF;
         $method = new MethodGenerator('save');
         $method->setParameter(new ParameterGenerator('model', $state->getEntityModel()->getClassName()));
         $method->setDocBlock(new DocBlockGenerator());
-        $method->getDocBlock()->setTag(new Tag(['name' => 'param', 'description' => $state->getEntityModel()->getClassName() . ' $model']));
+        $method->getDocBlock()->setTag(
+            new Tag(['name' => 'param', 'description' => $state->getEntityModel()->getClassName() . ' $model'])
+        );
         $method->setBody($body);
 
         $generator->addMethodFromGenerator($method);
@@ -149,7 +174,9 @@ EOF;
         $method = new MethodGenerator('delete');
         $method->setParameter(new ParameterGenerator('model', $state->getEntityModel()->getClassName()));
         $method->setDocBlock(new DocBlockGenerator());
-        $method->getDocBlock()->setTag(new Tag(['name' => 'param', 'description' => $state->getEntityModel()->getClassName() . ' $model']));
+        $method->getDocBlock()->setTag(
+            new Tag(['name' => 'param', 'description' => $state->getEntityModel()->getClassName() . ' $model'])
+        );
         $method->setBody($body);
 
         $generator->addMethodFromGenerator($method);

@@ -45,6 +45,16 @@ class FormBuilder extends AbstractBuilder
         $model->setPath($path);
         $state->setFormModel($model);
         $state->addModel($model);
+
+        $config = array(
+            'service_manager' => array(
+                'invokables' => array(
+                    $model->getServiceName() => $name
+                )
+            )
+        );
+
+        $state->getModuleConfig()->merge($config);
     }
 
     /**

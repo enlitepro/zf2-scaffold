@@ -42,13 +42,10 @@ class ModelWriter extends AbstractWriter
      */
     public function writeModel(Model $model, OutputInterface $output)
     {
-        $path = $this->config->getBasePath();
-        $path .= '/' . $model->getPath();
-
         $data = $model->getGenerator()->generate();
         $data = '<?php' . PHP_EOL . PHP_EOL . $data;
 
-        $this->writeData($path, $data, $output);
+        $this->writeData($model->getPath(), $data, $output);
     }
 
 }

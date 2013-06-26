@@ -30,14 +30,15 @@ abstract class AbstractWriter
      * @param OutputInterface $output
      * @throws \RuntimeException
      */
-    public function writeData($pathToWrite, $data, OutputInterface $output)
+    protected function writeData($pathToWrite, $data, OutputInterface $output)
     {
-        $path = realpath($pathToWrite);
+        $path = realpath($this->config->getBasePath());
 
         if (!$path) {
-            throw new \RuntimeException('Basepath not specify');
+            throw new \RuntimeException('Base path not specify');
         }
 
+        $path .= '/' . $pathToWrite;
         $directory = dirname($path);
 
         if (!file_exists($directory)) {
