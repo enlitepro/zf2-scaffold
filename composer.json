@@ -12,6 +12,7 @@
         "zendframework/zend-stdlib": ">=2.2.1",
         "symfony/console": ">=2.0.7"
     },
+    "bin": ["bin/scaffold.php"],
     "autoload": {
         "psr-0": {
             "Scaffold": "src/"
