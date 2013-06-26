@@ -8,7 +8,7 @@ namespace Scaffold;
 
 use Scaffold\Entity\Config;
 use Symfony\Component\Console\Output\OutputInterface;
-use Zend\Code\Generator\ValueGenerator;
+use Scaffold\Code\Generator\ValueGenerator;
 use Zend\Stdlib\ArrayUtils;
 
 class ConfigWriter extends AbstractWriter
@@ -68,6 +68,7 @@ class ConfigWriter extends AbstractWriter
     {
         $config = new ValueGenerator($this->moduleConfig);
         $config->setOutputMode($config::OUTPUT_MULTIPLE_LINE);
+        $config->setArrayDepth(0);
 
         $data = '<?php' . PHP_EOL . PHP_EOL . 'return ' . $config->generate() . ';';
 
