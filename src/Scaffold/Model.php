@@ -116,4 +116,17 @@ class Model
         return $module . $name;
     }
 
+    /**
+     * @return string
+     */
+    public function getControllerName()
+    {
+        $parts = explode('\\', $this->getName());
+
+        $module = array_shift($parts);
+        $name = array_pop($parts);
+
+        return strtolower($module) . '-' . strtolower(substr($name, 0, -10));
+    }
+
 }

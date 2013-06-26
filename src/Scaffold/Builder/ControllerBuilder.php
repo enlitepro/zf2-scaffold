@@ -47,6 +47,16 @@ class ControllerBuilder extends AbstractBuilder
         $model->setPath($path);
         $state->setControllerModel($model);
         $state->addModel($model);
+
+        $config = array(
+            'controllers' => array(
+                'invokables' => array(
+                    $model->getControllerName() => $model->getName()
+                )
+            )
+        );
+
+        $state->getModuleConfig()->merge($config);
     }
 
     /**
@@ -107,15 +117,16 @@ class ControllerBuilder extends AbstractBuilder
         $method = new MethodGenerator('indexAction');
         $method->setDocBlock(new DocBlockGenerator('Show one entity'));
 
-        $method->setBody(<<<EOF
-\$id = \$this->params()->fromRoute('id');
+        $method->setBody(
+            <<<EOF
+            \$id = \$this->params()->fromRoute('id');
 \$$name = \$this->$service()->loadById(\$id);
 
 return array(
     '$name' => \$$name
 );
 EOF
-);
+        );
         $generator->addMethodFromGenerator($method);
     }
 
@@ -127,8 +138,9 @@ EOF
         $method = new MethodGenerator('listAction');
         $method->setDocBlock(new DocBlockGenerator('Show list of entities'));
 
-        $method->setBody(<<<EOF
-\${$name}s = \$this->$service()->search();
+        $method->setBody(
+            <<<EOF
+            \${$name}s = \$this->$service()->search();
 
 return array(
     '{$name}s' => \${$name}s
@@ -146,8 +158,9 @@ EOF
         $method = new MethodGenerator('editAction');
         $method->setDocBlock(new DocBlockGenerator('Show one entity'));
 
-        $method->setBody(<<<EOF
-\$id = \$this->params()->fromRoute('id');
+        $method->setBody(
+            <<<EOF
+            \$id = \$this->params()->fromRoute('id');
 \$$name = \$this->$service()->loadById(\$id);
 /** @var {$state->getFormModel()->getClassName()} \$form */
 \$form = \$this->getServiceLocator()->get('{$state->getFormModel()->getServiceName()}');
