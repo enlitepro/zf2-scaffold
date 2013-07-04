@@ -6,6 +6,8 @@
 namespace Scaffold;
 
 
+use Scaffold\Writer\ConfigWriter;
+
 abstract class AbstractState
 {
 
@@ -25,7 +27,7 @@ abstract class AbstractState
     /**
      * Return value of ModuleConfig
      *
-     * @return \Scaffold\ConfigWriter
+     * @return \Scaffold\Writer\ConfigWriter
      */
     public function getModuleConfig()
     {

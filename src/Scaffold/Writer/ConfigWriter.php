@@ -3,10 +3,11 @@
  * @author Evgeny Shpilevsky <evgeny@shpilevsky.com>
  */
 
-namespace Scaffold;
+namespace Scaffold\Writer;
 
 
 use Scaffold\Entity\Config;
+use Scaffold\Writer\AbstractWriter;
 use Symfony\Component\Console\Output\OutputInterface;
 use Scaffold\Code\Generator\ValueGenerator;
 use Zend\Stdlib\ArrayUtils;

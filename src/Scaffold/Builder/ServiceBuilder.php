@@ -170,7 +170,7 @@ EOF;
 
     protected function buildDelete(ClassGenerator $generator, State $state)
     {
-        $body = '$this->getEntityManager()->detach($model);';
+        $body = '$this->getEntityManager()->remove($model);';
 
         $method = new MethodGenerator('delete');
         $method->setParameter(new ParameterGenerator('model', $state->getEntityModel()->getClassName()));

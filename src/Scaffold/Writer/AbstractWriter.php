@@ -3,9 +3,10 @@
  * @author Evgeny Shpilevsky <evgeny@shpilevsky.com>
  */
 
-namespace Scaffold;
+namespace Scaffold\Writer;
 
 
+use Scaffold\AbstractConfig;
 use Symfony\Component\Console\Output\OutputInterface;
 
 abstract class AbstractWriter
