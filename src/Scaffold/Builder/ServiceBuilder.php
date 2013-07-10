@@ -202,7 +202,7 @@ EOF;
         $getter = $this->getLazyGetter(
             'repository',
             $state->getRepositoryModel()->getClassName(),
-            '$this->getEntityManager(\'' . $state->getEntityModel()->getName() . '\')'
+            '$this->getEntityManager()->getRepository(\'' . $state->getEntityModel()->getName() . '\')'
         );
 
         $generator->addMethodFromGenerator($setter);
