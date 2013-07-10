@@ -155,7 +155,7 @@ EOF;
 
     protected function buildSave(ClassGenerator $generator, State $state)
     {
-        $body = '$this->getRepository()->persist($model);';
+        $body = '$this->getEntityManager()->persist($model);';
 
         $method = new MethodGenerator('save');
         $method->setParameter(new ParameterGenerator('model', $state->getEntityModel()->getClassName()));
