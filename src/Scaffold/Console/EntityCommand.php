@@ -5,15 +5,7 @@
 
 namespace Scaffold\Console;
 
-use Scaffold\Builder\Container;
-use Scaffold\Builder\ControllerBuilder;
-use Scaffold\Builder\EntityBuilder;
-use Scaffold\Builder\EntityTestBuilder;
-use Scaffold\Builder\ExceptionBuilder;
-use Scaffold\Builder\FormFactoryBuilder;
-use Scaffold\Builder\RepositoryBuilder;
-use Scaffold\Builder\ServiceBuilder;
-use Scaffold\Builder\ServiceTraitBuilder;
+use Scaffold\Builder;
 use Scaffold\Entity\Config;
 use Scaffold\Entity\State;
 use Scaffold\Writer\ConfigWriter;
@@ -44,15 +36,16 @@ class EntityCommand extends Command
 
         $state = new State($moduleConfig);
 
-        $builder = new Container();
-        $builder->addBuilder(new EntityBuilder($config));
-        $builder->addBuilder(new RepositoryBuilder($config));
-        $builder->addBuilder(new ServiceBuilder($config));
-        $builder->addBuilder(new ExceptionBuilder($config));
-        $builder->addBuilder(new ControllerBuilder($config));
-        $builder->addBuilder(new FormFactoryBuilder($config));
-        $builder->addBuilder(new ServiceTraitBuilder($config));
-        $builder->addBuilder(new EntityTestBuilder($config));
+        $builder = new Builder\Container();
+        $builder->addBuilder(new Builder\EntityBuilder($config));
+        $builder->addBuilder(new Builder\RepositoryBuilder($config));
+        $builder->addBuilder(new Builder\ServiceBuilder($config));
+        $builder->addBuilder(new Builder\ExceptionBuilder($config));
+        $builder->addBuilder(new Builder\ControllerBuilder($config));
+        $builder->addBuilder(new Builder\FormFactoryBuilder($config));
+        $builder->addBuilder(new Builder\ServiceTraitBuilder($config));
+        $builder->addBuilder(new Builder\EntityTestBuilder($config));
+        $builder->addBuilder(new Builder\ServiceTestBuilder($config));
         $builder->prepare($state);
         $builder->build($state);
 
