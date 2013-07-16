@@ -19,6 +19,11 @@ class PathBuilder
     protected $module;
 
     /**
+     * @var string
+     */
+    protected $type = 'src';
+
+    /**
      * @param string $part
      * @return $this
      */
@@ -40,6 +45,16 @@ class PathBuilder
         return $this;
     }
 
+    /**
+     * @param string $type
+     * @return $this
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+        return $this;
+    }
+
 
     /**
      * @return string
@@ -47,7 +62,14 @@ class PathBuilder
     public function getPath()
     {
         $path = implode("/", $this->parts);
-        $path = 'module/' . ucfirst($this->module) . '/src/' . ucfirst($this->module) . '/' . $path . '.php';
+        if ($this->type == 'src') {
+            $path = 'module/' . ucfirst($this->module) . '/' . $this->type . '/' .
+                ucfirst($this->module) . '/' . $path . '.php';
+        }
+        else {
+            $path = 'module/' . ucfirst($this->module) . '/' . $this->type . '/' .
+                ucfirst($this->module) . 'Test/' . $path . 'Test.php';
+        }
 
         return $path;
     }

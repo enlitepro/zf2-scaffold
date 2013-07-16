@@ -60,6 +60,8 @@ class EntityBuilder extends AbstractBuilder
         $generator->addUse('Doctrine\ORM\Mapping', 'ORM');
         $generator->setDocBlock($this->getClassDocBlock($state));
         $generator->addPropertyFromGenerator($this->getIdProperty());
+        $this->addGetter($generator, 'id', 'int');
+        $this->addSetter($generator, 'id', 'int');
     }
 
     protected function getClassDocBlock(State $state)

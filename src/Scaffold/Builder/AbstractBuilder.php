@@ -7,7 +7,6 @@ namespace Scaffold\Builder;
 
 
 use Scaffold\AbstractConfig;
-use Scaffold\AbstractState;
 use Scaffold\NamespaceBuilder;
 use Scaffold\PathBuilder;
 use Zend\Code\Generator\ClassGenerator;

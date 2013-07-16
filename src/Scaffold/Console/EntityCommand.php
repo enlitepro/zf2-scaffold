@@ -8,6 +8,7 @@ namespace Scaffold\Console;
 use Scaffold\Builder\Container;
 use Scaffold\Builder\ControllerBuilder;
 use Scaffold\Builder\EntityBuilder;
+use Scaffold\Builder\EntityTestBuilder;
 use Scaffold\Builder\ExceptionBuilder;
 use Scaffold\Builder\FormFactoryBuilder;
 use Scaffold\Builder\RepositoryBuilder;
@@ -51,6 +52,7 @@ class EntityCommand extends Command
         $builder->addBuilder(new ControllerBuilder($config));
         $builder->addBuilder(new FormFactoryBuilder($config));
         $builder->addBuilder(new ServiceTraitBuilder($config));
+        $builder->addBuilder(new EntityTestBuilder($config));
         $builder->prepare($state);
         $builder->build($state);
 
