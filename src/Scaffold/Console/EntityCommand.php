@@ -12,6 +12,7 @@ use Scaffold\Builder\ExceptionBuilder;
 use Scaffold\Builder\FormFactoryBuilder;
 use Scaffold\Builder\RepositoryBuilder;
 use Scaffold\Builder\ServiceBuilder;
+use Scaffold\Builder\ServiceTraitBuilder;
 use Scaffold\Entity\Config;
 use Scaffold\Entity\State;
 use Scaffold\Writer\ConfigWriter;
@@ -49,6 +50,7 @@ class EntityCommand extends Command
         $builder->addBuilder(new ExceptionBuilder($config));
         $builder->addBuilder(new ControllerBuilder($config));
         $builder->addBuilder(new FormFactoryBuilder($config));
+        $builder->addBuilder(new ServiceTraitBuilder($config));
         $builder->prepare($state);
         $builder->build($state);
 
