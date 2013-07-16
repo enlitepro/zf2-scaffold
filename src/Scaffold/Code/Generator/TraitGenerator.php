@@ -5,9 +5,6 @@
 
 namespace Scaffold\Code\Generator;
 
-
-use Zend\Code\Generator\ClassGenerator;
-
 class TraitGenerator extends ClassGenerator
 {
     /**

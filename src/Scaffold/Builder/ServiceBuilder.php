@@ -8,10 +8,10 @@ namespace Scaffold\Builder;
 
 use Scaffold\AbstractConfig;
 use Scaffold\AbstractState;
+use Scaffold\Code\Generator\ClassGenerator;
 use Scaffold\Entity\Config;
 use Scaffold\Entity\State;
 use Scaffold\Model;
-use Zend\Code\Generator\ClassGenerator;
 use Zend\Code\Generator\DocBlock\Tag;
 use Zend\Code\Generator\DocBlockGenerator;
 use Zend\Code\Generator\MethodGenerator;
@@ -78,14 +78,18 @@ class ServiceBuilder extends AbstractBuilder
         $model = $state->getServiceModel();
         $generator = new ClassGenerator($model->getName());
 
-        $generator->addUse('Zend\ServiceManager\ServiceManager');
+        $generator->setImplementedInterfaces(['ServiceLocatorAwareInterface']);
+
+        $generator->addUse('Zend\ServiceManager\ServiceLocatorAwareInterface');
+        $generator->addUse('Zend\ServiceManager\ServiceLocatorAwareTrait');
+        $generator->addUse('Zend\ServiceManager\ServiceLocatorInterface');
         $generator->addUse('Doctrine\ORM\EntityManager');
         $generator->addUse($state->getRepositoryModel()->getName());
         $generator->addUse($state->getRuntimeException()->getName());
         $generator->addUse($state->getEntityModel()->getName());
 
+        $generator->addTrait('ServiceLocatorAwareTrait');
 
-        $this->addProperty($generator, 'serviceManager', 'ServiceManager');
         $this->addProperty($generator, 'entityManager', 'EntityManager');
         $this->addProperty($generator, 'repository', $state->getRepositoryModel()->getClassName());
 
@@ -104,10 +108,10 @@ class ServiceBuilder extends AbstractBuilder
     protected function buildConstructor(ClassGenerator $generator)
     {
         $method = new MethodGenerator('__construct');
-        $method->setParameter(new ParameterGenerator('serviceManager', 'ServiceManager'));
+        $method->setParameter(new ParameterGenerator('serviceLocator', 'ServiceLocatorInterface'));
         $method->setDocBlock(new DocBlockGenerator());
-        $method->getDocBlock()->setTag(new Tag(['name' => 'param', 'description' => 'ServiceManager $serviceManager']));
-        $method->setBody('$this->serviceManager = $serviceManager;');
+        $method->getDocBlock()->setTag(new Tag(['name' => 'param', 'description' => 'ServiceLocatorInterface $serviceLocator']));
+        $method->setBody('$this->serviceLocator = $serviceLocator;');
 
         $generator->addMethodFromGenerator($method);
     }
@@ -189,7 +193,7 @@ EOF;
         $getter = $this->getLazyGetter(
             'entityManager',
             'EntityManager',
-            '$this->serviceManager->get(\'entity_manager\')'
+            '$this->getServiceLocator()->get(\'entity_manager\')'
         );
 
         $generator->addMethodFromGenerator($setter);
