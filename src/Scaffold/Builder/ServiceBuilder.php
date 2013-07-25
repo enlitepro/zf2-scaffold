@@ -85,7 +85,7 @@ class ServiceBuilder extends AbstractBuilder
         $generator->addUse('Zend\ServiceManager\ServiceLocatorInterface');
         $generator->addUse('Doctrine\ORM\EntityManager');
         $generator->addUse($state->getRepositoryModel()->getName());
-        $generator->addUse($state->getRuntimeException()->getName());
+        $generator->addUse($state->getNotFoundException()->getName());
         $generator->addUse($state->getEntityModel()->getName());
 
         $generator->addTrait('ServiceLocatorAwareTrait');
@@ -122,7 +122,7 @@ class ServiceBuilder extends AbstractBuilder
             = <<<EOF
 \$model = \$this->getRepository()->find(\$id);
 if (!\$model) {
-    throw new RuntimeException('Cannot load model (' . \$id . ')');
+    throw new NotFoundException('Cannot load model (' . \$id . ')');
 }
 
 return \$model;
@@ -132,7 +132,7 @@ EOF;
         $method->setParameter(new ParameterGenerator('id'));
         $method->setDocBlock(new DocBlockGenerator());
         $method->getDocBlock()->setTag(new Tag(['name' => 'param', 'description' => 'int $id']));
-        $method->getDocBlock()->setTag(new Tag(['name' => 'throws', 'description' => 'RuntimeException']));
+        $method->getDocBlock()->setTag(new Tag(['name' => 'throws', 'description' => 'NotFoundException']));
         $method->getDocBlock()->setTag(
             new Tag(['name' => 'return', 'description' => $state->getEntityModel()->getClassName()])
         );
