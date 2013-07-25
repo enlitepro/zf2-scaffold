@@ -8,7 +8,7 @@ namespace Scaffold\Builder;
 
 use Scaffold\AbstractState;
 use Scaffold\Entity\Config;
-use Scaffold\Entity\State;
+use Scaffold\State;
 use Scaffold\Model;
 use Zend\Code\Generator\ClassGenerator;
 use Zend\Code\Generator\DocBlock\Tag;
@@ -23,7 +23,7 @@ class EntityBuilder extends AbstractBuilder
     protected $config;
 
     /**
-     * @param AbstractState|State $state
+     * @param AbstractState|\Scaffold\State $state
      */
     public function prepare(AbstractState $state)
     {
@@ -48,7 +48,7 @@ class EntityBuilder extends AbstractBuilder
 
 
     /**
-     * @param AbstractState|State $state
+     * @param AbstractState|\Scaffold\State $state
      * @return AbstractState|void
      */
     public function build(AbstractState $state)

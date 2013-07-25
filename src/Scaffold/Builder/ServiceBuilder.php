@@ -10,7 +10,7 @@ use Scaffold\AbstractConfig;
 use Scaffold\AbstractState;
 use Scaffold\Code\Generator\ClassGenerator;
 use Scaffold\Entity\Config;
-use Scaffold\Entity\State;
+use Scaffold\State;
 use Scaffold\Model;
 use Zend\Code\Generator\DocBlock\Tag;
 use Zend\Code\Generator\DocBlockGenerator;
@@ -70,7 +70,7 @@ class ServiceBuilder extends AbstractBuilder
     /**
      * Build generators
      *
-     * @param AbstractState|State $state
+     * @param AbstractState|\Scaffold\State $state
      * @return \Scaffold\AbstractState|void
      */
     public function build(AbstractState $state)

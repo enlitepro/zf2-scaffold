@@ -7,7 +7,7 @@ namespace Scaffold\Console;
 
 use Scaffold\Builder;
 use Scaffold\Entity\Config;
-use Scaffold\Entity\State;
+use Scaffold\State;
 use Scaffold\Writer\ConfigWriter;
 use Scaffold\Writer\ModelWriter;
 use Symfony\Component\Console\Command\Command;
@@ -36,16 +36,8 @@ class EntityCommand extends Command
 
         $state = new State($moduleConfig);
 
-        $builder = new Builder\Container();
-        $builder->addBuilder(new Builder\EntityBuilder($config));
-        $builder->addBuilder(new Builder\RepositoryBuilder($config));
-        $builder->addBuilder(new Builder\ServiceBuilder($config));
-        $builder->addBuilder(new Builder\ExceptionBuilder($config));
-        $builder->addBuilder(new Builder\ControllerBuilder($config));
-        $builder->addBuilder(new Builder\FormFactoryBuilder($config));
-        $builder->addBuilder(new Builder\ServiceTraitBuilder($config));
-        $builder->addBuilder(new Builder\EntityTestBuilder($config));
-        $builder->addBuilder(new Builder\ServiceTestBuilder($config));
+        $factory = new Builder\Factory();
+        $builder = $factory->factory($config);
         $builder->prepare($state);
         $builder->build($state);
 

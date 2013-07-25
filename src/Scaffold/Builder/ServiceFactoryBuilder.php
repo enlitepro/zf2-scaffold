@@ -8,7 +8,7 @@ namespace Scaffold\Builder;
 
 use Scaffold\AbstractState;
 use Scaffold\Entity\Config;
-use Scaffold\Entity\State;
+use Scaffold\State;
 use Scaffold\Model;
 use Zend\Code\Generator\ClassGenerator;
 use Zend\Code\Generator\DocBlock\Tag;
@@ -31,7 +31,7 @@ class ServiceFactoryBuilder extends AbstractBuilder
     /**
      * Prepare models
      *
-     * @param AbstractState|State $state
+     * @param AbstractState|\Scaffold\State $state
      */
     public function prepare(AbstractState $state)
     {
@@ -50,7 +50,7 @@ class ServiceFactoryBuilder extends AbstractBuilder
 
         $model->setName($name);
         $model->setPath($path);
-        $state->addModel($model);
+        $state->addModel($model, 'service-factory');
 
         $config = array(
             'service_manager' => array(
@@ -67,7 +67,7 @@ class ServiceFactoryBuilder extends AbstractBuilder
     /**
      * Build generators
      *
-     * @param AbstractState|State $state
+     * @param AbstractState|\Scaffold\State $state
      * @return \Scaffold\AbstractState|void
      */
     public function build(AbstractState $state)

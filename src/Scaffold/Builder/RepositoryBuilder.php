@@ -8,7 +8,7 @@ namespace Scaffold\Builder;
 
 use Scaffold\AbstractState;
 use Scaffold\Entity\Config;
-use Scaffold\Entity\State;
+use Scaffold\State;
 use Scaffold\Model;
 use Zend\Code\Generator\ClassGenerator;
 
@@ -22,7 +22,7 @@ class RepositoryBuilder extends AbstractBuilder
     /**
      * Prepare models
      *
-     * @param AbstractState|State $state
+     * @param AbstractState|\Scaffold\State $state
      */
     public function prepare(AbstractState $state)
     {
@@ -48,7 +48,7 @@ class RepositoryBuilder extends AbstractBuilder
     /**
      * Build generators
      *
-     * @param AbstractState|State $state
+     * @param AbstractState|\Scaffold\State $state
      * @return \Scaffold\AbstractState|void
      */
     public function build(AbstractState $state)

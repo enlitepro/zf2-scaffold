@@ -9,7 +9,7 @@ namespace Scaffold\Builder;
 use Scaffold\AbstractState;
 use Scaffold\Code\Generator\TraitGenerator;
 use Scaffold\Entity\Config;
-use Scaffold\Entity\State;
+use Scaffold\State;
 use Scaffold\Model;
 use Zend\Code\Generator\ClassGenerator;
 use Zend\Code\Generator\DocBlock\Tag;
@@ -29,7 +29,7 @@ class ServiceTraitBuilder extends AbstractBuilder
     /**
      * Prepare models
      *
-     * @param AbstractState|State $state
+     * @param AbstractState|\Scaffold\State $state
      */
     public function prepare(AbstractState $state)
     {
@@ -48,7 +48,7 @@ class ServiceTraitBuilder extends AbstractBuilder
 
         $model->setName($name);
         $model->setPath($path);
-        $state->addModel($model);
+        $state->addModel($model, 'service-trait');
 
         $this->model = $model;
     }
@@ -57,7 +57,7 @@ class ServiceTraitBuilder extends AbstractBuilder
     /**
      * Build generators
      *
-     * @param AbstractState|State $state
+     * @param AbstractState|\Scaffold\State $state
      * @return \Scaffold\AbstractState|void
      */
     public function build(AbstractState $state)

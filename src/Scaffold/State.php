@@ -3,7 +3,7 @@
  * @author Evgeny Shpilevsky <evgeny@shpilevsky.com>
  */
 
-namespace Scaffold\Entity;
+namespace Scaffold;
 
 
 use Scaffold\AbstractState;
@@ -179,10 +179,29 @@ class State extends AbstractState
 
     /**
      * @param Model $model
+     * @param string $alias
      */
-    public function addModel(Model $model)
+    public function addModel(Model $model, $alias = null)
     {
-        $this->models[] = $model;
+        if ($alias) {
+            $this->models[$alias] = $model;
+        } else {
+            $this->models[] = $model;
+        }
+    }
+
+    /**
+     * @param string $alias
+     * @return Model
+     * @throws \RuntimeException
+     */
+    public function getModel($alias)
+    {
+        if (isset($this->models[$alias])) {
+            return $this->models[$alias];
+        }
+
+        throw new \RuntimeException('Model not found (' . $alias . ')');
     }
 
 }

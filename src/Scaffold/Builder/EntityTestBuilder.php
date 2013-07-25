@@ -9,7 +9,7 @@ namespace Scaffold\Builder;
 use Scaffold\AbstractState;
 use Scaffold\Code\Generator\ClassGenerator;
 use Scaffold\Entity\Config;
-use Scaffold\Entity\State;
+use Scaffold\State;
 use Scaffold\Model;
 use Zend\Code\Generator\MethodGenerator;
 
@@ -26,7 +26,7 @@ class EntityTestBuilder extends AbstractBuilder
     protected $model;
 
     /**
-     * @param AbstractState|State $state
+     * @param AbstractState|\Scaffold\State $state
      */
     public function prepare(AbstractState $state)
     {
@@ -53,7 +53,7 @@ class EntityTestBuilder extends AbstractBuilder
 
 
     /**
-     * @param AbstractState|State $state
+     * @param AbstractState|\Scaffold\State $state
      * @return AbstractState|void
      */
     public function build(AbstractState $state)

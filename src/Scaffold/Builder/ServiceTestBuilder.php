@@ -9,7 +9,7 @@ namespace Scaffold\Builder;
 use Scaffold\AbstractState;
 use Scaffold\Code\Generator\ClassGenerator;
 use Scaffold\Entity\Config;
-use Scaffold\Entity\State;
+use Scaffold\State;
 use Scaffold\Model;
 use Zend\Code\Generator\MethodGenerator;
 use Zend\Code\Generator\ParameterGenerator;
@@ -47,7 +47,7 @@ class ServiceTestBuilder extends AbstractBuilder
 
         $model->setName($name);
         $model->setPath($path);
-        $state->addModel($model);
+        $state->addModel($model, 'service-test');
 
         $this->model = $model;
     }
@@ -187,7 +187,7 @@ EOF;
 
     /**
      * @param ClassGenerator $generator
-     * @param State $state
+     * @param \Scaffold\State $state
      */
     public function addGetServiceManager(ClassGenerator $generator, State $state)
     {

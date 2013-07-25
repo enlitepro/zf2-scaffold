@@ -2,7 +2,7 @@
 
 <?php
 
-use Scaffold\Console\EntityCommand;
+use Scaffold\Console;
 use Symfony\Component\Console\Application;
 
 if (file_exists(__DIR__ . "/../vendor/autoload.php")) {
@@ -14,6 +14,7 @@ if (file_exists(__DIR__ . "/../vendor/autoload.php")) {
 }
 
 $application = new Application();
-$application->add(new EntityCommand());
+$application->add(new Console\EntityCommand());
+$application->add(new Console\ServiceCommand());
 
 $application->run();

@@ -8,7 +8,7 @@ namespace Scaffold\Builder;
 
 use Scaffold\AbstractState;
 use Scaffold\Entity\Config;
-use Scaffold\Entity\State;
+use Scaffold\State;
 use Scaffold\Model;
 use Zend\Code\Generator\ClassGenerator;
 use Zend\Code\Generator\DocBlockGenerator;
