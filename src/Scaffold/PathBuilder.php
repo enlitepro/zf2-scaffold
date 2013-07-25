@@ -65,8 +65,9 @@ class PathBuilder
         if ($this->type == 'src') {
             $path = 'module/' . ucfirst($this->module) . '/' . $this->type . '/' .
                 ucfirst($this->module) . '/' . $path . '.php';
-        }
-        else {
+        } elseif ($this->type == 'raw') {
+            $path = 'module/' . ucfirst($this->module) . '/' . $path . '.php';
+        } else {
             $path = 'module/' . ucfirst($this->module) . '/' . $this->type . '/' .
                 ucfirst($this->module) . 'Test/' . $path . 'Test.php';
         }

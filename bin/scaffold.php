@@ -2,6 +2,8 @@
 
 <?php
 
+define('SCAFFOLD_ROOT', dirname(__DIR__));
+
 use Scaffold\Console;
 use Symfony\Component\Console\Application;
 
@@ -17,5 +19,6 @@ $application = new Application();
 $application->add(new Console\EntityCommand());
 $application->add(new Console\ServiceCommand());
 $application->add(new Console\ExceptionCommand());
+$application->add(new Console\ModuleCommand());
 
 $application->run();
