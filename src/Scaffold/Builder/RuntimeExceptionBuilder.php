@@ -12,7 +12,7 @@ use Scaffold\State;
 use Scaffold\Model;
 use Zend\Code\Generator\ClassGenerator;
 
-class ExceptionBuilder extends AbstractBuilder
+class RuntimeExceptionBuilder extends AbstractBuilder
 {
     /**
      * @var Config

@@ -20,7 +20,8 @@ class Factory
         $builder->addBuilder(new EntityBuilder($config));
         $builder->addBuilder(new RepositoryBuilder($config));
         $builder->addBuilder(new ServiceBuilder($config));
-        $builder->addBuilder(new ExceptionBuilder($config));
+        $builder->addBuilder(new RuntimeExceptionBuilder($config));
+        $builder->addBuilder(new NotFoundExceptionBuilder($config));
         $builder->addBuilder(new ControllerBuilder($config));
         $builder->addBuilder(new FormFactoryBuilder($config));
         $builder->addBuilder(new ServiceTraitBuilder($config));

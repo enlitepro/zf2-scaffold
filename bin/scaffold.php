@@ -16,5 +16,6 @@ if (file_exists(__DIR__ . "/../vendor/autoload.php")) {
 $application = new Application();
 $application->add(new Console\EntityCommand());
 $application->add(new Console\ServiceCommand());
+$application->add(new Console\ExceptionCommand());
 
 $application->run();

@@ -43,6 +43,11 @@ class State extends AbstractState
     protected $runtimeException;
 
     /**
+     * @var Model
+     */
+    protected $notFoundException;
+
+    /**
      * @var Model[]
      */
     protected $models = [];
@@ -50,7 +55,7 @@ class State extends AbstractState
     /**
      * Set value of EntityModel
      *
-     * @param \Scaffold\Model $entityModel
+     * @param Model $entityModel
      */
     public function setEntityModel($entityModel)
     {
@@ -60,7 +65,7 @@ class State extends AbstractState
     /**
      * Return value of EntityModel
      *
-     * @return \Scaffold\Model
+     * @return Model
      */
     public function getEntityModel()
     {
@@ -70,7 +75,7 @@ class State extends AbstractState
     /**
      * Set value of RepositoryModel
      *
-     * @param \Scaffold\Model $repositoryModel
+     * @param Model $repositoryModel
      */
     public function setRepositoryModel($repositoryModel)
     {
@@ -80,7 +85,7 @@ class State extends AbstractState
     /**
      * Return value of RepositoryModel
      *
-     * @return \Scaffold\Model
+     * @return Model
      */
     public function getRepositoryModel()
     {
@@ -90,7 +95,7 @@ class State extends AbstractState
     /**
      * Set value of ServiceModel
      *
-     * @param \Scaffold\Model $serviceModel
+     * @param Model $serviceModel
      */
     public function setServiceModel($serviceModel)
     {
@@ -100,7 +105,7 @@ class State extends AbstractState
     /**
      * Return value of ServiceModel
      *
-     * @return \Scaffold\Model
+     * @return Model
      */
     public function getServiceModel()
     {
@@ -110,7 +115,7 @@ class State extends AbstractState
     /**
      * Set value of ControllerModel
      *
-     * @param \Scaffold\Model $controllerModel
+     * @param Model $controllerModel
      */
     public function setControllerModel($controllerModel)
     {
@@ -120,7 +125,7 @@ class State extends AbstractState
     /**
      * Return value of ControllerModel
      *
-     * @return \Scaffold\Model
+     * @return Model
      */
     public function getControllerModel()
     {
@@ -130,7 +135,7 @@ class State extends AbstractState
     /**
      * Set value of RuntimeException
      *
-     * @param \Scaffold\Model $runtimeException
+     * @param Model $runtimeException
      */
     public function setRuntimeException($runtimeException)
     {
@@ -140,7 +145,7 @@ class State extends AbstractState
     /**
      * Return value of RuntimeException
      *
-     * @return \Scaffold\Model
+     * @return Model
      */
     public function getRuntimeException()
     {
@@ -148,9 +153,29 @@ class State extends AbstractState
     }
 
     /**
+     * Set value of NotFoundException
+     *
+     * @param Model $notFoundException
+     */
+    public function setNotFoundException($notFoundException)
+    {
+        $this->notFoundException = $notFoundException;
+    }
+
+    /**
+     * Return value of NotFoundException
+     *
+     * @return Model
+     */
+    public function getNotFoundException()
+    {
+        return $this->notFoundException;
+    }
+
+    /**
      * Set value of FormModel
      *
-     * @param \Scaffold\Model $formModel
+     * @param Model $formModel
      */
     public function setFormModel($formModel)
     {
@@ -160,7 +185,7 @@ class State extends AbstractState
     /**
      * Return value of FormModel
      *
-     * @return \Scaffold\Model
+     * @return Model
      */
     public function getFormModel()
     {
