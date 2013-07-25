@@ -26,6 +26,12 @@ class ServiceCommand extends Command
         $this->addArgument('module', InputArgument::REQUIRED, 'Module name');
         $this->addArgument('name', InputArgument::REQUIRED, 'Service name');
         $this->addOption(
+            'no-service',
+            null,
+            InputOption::VALUE_NONE,
+            'Disable service generation'
+        );
+        $this->addOption(
             'no-trait',
             null,
             InputOption::VALUE_NONE,
@@ -62,7 +68,9 @@ class ServiceCommand extends Command
 
         $writeState = new State($moduleConfig);
 
-        $writeState->addModel($state->getServiceModel());
+        if (!$input->getOption('no-service')) {
+            $writeState->addModel($state->getServiceModel());
+        }
 
         if (!$input->getOption('no-factory')) {
             $writeState->addModel($state->getModel('service-factory'));
