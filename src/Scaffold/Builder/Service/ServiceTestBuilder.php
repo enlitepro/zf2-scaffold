@@ -106,7 +106,7 @@ EOF;
         );
 
 
-        $doc = '@expectedException \\' . $state->getRuntimeException()->getName();
+        $doc = '@expectedException \\' . $state->getModel('NotFoundException')->getName();
         $code
             = <<<EOF
 \$id = 123;

@@ -67,7 +67,7 @@ class ServiceTraitBuilder extends AbstractBuilder
 
         $generator = new TraitGenerator($model->getName());
         $generator->addUse($state->getServiceModel()->getName());
-        $generator->addUse($state->getRuntimeException()->getName());
+        $generator->addUse($state->getModel('RuntimeException')->getName());
         $generator->addUse('Zend\ServiceManager\ServiceLocatorAwareInterface');
         $generator->addUse('Zend\ServiceManager\ServiceLocatorInterface');
 
@@ -99,7 +99,7 @@ EOF;
         $getter = $this->getGetter($property, $class);
         $getter->setBody($code);
         $getter->getDocBlock()->setTag(
-            new Tag(['name' => 'throws', 'description' => $state->getRuntimeException()->getClassName()])
+            new Tag(['name' => 'throws', 'description' => $state->getModel('RuntimeException')->getClassName()])
         );
         $generator->addMethodFromGenerator($getter);
 //

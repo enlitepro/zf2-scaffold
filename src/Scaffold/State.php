@@ -43,16 +43,6 @@ class State
     protected $formFactoryModel;
 
     /**
-     * @var Model
-     */
-    protected $runtimeException;
-
-    /**
-     * @var Model
-     */
-    protected $notFoundException;
-
-    /**
      * @var Model[]
      */
     protected $models = [];
@@ -158,46 +148,6 @@ class State
     public function getControllerModel()
     {
         return $this->controllerModel;
-    }
-
-    /**
-     * Set value of RuntimeException
-     *
-     * @param Model $runtimeException
-     */
-    public function setRuntimeException($runtimeException)
-    {
-        $this->runtimeException = $runtimeException;
-    }
-
-    /**
-     * Return value of RuntimeException
-     *
-     * @return Model
-     */
-    public function getRuntimeException()
-    {
-        return $this->runtimeException;
-    }
-
-    /**
-     * Set value of NotFoundException
-     *
-     * @param Model $notFoundException
-     */
-    public function setNotFoundException($notFoundException)
-    {
-        $this->notFoundException = $notFoundException;
-    }
-
-    /**
-     * Return value of NotFoundException
-     *
-     * @return Model
-     */
-    public function getNotFoundException()
-    {
-        return $this->notFoundException;
     }
 
     /**

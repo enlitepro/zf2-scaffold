@@ -5,19 +5,42 @@
 
 namespace Scaffold\Builder\Exception;
 
-
 use Scaffold\Builder\AbstractBuilder;
 use Scaffold\State;
 use Scaffold\Config;
 use Scaffold\Model;
 use Zend\Code\Generator\ClassGenerator;
 
-class NotFoundExceptionBuilder extends AbstractBuilder
+
+class ExceptionBuilder extends AbstractBuilder
 {
+
     /**
-     * @var Config
+     * @var string
      */
-    protected $config;
+    protected $name;
+
+    /**
+     * @var string
+     */
+    protected $extends;
+
+    /**
+     * @var Model
+     */
+    protected $model;
+
+    /**
+     * @param Config $config
+     * @param string $name
+     * @param string $extends
+     */
+    public function __construct(Config $config, $name, $extends = '\RuntimeException')
+    {
+        $this->config = $config;
+        $this->extends = $extends;
+        $this->name = $name;
+    }
 
     /**
      * Prepare models
@@ -30,33 +53,31 @@ class NotFoundExceptionBuilder extends AbstractBuilder
         $name = $this->buildNamespace()
             ->addPart($this->config->getModule())
             ->addPart('Exception')
-            ->addPart('NotFoundException')
+            ->addPart($this->name)
             ->getNamespace();
 
         $path = $this->buildPath()
             ->setModule($this->config->getModule())
             ->addPart('Exception')
-            ->addPart('NotFoundException')
+            ->addPart($this->name)
             ->getPath();
 
         $model->setName($name);
         $model->setPath($path);
-        $state->setNotFoundException($model);
-        $state->addModel($model);
+        $state->addModel($model, $this->name);
+        $this->model = $model;
     }
 
     /**
      * Build generators
      *
-     * @param State|\Scaffold\State $state
-     * @return \Scaffold\State|void
+     * @param State $state
      */
     public function build(State $state)
     {
-        $model = $state->getNotFoundException();
-        $generator = new ClassGenerator($model->getName());
-        $generator->setExtendedClass('RuntimeException');
+        $generator = new ClassGenerator($this->model->getName());
+        $generator->setExtendedClass($this->extends);
 
-        $model->setGenerator($generator);
+        $this->model->setGenerator($generator);
     }
 }

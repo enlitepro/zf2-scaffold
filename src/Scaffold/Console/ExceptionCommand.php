@@ -6,6 +6,9 @@
 namespace Scaffold\Console;
 
 
+use Scaffold\Builder\BuilderInterface;
+use Scaffold\Builder\Container\ExceptionContainer;
+use Scaffold\Builder\Container\FullContainer;
 use Scaffold\State;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -21,12 +24,9 @@ class ExceptionCommand extends AbstractCommand
         $this->addArgument('module', InputArgument::REQUIRED, 'Module name');
     }
 
-    protected function write(State $state, InputInterface $input, OutputInterface $output)
+    protected function getBuilder()
     {
-        $writeState = new State($this->configWriter);
-        $writeState->addModel($state->getRuntimeException());
-        $writeState->addModel($state->getNotFoundException());
-
-        parent::write($writeState, $input, $output);
+        return new ExceptionContainer($this->config);
     }
+
 }
