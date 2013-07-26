@@ -22,5 +22,7 @@ $application->add(new Console\ExceptionCommand());
 $application->add(new Console\ModuleCommand());
 $application->add(new Console\ControllerCommand());
 $application->add(new Console\RepositoryCommand());
+$application->add(new Console\EntityCommand());
+$application->add(new Console\FormCommand());
 
 $application->run();

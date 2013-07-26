@@ -40,7 +40,7 @@ class State
     /**
      * @var Model
      */
-    protected $formModel;
+    protected $formFactoryModel;
 
     /**
      * @var Model
@@ -205,9 +205,9 @@ class State
      *
      * @param Model $formModel
      */
-    public function setFormModel($formModel)
+    public function setFormFactoryModel($formModel)
     {
-        $this->formModel = $formModel;
+        $this->formFactoryModel = $formModel;
     }
 
     /**
@@ -215,9 +215,9 @@ class State
      *
      * @return Model
      */
-    public function getFormModel()
+    public function getFormFactoryModel()
     {
-        return $this->formModel;
+        return $this->formFactoryModel;
     }
 
     /**

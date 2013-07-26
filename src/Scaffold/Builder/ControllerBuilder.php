@@ -148,7 +148,7 @@ EOF
             \$id = \$this->params()->fromRoute('id');
 \$$name = \$this->$service()->loadById(\$id);
 /** @var Form \$form */
-\$form = \$this->getServiceLocator()->get('{$state->getFormModel()->getServiceName()}');
+\$form = \$this->getServiceLocator()->get('{$state->getFormFactoryModel()->getServiceName()}');
 \$form->bind(\$$name);
 
 if (\$this->getRequest()->isPost()) {

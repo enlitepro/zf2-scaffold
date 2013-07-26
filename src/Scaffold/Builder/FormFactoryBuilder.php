@@ -43,7 +43,7 @@ class FormFactoryBuilder extends AbstractBuilder
 
         $model->setName($name);
         $model->setPath($path);
-        $state->setFormModel($model);
+        $state->setFormFactoryModel($model);
         $state->addModel($model);
 
         $config = array(
@@ -64,7 +64,7 @@ class FormFactoryBuilder extends AbstractBuilder
      */
     public function build(State $state)
     {
-        $model = $state->getFormModel();
+        $model = $state->getFormFactoryModel();
         $generator = new ClassGenerator($model->getName());
         $generator->setImplementedInterfaces(['FactoryInterface']);
 
@@ -121,8 +121,11 @@ EOF
         $method->getDocBlock()->setTag(['name' => 'return', 'description' => 'InputFilterInterface']);
 
         $method->setBody(<<<EOF
-\$factory = new Factory();
-return \$factory->createInputFilter(array());
+return (new Factory())->createInputFilter(
+    array(
+
+    )
+);
 EOF
 );
 
