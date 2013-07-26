@@ -178,7 +178,7 @@ if (\$this->getRequest()->isPost()) {
 }
 
 return array(
-    '\$form' => \$form
+    'form' => \$form
 );
 EOF
         );
