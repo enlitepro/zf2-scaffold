@@ -6,7 +6,6 @@
 namespace Scaffold\Console;
 
 
-use Scaffold\Builder\Factory;
 use Scaffold\Builder\ModuleBuilder;
 use Scaffold\Config;
 use Scaffold\State;

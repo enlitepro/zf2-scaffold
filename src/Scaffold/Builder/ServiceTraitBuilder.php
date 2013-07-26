@@ -47,6 +47,7 @@ class ServiceTraitBuilder extends AbstractBuilder
 
         $model->setName($name);
         $model->setPath($path);
+        $state->setServiceTraitModel($model);
         $state->addModel($model, 'service-trait');
 
         $this->model = $model;

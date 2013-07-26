@@ -36,6 +36,7 @@ class ModelWriter extends AbstractWriter
     {
         foreach ($state->getModels() as $model) {
             $this->writeModel($model, $output);
+            $this->mergeConfig($state, $model, $output);
         }
     }
 
@@ -50,6 +51,19 @@ class ModelWriter extends AbstractWriter
         $data = '<?php' . PHP_EOL . PHP_EOL . $data;
 
         $this->writeData($model->getPath(), $data, $output);
+    }
+
+    /**
+     * @param State $state
+     * @param Model $model
+     * @param OutputInterface $output
+     */
+    public function mergeConfig(State $state, Model $model, OutputInterface $output)
+    {
+        $config = $model->getServiceConfig();
+        if (is_array($config)) {
+            $state->getModuleConfig()->merge($config);
+        }
     }
 
 }

@@ -5,7 +5,8 @@
 
 namespace Scaffold\Console;
 
-use Scaffold\Builder;
+
+use Scaffold\Builder\EntityContainer;
 use Scaffold\Config;
 use Scaffold\State;
 use Scaffold\Writer\ConfigWriter;
@@ -15,15 +16,15 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class EntityCommand extends Command
+class ControllerCommand extends Command
 {
 
     protected function configure()
     {
-        $this->setName('entity');
-        $this->setDescription('Create entity, service and repository');
+        $this->setName('controller');
+        $this->setDescription('Create controller');
         $this->addArgument('module', InputArgument::REQUIRED, 'Module name');
-        $this->addArgument('name', InputArgument::REQUIRED, 'Entity name');
+        $this->addArgument('name', InputArgument::REQUIRED, 'Controller name');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -36,15 +37,17 @@ class EntityCommand extends Command
 
         $state = new State($moduleConfig);
 
-        $builder = new Builder\EntityContainer($config);
+        $builder = new EntityContainer($config);
         $builder->prepare($state);
         $builder->build($state);
 
+        $writeState = new State($moduleConfig);
+        $writeState->addModel($state->getControllerModel());
+
         $writer = new ModelWriter($config);
-        $writer->write($state, $output);
+        $writer->write($writeState, $output);
 
         $moduleConfig->save($output);
     }
-
 
 }

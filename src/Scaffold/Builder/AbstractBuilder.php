@@ -9,6 +9,7 @@ namespace Scaffold\Builder;
 use Scaffold\Config;
 use Scaffold\NamespaceBuilder;
 use Scaffold\PathBuilder;
+use Scaffold\State;
 use Zend\Code\Generator\ClassGenerator;
 use Zend\Code\Generator\DocBlock\Tag;
 use Zend\Code\Generator\DocBlockGenerator;

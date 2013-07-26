@@ -22,6 +22,11 @@ class Model
     protected $path;
 
     /**
+     * @var array
+     */
+    protected $serviceConfig = array();
+
+    /**
      * @var GeneratorInterface
      */
     protected $generator;
@@ -29,7 +34,7 @@ class Model
     /**
      * Set value of Generator
      *
-     * @param \Zend\Code\Generator\GeneratorInterface $generator
+     * @param GeneratorInterface $generator
      */
     public function setGenerator($generator)
     {
@@ -39,7 +44,7 @@ class Model
     /**
      * Return value of Generator
      *
-     * @return \Zend\Code\Generator\GeneratorInterface
+     * @return GeneratorInterface
      */
     public function getGenerator()
     {
@@ -84,6 +89,26 @@ class Model
     public function getPath()
     {
         return $this->path;
+    }
+
+    /**
+     * Set value of ServiceConfig
+     *
+     * @param array $serviceConfig
+     */
+    public function setServiceConfig(array $serviceConfig)
+    {
+        $this->serviceConfig = $serviceConfig;
+    }
+
+    /**
+     * Return value of ServiceConfig
+     *
+     * @return array
+     */
+    public function getServiceConfig()
+    {
+        return $this->serviceConfig;
     }
 
     /**

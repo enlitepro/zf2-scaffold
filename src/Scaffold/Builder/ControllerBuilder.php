@@ -6,10 +6,10 @@
 namespace Scaffold\Builder;
 
 
+use Scaffold\Code\Generator\ClassGenerator;
 use Scaffold\Config;
 use Scaffold\Model;
 use Scaffold\State;
-use Zend\Code\Generator\ClassGenerator;
 use Zend\Code\Generator\DocBlockGenerator;
 use Zend\Code\Generator\MethodGenerator;
 
@@ -54,8 +54,7 @@ class ControllerBuilder extends AbstractBuilder
                 )
             )
         );
-
-        $state->getModuleConfig()->merge($config);
+        $model->setServiceConfig($config);
     }
 
     /**
@@ -71,33 +70,20 @@ class ControllerBuilder extends AbstractBuilder
         $generator->setExtendedClass('AbstractActionController');
         $generator->addUse('Zend\Mvc\Controller\AbstractActionController');
         $generator->addUse('Doctrine\ORM\EntityManager');
-        $generator->addUse($state->getServiceModel()->getName());
-        $generator->addUse($state->getFormModel()->getName());
+        $generator->addUse('Zend\Form\Form');
+        $generator->addUse($state->getServiceTraitModel()->getName());
 
-        $this->addProperty(
-            $generator,
-            lcfirst($state->getServiceModel()->getClassName()),
-            $state->getServiceModel()->getClassName()
-        );
+        $generator->addTrait($state->getServiceTraitModel()->getClassName());
+
         $this->addProperty($generator, 'entityManager', 'EntityManager');
 
         $this->buildIndexAction($generator, $state);
         $this->buildListAction($generator, $state);
         $this->buildEditAction($generator, $state);
 
-        $this->buildGetService($generator, $state);
         $this->buildGetEntityManager($generator, $state);
 
         $model->setGenerator($generator);
-    }
-
-    public function buildGetService(ClassGenerator $generator, State $state)
-    {
-        $property = lcfirst($state->getServiceModel()->getClassName());
-        $this->addSetter($generator, $property, $state->getServiceModel()->getClassName());
-
-        $body = '$this->getServiceLocator()->get("' . $state->getServiceModel()->getServiceName() . '")';
-        $this->addLazyGetter($generator, $property, $state->getServiceModel()->getClassName(), $body);
     }
 
     public function buildGetEntityManager(ClassGenerator $generator, State $state)
@@ -161,7 +147,7 @@ EOF
             <<<EOF
             \$id = \$this->params()->fromRoute('id');
 \$$name = \$this->$service()->loadById(\$id);
-/** @var {$state->getFormModel()->getClassName()} \$form */
+/** @var Form \$form */
 \$form = \$this->getServiceLocator()->get('{$state->getFormModel()->getServiceName()}');
 \$form->bind(\$$name);
 

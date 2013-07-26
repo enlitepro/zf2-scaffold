@@ -6,7 +6,7 @@
 namespace Scaffold\Console;
 
 
-use Scaffold\Builder\Factory;
+use Scaffold\Builder\EntityContainer;
 use Scaffold\Config;
 use Scaffold\State;
 use Scaffold\Writer\ConfigWriter;
@@ -61,8 +61,7 @@ class ServiceCommand extends Command
 
         $state = new State($moduleConfig);
 
-        $factory = new Factory();
-        $builder = $factory->factory($config);
+        $builder = new EntityContainer($config);
         $builder->prepare($state);
         $builder->build($state);
 

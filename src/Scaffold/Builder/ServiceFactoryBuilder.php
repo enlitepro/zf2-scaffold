@@ -58,8 +58,7 @@ class ServiceFactoryBuilder extends AbstractBuilder
                 )
             )
         );
-
-        $state->getModuleConfig()->merge($config);
+        $model->setServiceConfig($config);
         $this->model = $model;
     }
 

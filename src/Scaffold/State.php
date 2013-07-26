@@ -30,6 +30,11 @@ class State
     /**
      * @var Model
      */
+    protected $serviceTraitModel;
+
+    /**
+     * @var Model
+     */
     protected $controllerModel;
 
     /**
@@ -213,6 +218,26 @@ class State
     public function getFormModel()
     {
         return $this->formModel;
+    }
+
+    /**
+     * Set value of ServiceTraitModel
+     *
+     * @param Model $serviceTraitModel
+     */
+    public function setServiceTraitModel($serviceTraitModel)
+    {
+        $this->serviceTraitModel = $serviceTraitModel;
+    }
+
+    /**
+     * Return value of ServiceTraitModel
+     *
+     * @return Model
+     */
+    public function getServiceTraitModel()
+    {
+        return $this->serviceTraitModel;
     }
 
     /**

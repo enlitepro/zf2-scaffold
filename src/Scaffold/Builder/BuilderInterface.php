@@ -24,5 +24,4 @@ interface BuilderInterface
      * @param State $state
      */
     public function build(State $state);
-
 }

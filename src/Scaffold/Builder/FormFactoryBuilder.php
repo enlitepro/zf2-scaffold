@@ -53,8 +53,7 @@ class FormFactoryBuilder extends AbstractBuilder
                 )
             )
         );
-
-        $state->getModuleConfig()->merge($config);
+        $model->setServiceConfig($config);
     }
 
     /**
