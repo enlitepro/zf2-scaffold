@@ -7,7 +7,7 @@ namespace Scaffold\Console;
 
 
 use Scaffold\Builder\Factory;
-use Scaffold\Entity\Config;
+use Scaffold\Config;
 use Scaffold\State;
 use Scaffold\Writer\ConfigWriter;
 use Scaffold\Writer\ModelWriter;

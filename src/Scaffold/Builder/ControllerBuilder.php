@@ -6,10 +6,9 @@
 namespace Scaffold\Builder;
 
 
-use Scaffold\AbstractState;
-use Scaffold\Entity\Config;
-use Scaffold\State;
+use Scaffold\Config;
 use Scaffold\Model;
+use Scaffold\State;
 use Zend\Code\Generator\ClassGenerator;
 use Zend\Code\Generator\DocBlockGenerator;
 use Zend\Code\Generator\MethodGenerator;
@@ -24,9 +23,9 @@ class ControllerBuilder extends AbstractBuilder
     /**
      * Prepare models
      *
-     * @param AbstractState|State $state
+     * @param State|State $state
      */
-    public function prepare(AbstractState $state)
+    public function prepare(State $state)
     {
         $filename = $this->config->getName() . 'Controller';
 
@@ -62,10 +61,10 @@ class ControllerBuilder extends AbstractBuilder
     /**
      * Build generators
      *
-     * @param AbstractState|State $state
-     * @return \Scaffold\AbstractState|void
+     * @param State|State $state
+     * @return \Scaffold\State|void
      */
-    public function build(AbstractState $state)
+    public function build(State $state)
     {
         $model = $state->getControllerModel();
         $generator = new ClassGenerator($model->getName());

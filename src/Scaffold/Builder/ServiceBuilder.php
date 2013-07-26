@@ -6,11 +6,9 @@
 namespace Scaffold\Builder;
 
 
-use Scaffold\AbstractConfig;
-use Scaffold\AbstractState;
-use Scaffold\Code\Generator\ClassGenerator;
-use Scaffold\Entity\Config;
 use Scaffold\State;
+use Scaffold\Code\Generator\ClassGenerator;
+use Scaffold\Config;
 use Scaffold\Model;
 use Zend\Code\Generator\DocBlock\Tag;
 use Zend\Code\Generator\DocBlockGenerator;
@@ -31,9 +29,9 @@ class ServiceBuilder extends AbstractBuilder
     protected $factory;
 
     /**
-     * @param AbstractConfig $config
+     * @param Config $config
      */
-    public function __construct(AbstractConfig $config)
+    public function __construct(Config $config)
     {
         $this->factory = new ServiceFactoryBuilder($config);
         parent::__construct($config);
@@ -42,9 +40,9 @@ class ServiceBuilder extends AbstractBuilder
     /**
      * Prepare models
      *
-     * @param AbstractState|State $state
+     * @param State|State $state
      */
-    public function prepare(AbstractState $state)
+    public function prepare(State $state)
     {
         $model = new Model();
         $name = $this->buildNamespace()
@@ -70,10 +68,10 @@ class ServiceBuilder extends AbstractBuilder
     /**
      * Build generators
      *
-     * @param AbstractState|\Scaffold\State $state
-     * @return \Scaffold\AbstractState|void
+     * @param State|\Scaffold\State $state
+     * @return \Scaffold\State|void
      */
-    public function build(AbstractState $state)
+    public function build(State $state)
     {
         $model = $state->getServiceModel();
         $generator = new ClassGenerator($model->getName());

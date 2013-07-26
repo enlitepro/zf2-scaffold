@@ -6,7 +6,8 @@
 namespace Scaffold\Builder;
 
 
-use Scaffold\AbstractConfig;
+
+use Scaffold\Config;
 
 class Factory
 {
@@ -14,7 +15,7 @@ class Factory
     /**
      * Factory builder container
      */
-    public function factory(AbstractConfig $config)
+    public function factory(Config $config)
     {
         $builder = new Container();
         $builder->addBuilder(new EntityBuilder($config));

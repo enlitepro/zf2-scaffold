@@ -6,7 +6,7 @@
 namespace Scaffold\Writer;
 
 
-use Scaffold\Entity\Config;
+use Scaffold\Config;
 use Scaffold\Writer\AbstractWriter;
 use Symfony\Component\Console\Output\OutputInterface;
 use Scaffold\Code\Generator\ValueGenerator;

@@ -6,8 +6,8 @@
 namespace Scaffold\Writer;
 
 
-use Scaffold\AbstractConfig;
-use Scaffold\AbstractState;
+use Scaffold\Config;
+use Scaffold\State;
 use Scaffold\Model;
 use Scaffold\Writer\AbstractWriter;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -16,23 +16,23 @@ class ModelWriter extends AbstractWriter
 {
 
     /**
-     * @var AbstractConfig
+     * @var Config
      */
     protected $config;
 
     /**
-     * @param AbstractConfig $config
+     * @param Config $config
      */
-    public function __construct(AbstractConfig $config)
+    public function __construct(Config $config)
     {
         $this->config = $config;
     }
 
     /**
-     * @param AbstractState $state
+     * @param State $state
      * @param OutputInterface $output
      */
-    public function write(AbstractState $state, OutputInterface $output)
+    public function write(State $state, OutputInterface $output)
     {
         foreach ($state->getModels() as $model) {
             $this->writeModel($model, $output);

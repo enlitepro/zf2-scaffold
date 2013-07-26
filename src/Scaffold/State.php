@@ -6,10 +6,10 @@
 namespace Scaffold;
 
 
-use Scaffold\AbstractState;
 use Scaffold\Model;
+use Scaffold\Writer\ConfigWriter;
 
-class State extends AbstractState
+class State
 {
 
     /**
@@ -51,6 +51,29 @@ class State extends AbstractState
      * @var Model[]
      */
     protected $models = [];
+
+    /**
+     * @var ConfigWriter
+     */
+    protected $moduleConfig;
+
+    /**
+     * @param ConfigWriter $moduleConfig
+     */
+    public function __construct(ConfigWriter $moduleConfig)
+    {
+        $this->moduleConfig = $moduleConfig;
+    }
+
+    /**
+     * Return value of ModuleConfig
+     *
+     * @return \Scaffold\Writer\ConfigWriter
+     */
+    public function getModuleConfig()
+    {
+        return $this->moduleConfig;
+    }
 
     /**
      * Set value of EntityModel

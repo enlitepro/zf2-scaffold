@@ -6,10 +6,9 @@
 namespace Scaffold\Builder;
 
 
-use Scaffold\AbstractState;
-use Scaffold\Code\Generator\ClassGenerator;
-use Scaffold\Entity\Config;
 use Scaffold\State;
+use Scaffold\Code\Generator\ClassGenerator;
+use Scaffold\Config;
 use Scaffold\Model;
 use Zend\Code\Generator\MethodGenerator;
 use Zend\Code\Generator\ParameterGenerator;
@@ -17,7 +16,7 @@ use Zend\Code\Generator\ParameterGenerator;
 class ServiceTestBuilder extends AbstractBuilder
 {
     /**
-     * @var Config
+     * @var \Scaffold\Config
      */
     protected $config;
 
@@ -27,9 +26,9 @@ class ServiceTestBuilder extends AbstractBuilder
     protected $model;
 
     /**
-     * @param AbstractState|State $state
+     * @param State|State $state
      */
-    public function prepare(AbstractState $state)
+    public function prepare(State $state)
     {
         $model = new Model();
         $name = $this->buildNamespace()
@@ -54,10 +53,10 @@ class ServiceTestBuilder extends AbstractBuilder
 
 
     /**
-     * @param AbstractState|State $state
-     * @return AbstractState|void
+     * @param State|State $state
+     * @return State|void
      */
-    public function build(AbstractState $state)
+    public function build(State $state)
     {
         $model = $this->model;
         $generator = new ClassGenerator($model->getName());

@@ -6,7 +6,7 @@
 namespace Scaffold\Builder;
 
 
-use Scaffold\AbstractState;
+use Scaffold\State;
 
 class Container implements BuilderInterface
 {
@@ -17,9 +17,9 @@ class Container implements BuilderInterface
     protected $builders = [];
 
     /**
-     * @param AbstractState $state
+     * @param State $state
      */
-    public function prepare(AbstractState $state)
+    public function prepare(State $state)
     {
         foreach ($this->builders as $builder) {
             $builder->prepare($state);
@@ -29,7 +29,7 @@ class Container implements BuilderInterface
     /**
      * @param BuilderInterface $state
      */
-    public function build(AbstractState $state)
+    public function build(State $state)
     {
         foreach ($this->builders as $builder) {
             $builder->build($state);

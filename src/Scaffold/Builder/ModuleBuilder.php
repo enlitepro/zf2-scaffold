@@ -6,7 +6,7 @@
 namespace Scaffold\Builder;
 
 
-use Scaffold\Entity\Config;
+use Scaffold\Config;
 use Scaffold\Builder\Module;
 
 class ModuleBuilder extends Container

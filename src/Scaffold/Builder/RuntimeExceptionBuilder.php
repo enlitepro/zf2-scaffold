@@ -6,25 +6,24 @@
 namespace Scaffold\Builder;
 
 
-use Scaffold\AbstractState;
-use Scaffold\Entity\Config;
 use Scaffold\State;
+use Scaffold\Config;
 use Scaffold\Model;
 use Zend\Code\Generator\ClassGenerator;
 
 class RuntimeExceptionBuilder extends AbstractBuilder
 {
     /**
-     * @var Config
+     * @var \Scaffold\Config
      */
     protected $config;
 
     /**
      * Prepare models
      *
-     * @param AbstractState|\Scaffold\State $state
+     * @param State|\Scaffold\State $state
      */
-    public function prepare(AbstractState $state)
+    public function prepare(State $state)
     {
         $model = new Model();
         $name = $this->buildNamespace()
@@ -48,10 +47,10 @@ class RuntimeExceptionBuilder extends AbstractBuilder
     /**
      * Build generators
      *
-     * @param AbstractState|\Scaffold\State $state
-     * @return \Scaffold\AbstractState|void
+     * @param State|\Scaffold\State $state
+     * @return \Scaffold\State|void
      */
-    public function build(AbstractState $state)
+    public function build(State $state)
     {
         $model = $state->getRuntimeException();
         $generator = new ClassGenerator($model->getName());

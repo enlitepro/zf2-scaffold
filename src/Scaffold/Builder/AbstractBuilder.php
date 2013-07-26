@@ -6,7 +6,7 @@
 namespace Scaffold\Builder;
 
 
-use Scaffold\AbstractConfig;
+use Scaffold\Config;
 use Scaffold\NamespaceBuilder;
 use Scaffold\PathBuilder;
 use Zend\Code\Generator\ClassGenerator;
@@ -25,14 +25,14 @@ abstract class AbstractBuilder implements BuilderInterface
     protected $name;
 
     /**
-     * @var AbstractConfig
+     * @var Config
      */
     protected $config;
 
     /**
-     * @param AbstractConfig $config
+     * @param Config $config
      */
-    public function __construct(AbstractConfig $config)
+    public function __construct(Config $config)
     {
         $this->setConfig($config);
     }
@@ -66,7 +66,7 @@ abstract class AbstractBuilder implements BuilderInterface
     /**
      * Set value of Config
      *
-     * @param \Scaffold\AbstractConfig $config
+     * @param \Scaffold\Config $config
      */
     public function setConfig($config)
     {

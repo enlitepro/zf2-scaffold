@@ -6,10 +6,10 @@
 namespace Scaffold\Builder\Module;
 
 
-use Scaffold\AbstractState;
+use Scaffold\State;
 use Scaffold\Builder\AbstractBuilder;
 use Scaffold\Code\Generator\RawGenerator;
-use Scaffold\Entity\Config;
+use Scaffold\Config;
 use Scaffold\Model;
 use Scaffold\State;
 
@@ -24,9 +24,9 @@ class ModuleBuilder extends AbstractBuilder
     /**
      * Prepare models
      *
-     * @param AbstractState|State $state
+     * @param State|State $state
      */
-    public function prepare(AbstractState $state)
+    public function prepare(State $state)
     {
         $model = new Model();
         $name = $this->buildNamespace()
@@ -48,9 +48,9 @@ class ModuleBuilder extends AbstractBuilder
     /**
      * Build generators
      *
-     * @param AbstractState|State $state
+     * @param State|State $state
      */
-    public function build(AbstractState $state)
+    public function build(State $state)
     {
         $model = $state->getModel('module');
         $data = file_get_contents(SCAFFOLD_ROOT . "/data/template/Module.php");

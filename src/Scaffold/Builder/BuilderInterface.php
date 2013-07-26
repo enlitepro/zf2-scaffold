@@ -6,7 +6,7 @@
 namespace Scaffold\Builder;
 
 
-use Scaffold\AbstractState;
+use Scaffold\State;
 
 interface BuilderInterface
 {
@@ -14,15 +14,15 @@ interface BuilderInterface
     /**
      * Prepare models
      *
-     * @param AbstractState $state
+     * @param State $state
      */
-    public function prepare(AbstractState $state);
+    public function prepare(State $state);
 
     /**
      * Build generators
      *
-     * @param AbstractState $state
+     * @param State $state
      */
-    public function build(AbstractState $state);
+    public function build(State $state);
 
 }

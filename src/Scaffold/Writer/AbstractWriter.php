@@ -6,21 +6,21 @@
 namespace Scaffold\Writer;
 
 
-use Scaffold\AbstractConfig;
+use Scaffold\Config;
 use Symfony\Component\Console\Output\OutputInterface;
 
 abstract class AbstractWriter
 {
 
     /**
-     * @var AbstractConfig
+     * @var \Scaffold\Config
      */
     protected $config;
 
     /**
-     * @param AbstractConfig $config
+     * @param \Scaffold\Config $config
      */
-    public function __construct(AbstractConfig $config)
+    public function __construct(Config $config)
     {
         $this->config = $config;
     }
