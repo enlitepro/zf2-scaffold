@@ -3,18 +3,19 @@
  * @author Evgeny Shpilevsky <evgeny@shpilevsky.com>
  */
 
-namespace Scaffold\Builder;
+namespace Scaffold\Builder\Repository;
 
 
+use Scaffold\Builder\AbstractBuilder;
 use Scaffold\State;
 use Scaffold\Config;
 use Scaffold\Model;
 use Zend\Code\Generator\ClassGenerator;
 
-class RuntimeExceptionBuilder extends AbstractBuilder
+class RepositoryBuilder extends AbstractBuilder
 {
     /**
-     * @var \Scaffold\Config
+     * @var Config
      */
     protected $config;
 
@@ -28,19 +29,19 @@ class RuntimeExceptionBuilder extends AbstractBuilder
         $model = new Model();
         $name = $this->buildNamespace()
             ->addPart($this->config->getModule())
-            ->addPart('Exception')
-            ->addPart('RuntimeException')
+            ->addPart('Repository')
+            ->addPart($this->config->getName() . 'Repository')
             ->getNamespace();
 
         $path = $this->buildPath()
             ->setModule($this->config->getModule())
-            ->addPart('Exception')
-            ->addPart('RuntimeException')
+            ->addPart('Repository')
+            ->addPart($this->config->getName() . 'Repository')
             ->getPath();
 
         $model->setName($name);
         $model->setPath($path);
-        $state->setRuntimeException($model);
+        $state->setRepositoryModel($model);
         $state->addModel($model);
     }
 
@@ -52,10 +53,12 @@ class RuntimeExceptionBuilder extends AbstractBuilder
      */
     public function build(State $state)
     {
-        $model = $state->getRuntimeException();
+        $model = $state->getRepositoryModel();
         $generator = new ClassGenerator($model->getName());
-        $generator->setExtendedClass('\RuntimeException');
+        $generator->addUse('Doctrine\ORM\EntityRepository');
+        $generator->setExtendedClass('EntityRepository');
 
         $model->setGenerator($generator);
     }
+
 }

@@ -3,13 +3,14 @@
  * @author Evgeny Shpilevsky <evgeny@shpilevsky.com>
  */
 
-namespace Scaffold\Builder;
+namespace Scaffold\Builder\Container;
 
 
+use Scaffold\Builder\AbstractContainer;
 use Scaffold\Config;
 use Scaffold\Builder\Module;
 
-class ModuleBuilder extends Container
+class ModuleContainer extends AbstractContainer
 {
 
     /**

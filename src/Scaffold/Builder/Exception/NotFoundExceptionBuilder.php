@@ -3,15 +3,16 @@
  * @author Evgeny Shpilevsky <evgeny@shpilevsky.com>
  */
 
-namespace Scaffold\Builder;
+namespace Scaffold\Builder\Exception;
 
 
+use Scaffold\Builder\AbstractBuilder;
 use Scaffold\State;
 use Scaffold\Config;
 use Scaffold\Model;
 use Zend\Code\Generator\ClassGenerator;
 
-class RepositoryBuilder extends AbstractBuilder
+class NotFoundExceptionBuilder extends AbstractBuilder
 {
     /**
      * @var Config
@@ -28,19 +29,19 @@ class RepositoryBuilder extends AbstractBuilder
         $model = new Model();
         $name = $this->buildNamespace()
             ->addPart($this->config->getModule())
-            ->addPart('Repository')
-            ->addPart($this->config->getName() . 'Repository')
+            ->addPart('Exception')
+            ->addPart('NotFoundException')
             ->getNamespace();
 
         $path = $this->buildPath()
             ->setModule($this->config->getModule())
-            ->addPart('Repository')
-            ->addPart($this->config->getName() . 'Repository')
+            ->addPart('Exception')
+            ->addPart('NotFoundException')
             ->getPath();
 
         $model->setName($name);
         $model->setPath($path);
-        $state->setRepositoryModel($model);
+        $state->setNotFoundException($model);
         $state->addModel($model);
     }
 
@@ -52,12 +53,10 @@ class RepositoryBuilder extends AbstractBuilder
      */
     public function build(State $state)
     {
-        $model = $state->getRepositoryModel();
+        $model = $state->getNotFoundException();
         $generator = new ClassGenerator($model->getName());
-        $generator->addUse('Doctrine\ORM\EntityRepository');
-        $generator->setExtendedClass('EntityRepository');
+        $generator->setExtendedClass('RuntimeException');
 
         $model->setGenerator($generator);
     }
-
 }

@@ -3,9 +3,11 @@
  * @author Evgeny Shpilevsky <evgeny@shpilevsky.com>
  */
 
-namespace Scaffold\Builder;
+namespace Scaffold\Builder\Service;
 
 
+use Scaffold\Builder\AbstractBuilder;
+use Scaffold\Builder\Service\ServiceFactoryBuilder;
 use Scaffold\State;
 use Scaffold\Code\Generator\ClassGenerator;
 use Scaffold\Config;

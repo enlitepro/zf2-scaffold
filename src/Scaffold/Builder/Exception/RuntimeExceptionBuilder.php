@@ -3,18 +3,19 @@
  * @author Evgeny Shpilevsky <evgeny@shpilevsky.com>
  */
 
-namespace Scaffold\Builder;
+namespace Scaffold\Builder\Exception;
 
 
+use Scaffold\Builder\AbstractBuilder;
 use Scaffold\State;
 use Scaffold\Config;
 use Scaffold\Model;
 use Zend\Code\Generator\ClassGenerator;
 
-class NotFoundExceptionBuilder extends AbstractBuilder
+class RuntimeExceptionBuilder extends AbstractBuilder
 {
     /**
-     * @var Config
+     * @var \Scaffold\Config
      */
     protected $config;
 
@@ -29,18 +30,18 @@ class NotFoundExceptionBuilder extends AbstractBuilder
         $name = $this->buildNamespace()
             ->addPart($this->config->getModule())
             ->addPart('Exception')
-            ->addPart('NotFoundException')
+            ->addPart('RuntimeException')
             ->getNamespace();
 
         $path = $this->buildPath()
             ->setModule($this->config->getModule())
             ->addPart('Exception')
-            ->addPart('NotFoundException')
+            ->addPart('RuntimeException')
             ->getPath();
 
         $model->setName($name);
         $model->setPath($path);
-        $state->setNotFoundException($model);
+        $state->setRuntimeException($model);
         $state->addModel($model);
     }
 
@@ -52,9 +53,9 @@ class NotFoundExceptionBuilder extends AbstractBuilder
      */
     public function build(State $state)
     {
-        $model = $state->getNotFoundException();
+        $model = $state->getRuntimeException();
         $generator = new ClassGenerator($model->getName());
-        $generator->setExtendedClass('RuntimeException');
+        $generator->setExtendedClass('\RuntimeException');
 
         $model->setGenerator($generator);
     }

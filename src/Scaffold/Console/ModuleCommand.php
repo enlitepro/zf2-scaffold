@@ -6,7 +6,7 @@
 namespace Scaffold\Console;
 
 
-use Scaffold\Builder\ModuleBuilder;
+use Scaffold\Builder\Container\ModuleContainer;
 use Scaffold\Config;
 use Scaffold\State;
 use Scaffold\Writer\ConfigWriter;
@@ -36,7 +36,7 @@ class ModuleCommand extends Command
 
         $state = new State($moduleConfig);
 
-        $builder = new ModuleBuilder($config);
+        $builder = new ModuleContainer($config);
         $builder->prepare($state);
         $builder->build($state);
 

@@ -3,9 +3,10 @@
  * @author Evgeny Shpilevsky <evgeny@shpilevsky.com>
  */
 
-namespace Scaffold\Builder;
+namespace Scaffold\Builder\Entity;
 
 
+use Scaffold\Builder\AbstractBuilder;
 use Scaffold\State;
 use Scaffold\Code\Generator\ClassGenerator;
 use Scaffold\Config;

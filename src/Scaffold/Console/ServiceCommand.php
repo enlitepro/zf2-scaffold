@@ -6,7 +6,7 @@
 namespace Scaffold\Console;
 
 
-use Scaffold\Builder\FullContainer;
+use Scaffold\Builder\Container\FullContainer;
 use Scaffold\Config;
 use Scaffold\State;
 use Scaffold\Writer\ConfigWriter;

@@ -8,7 +8,7 @@ namespace Scaffold\Builder;
 
 use Scaffold\State;
 
-class Container implements BuilderInterface
+abstract class AbstractContainer implements BuilderInterface
 {
 
     /**
