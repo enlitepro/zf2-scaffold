@@ -16,10 +16,11 @@ if (file_exists(__DIR__ . "/../vendor/autoload.php")) {
 }
 
 $application = new Application();
-$application->add(new Console\EntityCommand());
+$application->add(new Console\FullCommand());
 $application->add(new Console\ServiceCommand());
 $application->add(new Console\ExceptionCommand());
 $application->add(new Console\ModuleCommand());
 $application->add(new Console\ControllerCommand());
+$application->add(new Console\RepositoryCommand());
 
 $application->run();

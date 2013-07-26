@@ -6,17 +6,12 @@
 namespace Scaffold\Console;
 
 
-use Scaffold\Builder\EntityContainer;
-use Scaffold\Config;
 use Scaffold\State;
-use Scaffold\Writer\ConfigWriter;
-use Scaffold\Writer\ModelWriter;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class ControllerCommand extends Command
+class ControllerCommand extends AbstractCommand
 {
 
     protected function configure()
@@ -27,27 +22,13 @@ class ControllerCommand extends Command
         $this->addArgument('name', InputArgument::REQUIRED, 'Controller name');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function write(State $state, InputInterface $input, OutputInterface $output)
     {
-        $config = new Config();
-        $config->setBasePath(getcwd());
-        $config->setFromArray($input->getArguments());
-
-        $moduleConfig = new ConfigWriter($config);
-
-        $state = new State($moduleConfig);
-
-        $builder = new EntityContainer($config);
-        $builder->prepare($state);
-        $builder->build($state);
-
-        $writeState = new State($moduleConfig);
+        $writeState = new State($this->configWriter);
         $writeState->addModel($state->getControllerModel());
 
-        $writer = new ModelWriter($config);
-        $writer->write($writeState, $output);
-
-        $moduleConfig->save($output);
+        parent::write($writeState, $input, $output);
     }
+
 
 }

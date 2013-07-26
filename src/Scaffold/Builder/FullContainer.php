@@ -8,7 +8,7 @@ namespace Scaffold\Builder;
 
 use Scaffold\Config;
 
-class EntityContainer extends Container
+class FullContainer extends Container
 {
 
     /**

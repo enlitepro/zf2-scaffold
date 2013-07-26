@@ -6,7 +6,7 @@
 namespace Scaffold\Console;
 
 
-use Scaffold\Builder\EntityContainer;
+use Scaffold\Builder\FullContainer;
 use Scaffold\Config;
 use Scaffold\State;
 use Scaffold\Writer\ConfigWriter;
@@ -17,7 +17,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class ServiceCommand extends Command
+class ServiceCommand extends AbstractCommand
 {
     protected function configure()
     {
@@ -61,7 +61,7 @@ class ServiceCommand extends Command
 
         $state = new State($moduleConfig);
 
-        $builder = new EntityContainer($config);
+        $builder = new FullContainer($config);
         $builder->prepare($state);
         $builder->build($state);
 
