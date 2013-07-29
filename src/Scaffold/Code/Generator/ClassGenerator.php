@@ -94,7 +94,8 @@ class ClassGenerator extends ZendClassGenerator
         $traits = $this->getTraits();
         if (!empty($traits)) {
             $output .= $this->getIndentation();
-            $output .= 'use ' . implode(',' . self::LINE_FEED . $this->getIndentation(), $traits) . ';';
+            $output .= 'use ' . implode(',' . self::LINE_FEED . $this->getIndentation() .
+                    $this->getIndentation(), $traits) . ';';
             $output .= self::LINE_FEED;
             $output .= self::LINE_FEED;
         }

@@ -25,6 +25,7 @@ class RepositoryCommand extends AbstractCommand
     {
         $writeState = new State($this->configWriter);
         $writeState->addModel($state->getRepositoryModel());
+        $writeState->addModel($state->getModel('repository-trait'));
 
         parent::write($writeState, $input, $output);
     }

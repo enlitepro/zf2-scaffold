@@ -80,18 +80,18 @@ class ServiceBuilder extends AbstractBuilder
 
         $generator->setImplementedInterfaces(['ServiceLocatorAwareInterface']);
 
+        $generator->addUse('Doctrine\ORM\EntityManager');
+        $generator->addUse($state->getEntityModel()->getName());
+        $generator->addUse($state->getModel('NotFoundException')->getName());
+        $generator->addUse($state->getModel('repository-trait')->getName());
         $generator->addUse('Zend\ServiceManager\ServiceLocatorAwareInterface');
         $generator->addUse('Zend\ServiceManager\ServiceLocatorAwareTrait');
         $generator->addUse('Zend\ServiceManager\ServiceLocatorInterface');
-        $generator->addUse('Doctrine\ORM\EntityManager');
-        $generator->addUse($state->getRepositoryModel()->getName());
-        $generator->addUse($state->getModel('NotFoundException')->getName());
-        $generator->addUse($state->getEntityModel()->getName());
 
         $generator->addTrait('ServiceLocatorAwareTrait');
+        $generator->addTrait($state->getModel('repository-trait')->getClassName());
 
         $this->addProperty($generator, 'entityManager', 'EntityManager');
-        $this->addProperty($generator, 'repository', $state->getRepositoryModel()->getClassName());
 
         $this->buildConstructor($generator);
         $this->buildLoadById($generator, $state);
@@ -99,7 +99,6 @@ class ServiceBuilder extends AbstractBuilder
         $this->buildSave($generator, $state);
         $this->buildDelete($generator, $state);
         $this->buildEntityManager($generator);
-        $this->buildRepository($generator, $state);
 
         $model->setGenerator($generator);
         $this->factory->build($state);
@@ -194,19 +193,6 @@ EOF;
             'entityManager',
             'EntityManager',
             '$this->getServiceLocator()->get(\'entity_manager\')'
-        );
-
-        $generator->addMethodFromGenerator($setter);
-        $generator->addMethodFromGenerator($getter);
-    }
-
-    protected function buildRepository(ClassGenerator $generator, State $state)
-    {
-        $setter = $this->getSetter('repository', $state->getRepositoryModel()->getClassName());
-        $getter = $this->getLazyGetter(
-            'repository',
-            $state->getRepositoryModel()->getClassName(),
-            '$this->getEntityManager()->getRepository(\'' . $state->getEntityModel()->getName() . '\')'
         );
 
         $generator->addMethodFromGenerator($setter);
