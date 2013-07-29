@@ -109,7 +109,9 @@ class ServiceBuilder extends AbstractBuilder
         $method = new MethodGenerator('__construct');
         $method->setParameter(new ParameterGenerator('serviceLocator', 'ServiceLocatorInterface'));
         $method->setDocBlock(new DocBlockGenerator());
-        $method->getDocBlock()->setTag(new Tag(['name' => 'param', 'description' => 'ServiceLocatorInterface $serviceLocator']));
+        $method->getDocBlock()->setTag(
+            new Tag(['name' => 'param', 'description' => 'ServiceLocatorInterface $serviceLocator'])
+        );
         $method->setBody('$this->serviceLocator = $serviceLocator;');
 
         $generator->addMethodFromGenerator($method);
@@ -117,9 +119,10 @@ class ServiceBuilder extends AbstractBuilder
 
     protected function buildLoadById(ClassGenerator $generator, State $state)
     {
+        $repository = ucfirst($state->getRepositoryModel()->getClassName());
         $body
             = <<<EOF
-\$model = \$this->getRepository()->find(\$id);
+\$model = \$this->get$repository()->find(\$id);
 if (!\$model) {
     throw new NotFoundException('Cannot load model (' . \$id . ')');
 }
@@ -142,7 +145,8 @@ EOF;
 
     protected function buildSearch(ClassGenerator $generator, State $state)
     {
-        $body = 'return $this->getRepository()->findBy($criteria);';
+        $repository = ucfirst($state->getRepositoryModel()->getClassName());
+        $body = 'return $this->get' . $repository . '()->findBy($criteria);';
 
         $method = new MethodGenerator('search');
         $method->setParameter(new ParameterGenerator('criteria', 'array', []));

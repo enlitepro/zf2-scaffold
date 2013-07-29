@@ -89,6 +89,7 @@ class ServiceTestBuilder extends AbstractBuilder
     public function addLoadById(ClassGenerator $generator, State $state)
     {
         $entity = $state->getEntityModel()->getClassName();
+        $repository = ucfirst($state->getRepositoryModel()->getClassName());
 
         $code
             = <<<EOF
@@ -96,7 +97,7 @@ class ServiceTestBuilder extends AbstractBuilder
 \$entity = new $entity();
 
 \$object = \$this->getObject();
-\$object->getRepository()->expects(\$this->once())->method('find')
+\$object->get$repository()->expects(\$this->once())->method('find')
     ->with(\$id)->will(\$this->returnValue(\$entity));
 
 \$this->assertSame(\$entity, \$object->loadById(\$id));
@@ -112,7 +113,7 @@ EOF;
 \$id = 123;
 
 \$object = \$this->getObject();
-\$object->getRepository()->expects(\$this->once())->method('find')
+\$object->get$repository()->expects(\$this->once())->method('find')
     ->with(\$id)->will(\$this->returnValue(false));
 
 \$object->loadById(\$id);
@@ -126,6 +127,7 @@ EOF;
     public function addSearch(ClassGenerator $generator, State $state)
     {
         $entity = $state->getEntityModel()->getClassName();
+        $repository = ucfirst($state->getRepositoryModel()->getClassName());
 
         $code
             = <<<EOF
@@ -133,7 +135,7 @@ EOF;
 \$result = [new $entity()];
 
 \$object = \$this->getObject();
-\$object->getRepository()->expects(\$this->once())->method('findBy')
+\$object->get$repository()->expects(\$this->once())->method('findBy')
     ->with(\$criteria)->will(\$this->returnValue(\$result));
 
 \$this->assertSame(\$result, \$object->search(\$criteria));
@@ -208,6 +210,7 @@ EOF;
         $doc = "@param array \$methods\n@return \\PHPUnit_Framework_MockObject_MockObject|" . $className;
 
         $class = $state->getServiceModel()->getName();
+        $repository = ucfirst($state->getRepositoryModel()->getClassName());
 
         $body
             = <<<EOF
@@ -221,7 +224,7 @@ else {
     \$object = new $className(\$this->getServiceManager());
 }
 
-\$object->setRepository(\$this->getRepository());
+\$object->set$repository(\$this->getRepository());
 \$object->setEntityManager(\$this->getEntityManager());
 
 return \$object;
