@@ -50,7 +50,7 @@ class FormFactoryBuilder extends AbstractBuilder
         $config = array(
             'service_manager' => array(
                 'factories' => array(
-                    $model->getServiceName() => $name
+                    substr($model->getServiceName(), 0, -7) => $name
                 )
             )
         );
