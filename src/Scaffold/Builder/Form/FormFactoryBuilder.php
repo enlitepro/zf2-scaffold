@@ -18,7 +18,7 @@ use Zend\Code\Generator\ParameterGenerator;
 class FormFactoryBuilder extends AbstractBuilder
 {
     /**
-     * @var \Scaffold\Config
+     * @var Config
      */
     protected $config;
 
@@ -60,8 +60,8 @@ class FormFactoryBuilder extends AbstractBuilder
     /**
      * Build generators
      *
-     * @param State|State $state
-     * @return \Scaffold\State|void
+     * @param State $state
+     * @return void
      */
     public function build(State $state)
     {
