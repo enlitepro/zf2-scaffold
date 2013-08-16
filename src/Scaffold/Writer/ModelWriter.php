@@ -6,6 +6,7 @@
 namespace Scaffold\Writer;
 
 
+use Scaffold\Code\Generator\BinGenerator;
 use Scaffold\Config;
 use Scaffold\State;
 use Scaffold\Model;
@@ -48,7 +49,9 @@ class ModelWriter extends AbstractWriter
     public function writeModel(Model $model, OutputInterface $output)
     {
         $data = $model->getGenerator()->generate();
-        $data = '<?php' . PHP_EOL . PHP_EOL . $data;
+        if (!$model->getGenerator() instanceof BinGenerator) {
+            $data = '<?php' . PHP_EOL . PHP_EOL . $data;
+        }
 
         $this->writeData($model->getPath(), $data, $output);
     }

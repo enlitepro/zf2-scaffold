@@ -6,13 +6,13 @@
 namespace Scaffold\Builder\Module;
 
 
-use Scaffold\State;
 use Scaffold\Builder\AbstractBuilder;
-use Scaffold\Code\Generator\RawGenerator;
+use Scaffold\Code\Generator\BinGenerator;
 use Scaffold\Config;
 use Scaffold\Model;
+use Scaffold\State;
 
-class ConfigBuilder extends AbstractBuilder
+class TestBuilder extends AbstractBuilder
 {
 
     /**
@@ -45,9 +45,9 @@ class ConfigBuilder extends AbstractBuilder
         $model = new Model();
         $path = $this->buildPath()
             ->setModule($this->config->getModule())
-            ->addPart('config')
-            ->addPart(basename($this->name, '.php'))
-            ->setType('raw')
+            ->addPart('test')
+            ->addPart(basename($this->name))
+            ->setType('bin')
             ->getPath();
 
         $model->setPath($path);
@@ -64,8 +64,7 @@ class ConfigBuilder extends AbstractBuilder
         $model = $state->getModel($this->name);
         $data = file_get_contents(SCAFFOLD_ROOT . "/data/template/" . $this->name);
         $data = str_replace('__NAMESPACE_PLACEHOLDER__', ucfirst($this->config->getModule()), $data);
-        $data = substr($data, 7);
-        $model->setGenerator(new RawGenerator($data));
+        $model->setGenerator(new BinGenerator($data));
     }
 
 }

@@ -11,7 +11,6 @@ use Scaffold\Builder\AbstractBuilder;
 use Scaffold\Code\Generator\RawGenerator;
 use Scaffold\Config;
 use Scaffold\Model;
-use Scaffold\State;
 
 class ModuleBuilder extends AbstractBuilder
 {
