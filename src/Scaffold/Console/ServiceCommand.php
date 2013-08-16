@@ -49,6 +49,31 @@ class ServiceCommand extends AbstractCommand
             InputOption::VALUE_NONE,
             'Disable service test generation'
         );
+
+        $this->addOption(
+            'only-service',
+            null,
+            InputOption::VALUE_NONE,
+            'Generate only service'
+        );
+        $this->addOption(
+            'only-trait',
+            null,
+            InputOption::VALUE_NONE,
+            'Generate only trait'
+        );
+        $this->addOption(
+            'only-factory',
+            null,
+            InputOption::VALUE_NONE,
+            'Generate only factory'
+        );
+        $this->addOption(
+            'only-test',
+            null,
+            InputOption::VALUE_NONE,
+            'Generate only test'
+        );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -67,20 +92,31 @@ class ServiceCommand extends AbstractCommand
 
         $writeState = new State($moduleConfig);
 
-        if (!$input->getOption('no-service')) {
-            $writeState->addModel($state->getServiceModel());
+        $models = array(
+            'service' => $state->getServiceModel(),
+            'factory' => $state->getModel('service-factory'),
+            'trait' => $state->getModel('service-trait'),
+            'test' => $state->getModel('service-test'),
+        );
+
+        foreach (array_keys($models) as $key) {
+            if ($input->getOption('no-' . $key)) {
+                $models[$key] = false;
+            }
+
+            if ($input->getOption('only-' . $key)) {
+                foreach (array_keys($models) as $index) {
+                    if ($key != $index) {
+                        $models[$index] = false;
+                    }
+                }
+            }
         }
 
-        if (!$input->getOption('no-factory')) {
-            $writeState->addModel($state->getModel('service-factory'));
-        }
-
-        if (!$input->getOption('no-trait')) {
-            $writeState->addModel($state->getModel('service-trait'));
-        }
-
-        if (!$input->getOption('no-test')) {
-            $writeState->addModel($state->getModel('service-test'));
+        foreach ($models as $model) {
+            if ($model) {
+                $writeState->addModel($model);
+            }
         }
 
         $writer = new ModelWriter($config);
