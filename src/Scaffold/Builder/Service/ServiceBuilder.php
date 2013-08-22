@@ -99,9 +99,30 @@ class ServiceBuilder extends AbstractBuilder
         $this->buildSave($generator, $state);
         $this->buildDelete($generator, $state);
         $this->buildEntityManager($generator);
+        $this->buildFactory($generator, $state);
 
         $model->setGenerator($generator);
         $this->factory->build($state);
+    }
+
+    /**
+     * Build method factory
+     *
+     * @param ClassGenerator $generator
+     * @param \Scaffold\State $state
+     */
+    public function buildFactory(ClassGenerator $generator, State $state)
+    {
+        $repository = ucfirst($state->getRepositoryModel()->getClassName());
+
+        $docBlock = new DocBlockGenerator();
+        $docBlock->setTag(new Tag(['name' => 'return', 'description' => $this->config->getName()]));
+
+        $factory = new MethodGenerator();
+        $factory->setDocBlock($docBlock);
+        $factory->setName('factory');
+        $factory->setBody('return $this->get' . $repository . '()->factory();');
+        $generator->addMethodFromGenerator($factory);
     }
 
     protected function buildConstructor(ClassGenerator $generator)

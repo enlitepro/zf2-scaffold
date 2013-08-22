@@ -11,6 +11,8 @@ use Scaffold\State;
 use Scaffold\Config;
 use Scaffold\Model;
 use Zend\Code\Generator\ClassGenerator;
+use Zend\Code\Generator\DocBlockGenerator;
+use Zend\Code\Generator\MethodGenerator;
 
 class RepositoryBuilder extends AbstractBuilder
 {
@@ -56,9 +58,27 @@ class RepositoryBuilder extends AbstractBuilder
         $model = $state->getRepositoryModel();
         $generator = new ClassGenerator($model->getName());
         $generator->addUse('Doctrine\ORM\EntityRepository');
+        $generator->addUse($state->getEntityModel()->getName());
         $generator->setExtendedClass('EntityRepository');
 
+        $this->buildFactory($generator);
+
         $model->setGenerator($generator);
+    }
+
+    /**
+     * Build method factory
+     *
+     * @param ClassGenerator $generator
+     */
+    public function buildFactory(ClassGenerator $generator)
+    {
+        $docBlock = new DocBlockGenerator('@return ' . $this->config->getName());
+        $factory = new MethodGenerator();
+        $factory->setDocBlock($docBlock);
+        $factory->setName('factory');
+        $factory->setBody('return new ' . $this->config->getName() . '();');
+        $generator->addMethodFromGenerator($factory);
     }
 
 }
