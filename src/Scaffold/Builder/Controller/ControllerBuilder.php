@@ -41,21 +41,20 @@ class ControllerBuilder extends AbstractBuilder
             ->setModule($this->config->getModule())
             ->addPart('Controller')
             ->addPart($filename)
-            ->getPath();
+            ->getSourcePath();
 
         $model->setName($name);
         $model->setPath($path);
-        $state->setControllerModel($model);
-        $state->addModel($model);
 
         $config = array(
             'controllers' => array(
                 'invokables' => array(
-                    $model->getControllerName() => $model->getName()
+                    $model->getServiceName() => $model->getName()
                 )
             )
         );
         $model->setServiceConfig($config);
+        $state->addModel($model, 'controller');
     }
 
     /**

@@ -71,7 +71,11 @@ class PathBuilder
      */
     public function getRawPath($extension = 'php')
     {
-        return $this->getModuleBase() . '/' . implode("/", $this->parts) . '.' . $extension;
+        $path = $this->getModuleBase() . '/' . implode("/", $this->parts);
+        if ($extension) {
+            return $path . '.' . $extension;
+        }
+        return $path;
     }
 
     /**

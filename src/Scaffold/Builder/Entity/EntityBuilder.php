@@ -38,12 +38,11 @@ class EntityBuilder extends AbstractBuilder
             ->setModule($this->config->getModule())
             ->addPart('Entity')
             ->addPart($this->config->getName())
-            ->getPath();
+            ->getSourcePath();
 
         $model->setName($name);
         $model->setPath($path);
-        $state->setEntityModel($model);
-        $state->addModel($model);
+        $state->addModel($model, 'entity');
     }
 
 

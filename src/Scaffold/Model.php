@@ -130,7 +130,7 @@ class Model
         $module = array_shift($parts);
         $name = array_pop($parts);
 
-        foreach(['FormFactory' => 'Form', 'Controller' => ''] as $search => $replace) {
+        foreach(['Factory' => '', 'Controller' => ''] as $search => $replace) {
             if (substr($name, -strlen($search)) == $search) {
                 $name = substr($name, 0, -strlen($search)) . $replace;
                 break;

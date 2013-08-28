@@ -24,6 +24,7 @@ class FullContainer extends AbstractContainer
     public function __construct(Config $config)
     {
         $this->addBuilder(new Service\ServiceBuilder($config));
+        $this->addBuilder(new Service\ServiceFactoryBuilder($config));
         $this->addBuilder(new Service\ServiceTraitBuilder($config));
         $this->addBuilder(new Service\ServiceTestBuilder($config));
         $this->addBuilder(new Entity\EntityBuilder($config));

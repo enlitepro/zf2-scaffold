@@ -1,0 +1,33 @@
+namespace User\Repository;
+
+use User\Repository\GroupRepository;
+
+trait GroupRepositoryTrait
+{
+
+    /**
+     * @var GroupRepository
+     */
+    protected $groupRepository = null;
+
+    /**
+     * @param GroupRepository $groupRepository
+     */
+    public function setGroupRepository(GroupRepository $groupRepository)
+    {
+        $this->groupRepository = $groupRepository;
+    }
+
+    /**
+     * @return GroupRepository
+     */
+    public function getGroupRepository()
+    {
+        if (null === $this->groupRepository) {
+            $this->groupRepository = $this->getEntityManager()->getRepository('User\Entity\Group');
+        }
+        return $this->groupRepository;
+    }
+
+
+}

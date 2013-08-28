@@ -60,7 +60,7 @@ class ExceptionBuilder extends AbstractBuilder
             ->setModule($this->config->getModule())
             ->addPart('Exception')
             ->addPart($this->name)
-            ->getPath();
+            ->getSourcePath();
 
         $model->setName($name);
         $model->setPath($path);

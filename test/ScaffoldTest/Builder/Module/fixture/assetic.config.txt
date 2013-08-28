@@ -1,0 +1,12 @@
+return array(
+    'assetic_configuration' => array(
+        'modules' => array(
+            'User' => array(
+                'root_path' => __DIR__ . '/../assets',
+                # collection od assets
+                'collections' => array(),
+            ),
+        ),
+        'routes' => array()
+    )
+);

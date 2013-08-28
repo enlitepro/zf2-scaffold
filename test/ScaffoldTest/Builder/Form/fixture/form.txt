@@ -1,0 +1,48 @@
+namespace User\Form;
+
+use Doctrine\ORM\EntityManager;
+use DoctrineModule\Stdlib\Hydrator\DoctrineObject;
+use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\Form\Form;
+use Zend\Form\Element;
+use Zend\InputFilter\Factory;
+use Zend\InputFilter\InputFilterInterface;
+
+class GroupFormFactory implements FactoryInterface
+{
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createService(ServiceLocatorInterface $serviceLocator)
+    {
+        $form = new Form('group');
+
+        $submit = new Element\Submit('submit');
+        $submit->setValue('Submit');
+        $form->add($submit);
+
+        $form->setInputFilter($this->getInputFilter());
+
+        /** @var EntityManager $entityManager */
+        $entityManager = $serviceLocator->get('entity_manager');
+        $form->setHydrator(new DoctrineObject($entityManager, 'User\Entity\Group'));
+
+        return $form;
+    }
+
+    /**
+     * @return InputFilterInterface
+     */
+    public function getInputFilter()
+    {
+        return (new Factory())->createInputFilter(
+            array(
+
+            )
+        );
+    }
+
+
+}

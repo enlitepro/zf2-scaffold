@@ -47,8 +47,7 @@ class TestBuilder extends AbstractBuilder
             ->setModule($this->config->getModule())
             ->addPart('test')
             ->addPart(basename($this->name))
-            ->setType('bin')
-            ->getPath();
+            ->getRawPath('');
 
         $model->setPath($path);
         $state->addModel($model, $this->name);

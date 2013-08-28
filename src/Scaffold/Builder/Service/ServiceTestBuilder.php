@@ -39,11 +39,10 @@ class ServiceTestBuilder extends AbstractBuilder
             ->getNamespace();
 
         $path = $this->buildPath()
-            ->setType('test')
             ->setModule($this->config->getModule())
             ->addPart('Service')
             ->addPart($this->config->getName() . 'Service')
-            ->getPath();
+            ->getTestPath();
 
         $model->setName($name);
         $model->setPath($path);
