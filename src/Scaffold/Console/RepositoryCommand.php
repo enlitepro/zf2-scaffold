@@ -17,7 +17,7 @@ class RepositoryCommand extends AbstractCommand
     protected function configure()
     {
         $this->setName('repository');
-        $this->setDescription('Create controller');
+        $this->setDescription('Generate repository and repository DI trait');
         $this->addArgument('module', InputArgument::REQUIRED, 'Module name');
         $this->addArgument('name', InputArgument::REQUIRED, 'Repository name');
         $this->addOption('no-trait', null, InputOption::VALUE_NONE, 'Generate without trait');

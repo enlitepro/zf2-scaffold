@@ -17,7 +17,7 @@ class ControllerCommand extends AbstractCommand
     protected function configure()
     {
         $this->setName('controller');
-        $this->setDescription('Create controller');
+        $this->setDescription('Generate controller');
         $this->addArgument('module', InputArgument::REQUIRED, 'Module name');
         $this->addArgument('name', InputArgument::REQUIRED, 'Controller name');
     }

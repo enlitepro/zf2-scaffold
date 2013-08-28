@@ -21,7 +21,7 @@ class FullCommand extends AbstractCommand
     protected function configure()
     {
         $this->setName('full');
-        $this->setDescription('Create entity, service and repository');
+        $this->setDescription('Generate all available (without module skeleton)');
         $this->addArgument('module', InputArgument::REQUIRED, 'Module name');
         $this->addArgument('name', InputArgument::REQUIRED, 'Entity name');
     }
