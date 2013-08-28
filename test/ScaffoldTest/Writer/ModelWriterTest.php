@@ -6,6 +6,7 @@
 namespace ScaffoldTest\Writer;
 
 
+use Scaffold\Code\Generator\BinGenerator;
 use Scaffold\Code\Generator\ValueGenerator;
 use Scaffold\Config;
 use Scaffold\Model;
@@ -53,6 +54,21 @@ EOF;
 
         $nullOutput = new NullOutput();
         $writer->expects($this->once())->method('writeData')->with('Model.php', $data, $nullOutput);
+
+        $writer->writeModel($model, $nullOutput);
+    }
+
+    public function testWriteModelBin()
+    {
+        $writer = $this->getWriter(['writeData']);
+
+
+        $model = new Model();
+        $model->setPath('Model.php');
+        $model->setGenerator(new BinGenerator('Test'));
+
+        $nullOutput = new NullOutput();
+        $writer->expects($this->once())->method('writeData')->with('Model.php', 'Test', $nullOutput);
 
         $writer->writeModel($model, $nullOutput);
     }
