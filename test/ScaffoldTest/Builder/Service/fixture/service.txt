@@ -1,0 +1,99 @@
+namespace User\Service;
+
+use Doctrine\ORM\EntityManager;
+use User\Entity\Group;
+use User\Exception\NotFoundException;
+use User\Repository\GroupRepositoryTrait;
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorAwareTrait;
+use Zend\ServiceManager\ServiceLocatorInterface;
+
+class GroupService implements ServiceLocatorAwareInterface
+{
+
+    use ServiceLocatorAwareTrait,
+        GroupRepositoryTrait;
+
+    /**
+     * @var EntityManager
+     */
+    protected $entityManager = null;
+
+    /**
+     * @param ServiceLocatorInterface $serviceLocator
+     */
+    public function __construct(ServiceLocatorInterface $serviceLocator)
+    {
+        $this->serviceLocator = $serviceLocator;
+    }
+
+    /**
+     * @param int $id
+     * @throws NotFoundException
+     * @return Group
+     */
+    public function loadById($id)
+    {
+        $model = $this->getGroupRepository()->find($id);
+        if (!$model) {
+            throw new NotFoundException('Cannot load model (' . $id . ')');
+        }
+
+        return $model;
+    }
+
+    /**
+     * @param array $criteria
+     * @return Group[]
+     */
+    public function search(array $criteria = array())
+    {
+        return $this->getGroupRepository()->findBy($criteria);
+    }
+
+    /**
+     * @param Group $model
+     */
+    public function save(Group $model)
+    {
+        $this->getEntityManager()->persist($model);
+    }
+
+    /**
+     * @param Group $model
+     */
+    public function delete(Group $model)
+    {
+        $this->getEntityManager()->remove($model);
+    }
+
+    /**
+     * @param EntityManager $entityManager
+     */
+    public function setEntityManager(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
+    /**
+     * @return EntityManager
+     */
+    public function getEntityManager()
+    {
+        if (null === $this->entityManager) {
+            $this->entityManager = $this->getServiceLocator()->get('entity_manager');
+        }
+
+        return $this->entityManager;
+    }
+
+    /**
+     * @return Group
+     */
+    public function factory()
+    {
+        return $this->getGroupRepository()->factory();
+    }
+
+
+}

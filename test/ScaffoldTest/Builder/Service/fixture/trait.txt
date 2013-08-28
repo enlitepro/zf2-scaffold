@@ -1,0 +1,47 @@
+namespace User\Service;
+
+use User\Service\GroupService;
+use User\Exception\RuntimeException;
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
+
+trait GroupServiceTrait
+{
+
+    /**
+     * @var GroupService
+     */
+    protected $groupService = null;
+
+    /**
+     * @param GroupService $groupService
+     */
+    public function setGroupService(GroupService $groupService)
+    {
+        $this->groupService = $groupService;
+    }
+
+    /**
+     * @return GroupService
+     * @throws RuntimeException
+     */
+    public function getGroupService()
+    {
+        if (null === $this->groupService) {
+            if ($this instanceof ServiceLocatorAwareInterface || method_exists($this, 'getServiceLocator')) {
+                $this->groupService = $this->getServiceLocator()->get('UserGroupService');
+            } else {
+                if (property_exists($this, 'serviceLocator')
+                    && $this->serviceLocator instanceof ServiceLocatorInterface
+                ) {
+                    $this->groupService = $this->serviceLocator->get('UserGroupService');
+                } else {
+                    throw new RuntimeException('Service locator not found');
+                }
+            }
+        }
+        return $this->groupService;
+    }
+
+
+}

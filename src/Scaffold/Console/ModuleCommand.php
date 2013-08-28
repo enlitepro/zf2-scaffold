@@ -22,7 +22,7 @@ class ModuleCommand extends Command
     protected function configure()
     {
         $this->setName('module');
-        $this->setDescription('Create module');
+        $this->setDescription('Generate module skeleton');
         $this->addArgument('module', InputArgument::REQUIRED, 'Module name');
     }
 

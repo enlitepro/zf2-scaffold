@@ -44,4 +44,14 @@ abstract class AbstractContainer implements BuilderInterface
         $this->builders[] = $builder;
     }
 
+    /**
+     * Return value of Builders
+     *
+     * @return \Scaffold\Builder\BuilderInterface[]
+     */
+    public function getBuilders()
+    {
+        return $this->builders;
+    }
+
 }

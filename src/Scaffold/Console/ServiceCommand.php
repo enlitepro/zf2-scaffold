@@ -22,7 +22,7 @@ class ServiceCommand extends AbstractCommand
     protected function configure()
     {
         $this->setName('service');
-        $this->setDescription('Create service');
+        $this->setDescription('Generate service, service DI trait, service factory, service test and write to service.config.php');
         $this->addArgument('module', InputArgument::REQUIRED, 'Module name');
         $this->addArgument('name', InputArgument::REQUIRED, 'Service name');
         $this->addOption(

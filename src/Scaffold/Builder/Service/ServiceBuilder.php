@@ -26,20 +26,6 @@ class ServiceBuilder extends AbstractBuilder
     protected $config;
 
     /**
-     * @var ServiceFactoryBuilder
-     */
-    protected $factory;
-
-    /**
-     * @param Config $config
-     */
-    public function __construct(Config $config)
-    {
-        $this->factory = new ServiceFactoryBuilder($config);
-        parent::__construct($config);
-    }
-
-    /**
      * Prepare models
      *
      * @param State|State $state
@@ -57,14 +43,11 @@ class ServiceBuilder extends AbstractBuilder
             ->setModule($this->config->getModule())
             ->addPart('Service')
             ->addPart($this->config->getName() . 'Service')
-            ->getPath();
+            ->getSourcePath();
 
         $model->setName($name);
         $model->setPath($path);
-        $state->setServiceModel($model);
-        $state->addModel($model);
-
-        $this->factory->prepare($state);
+        $state->addModel($model, 'service');
     }
 
     /**
@@ -102,7 +85,6 @@ class ServiceBuilder extends AbstractBuilder
         $this->buildFactory($generator, $state);
 
         $model->setGenerator($generator);
-        $this->factory->build($state);
     }
 
     /**

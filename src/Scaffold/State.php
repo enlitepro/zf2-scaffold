@@ -6,16 +6,11 @@
 namespace Scaffold;
 
 
-use Scaffold\Model;
+use Scaffold\Exception\RuntimeException;
 use Scaffold\Writer\ConfigWriter;
 
 class State
 {
-
-    /**
-     * @var Model
-     */
-    protected $entityModel;
 
     /**
      * @var Model
@@ -71,33 +66,13 @@ class State
     }
 
     /**
-     * Set value of EntityModel
-     *
-     * @param Model $entityModel
-     */
-    public function setEntityModel($entityModel)
-    {
-        $this->entityModel = $entityModel;
-    }
-
-    /**
      * Return value of EntityModel
      *
      * @return Model
      */
     public function getEntityModel()
     {
-        return $this->entityModel;
-    }
-
-    /**
-     * Set value of RepositoryModel
-     *
-     * @param Model $repositoryModel
-     */
-    public function setRepositoryModel($repositoryModel)
-    {
-        $this->repositoryModel = $repositoryModel;
+        return $this->getModel('entity');
     }
 
     /**
@@ -107,17 +82,7 @@ class State
      */
     public function getRepositoryModel()
     {
-        return $this->repositoryModel;
-    }
-
-    /**
-     * Set value of ServiceModel
-     *
-     * @param Model $serviceModel
-     */
-    public function setServiceModel($serviceModel)
-    {
-        $this->serviceModel = $serviceModel;
+        return $this->getModel('repository');
     }
 
     /**
@@ -127,17 +92,7 @@ class State
      */
     public function getServiceModel()
     {
-        return $this->serviceModel;
-    }
-
-    /**
-     * Set value of ControllerModel
-     *
-     * @param Model $controllerModel
-     */
-    public function setControllerModel($controllerModel)
-    {
-        $this->controllerModel = $controllerModel;
+        return $this->getModel('service');
     }
 
     /**
@@ -147,17 +102,7 @@ class State
      */
     public function getControllerModel()
     {
-        return $this->controllerModel;
-    }
-
-    /**
-     * Set value of FormModel
-     *
-     * @param Model $formModel
-     */
-    public function setFormFactoryModel($formModel)
-    {
-        $this->formFactoryModel = $formModel;
+        return $this->getModel('controller');
     }
 
     /**
@@ -167,17 +112,7 @@ class State
      */
     public function getFormFactoryModel()
     {
-        return $this->formFactoryModel;
-    }
-
-    /**
-     * Set value of ServiceTraitModel
-     *
-     * @param Model $serviceTraitModel
-     */
-    public function setServiceTraitModel($serviceTraitModel)
-    {
-        $this->serviceTraitModel = $serviceTraitModel;
+        return $this->getModel('form-factory');
     }
 
     /**
@@ -187,7 +122,7 @@ class State
      */
     public function getServiceTraitModel()
     {
-        return $this->serviceTraitModel;
+        return $this->getModel('service-trait');
     }
 
     /**
@@ -216,7 +151,7 @@ class State
     /**
      * @param string $alias
      * @return Model
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     public function getModel($alias)
     {
@@ -224,7 +159,7 @@ class State
             return $this->models[$alias];
         }
 
-        throw new \RuntimeException('Model not found (' . $alias . ')');
+        throw new RuntimeException('Model not found (' . $alias . ')');
     }
 
 }

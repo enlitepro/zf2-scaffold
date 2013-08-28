@@ -1,0 +1,7 @@
+namespace User\Exception;
+
+class NotFoundException extends \RuntimeException
+{
+
+
+}
