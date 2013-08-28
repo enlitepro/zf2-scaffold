@@ -32,7 +32,11 @@ Available commands:
   service      Generate service, service DI trait, service factory, service test and write to service.config.php
 
 
-./vendor/bin/scaffold.php service
+./vendor/bin/scaffold.php service [--no-service] [--no-trait] [--no-factory]
+    [--no-test] [--only-service] [--only-trait]
+    [--only-factory] [--only-test] <module> <name>
+ <module>              Name of module
+ <name>                Name of service
  --no-service          Disable service generation
  --no-trait            Disable service trait generation
  --no-factory          Disable service factory generation
