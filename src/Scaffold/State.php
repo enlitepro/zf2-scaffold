@@ -6,7 +6,7 @@
 namespace Scaffold;
 
 
-use Scaffold\Model;
+use Scaffold\Exception\RuntimeException;
 use Scaffold\Writer\ConfigWriter;
 
 class State
@@ -74,6 +74,7 @@ class State
      * Set value of EntityModel
      *
      * @param Model $entityModel
+     * @deprecated
      */
     public function setEntityModel($entityModel)
     {
@@ -94,6 +95,7 @@ class State
      * Set value of RepositoryModel
      *
      * @param Model $repositoryModel
+     * @deprecated
      */
     public function setRepositoryModel($repositoryModel)
     {
@@ -114,6 +116,7 @@ class State
      * Set value of ServiceModel
      *
      * @param Model $serviceModel
+     * @deprecated
      */
     public function setServiceModel($serviceModel)
     {
@@ -134,6 +137,7 @@ class State
      * Set value of ControllerModel
      *
      * @param Model $controllerModel
+     * @deprecated
      */
     public function setControllerModel($controllerModel)
     {
@@ -154,6 +158,7 @@ class State
      * Set value of FormModel
      *
      * @param Model $formModel
+     * @deprecated
      */
     public function setFormFactoryModel($formModel)
     {
@@ -174,6 +179,7 @@ class State
      * Set value of ServiceTraitModel
      *
      * @param Model $serviceTraitModel
+     * @deprecated
      */
     public function setServiceTraitModel($serviceTraitModel)
     {
@@ -216,7 +222,7 @@ class State
     /**
      * @param string $alias
      * @return Model
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     public function getModel($alias)
     {
@@ -224,7 +230,7 @@ class State
             return $this->models[$alias];
         }
 
-        throw new \RuntimeException('Model not found (' . $alias . ')');
+        throw new RuntimeException('Model not found (' . $alias . ')');
     }
 
 }

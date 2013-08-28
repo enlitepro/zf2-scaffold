@@ -48,6 +48,7 @@ class PathBuilder
     /**
      * @param string $type
      * @return $this
+     * @deprecated
      */
     public function setType($type)
     {
@@ -55,9 +56,44 @@ class PathBuilder
         return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function getSourcePath()
+    {
+        return $this->getModuleBase() . '/src/' .
+        ucfirst($this->module) . '/' . implode("/", $this->parts) . '.php';
+    }
+
+    /**
+     * @param string $extension
+     * @return string
+     */
+    public function getRawPath($extension = 'php')
+    {
+        return $this->getModuleBase() . '/' . implode("/", $this->parts) . '.' . $extension;
+    }
 
     /**
      * @return string
+     */
+    public function getTestPath()
+    {
+        return $this->getModuleBase() . '/test/' . ucfirst($this->module) .
+        'Test/' . implode("/", $this->parts) . 'Test.php';
+    }
+
+    /**
+     * @return string
+     */
+    public function getModuleBase()
+    {
+        return 'module/' . ucfirst($this->module);
+    }
+
+    /**
+     * @return string
+     * @deprecated
      */
     public function getPath()
     {
