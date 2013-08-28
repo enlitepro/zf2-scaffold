@@ -40,21 +40,20 @@ class FormFactoryBuilder extends AbstractBuilder
             ->setModule($this->config->getModule())
             ->addPart('Form')
             ->addPart($this->config->getName() . 'FormFactory')
-            ->getPath();
+            ->getSourcePath();
 
         $model->setName($name);
         $model->setPath($path);
-        $state->setFormFactoryModel($model);
-        $state->addModel($model);
 
         $config = array(
             'service_manager' => array(
                 'factories' => array(
-                    substr($model->getServiceName(), 0, -7) => $name
+                    $model->getServiceName() => $name
                 )
             )
         );
         $model->setServiceConfig($config);
+        $state->addModel($model, 'form-factory');
     }
 
     /**

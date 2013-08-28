@@ -44,11 +44,10 @@ class ServiceTraitBuilder extends AbstractBuilder
             ->setModule($this->config->getModule())
             ->addPart('Service')
             ->addPart($this->config->getName() . 'ServiceTrait')
-            ->getPath();
+            ->getSourcePath();
 
         $model->setName($name);
         $model->setPath($path);
-        $state->setServiceTraitModel($model);
         $state->addModel($model, 'service-trait');
 
         $this->model = $model;

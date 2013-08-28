@@ -39,12 +39,11 @@ class RepositoryBuilder extends AbstractBuilder
             ->setModule($this->config->getModule())
             ->addPart('Repository')
             ->addPart($this->config->getName() . 'Repository')
-            ->getPath();
+            ->getSourcePath();
 
         $model->setName($name);
         $model->setPath($path);
-        $state->setRepositoryModel($model);
-        $state->addModel($model);
+        $state->addModel($model, 'repository');
     }
 
     /**

@@ -47,8 +47,7 @@ class ConfigBuilder extends AbstractBuilder
             ->setModule($this->config->getModule())
             ->addPart('config')
             ->addPart(basename($this->name, '.php'))
-            ->setType('raw')
-            ->getPath();
+            ->getRawPath();
 
         $model->setPath($path);
         $state->addModel($model, $this->name);

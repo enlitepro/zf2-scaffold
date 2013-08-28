@@ -46,20 +46,21 @@ class ServiceFactoryBuilder extends AbstractBuilder
             ->setModule($this->config->getModule())
             ->addPart('Service')
             ->addPart($this->config->getName() . 'ServiceFactory')
-            ->getPath();
+            ->getSourcePath();
 
         $model->setName($name);
         $model->setPath($path);
-        $state->addModel($model, 'service-factory');
 
         $config = array(
             'service_manager' => array(
                 'factories' => array(
-                    $state->getServiceModel()->getServiceName() => $name
+                    $model->getServiceName() => $name
                 )
             )
         );
         $model->setServiceConfig($config);
+        $state->addModel($model, 'service-factory');
+
         $this->model = $model;
     }
 

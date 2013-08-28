@@ -1,0 +1,119 @@
+namespace UserTest\Service;
+
+use User\Service\GroupService;
+use User\Entity\Group;
+use User\Repository\GroupRepository;
+use Zend\ServiceManager\ServiceManager;
+use Doctrine\ORM\EntityManager;
+
+class GroupServiceTest extends \PHPUnit_Framework_TestCase
+{
+
+    public function testLoadById()
+    {
+        $id = 123;
+        $entity = new Group();
+
+        $object = $this->getObject();
+        $object->getGroupRepository()->expects($this->once())->method('find')
+            ->with($id)->will($this->returnValue($entity));
+
+        $this->assertSame($entity, $object->loadById($id));
+    }
+
+    /**
+     * @expectedException \User\Exception\NotFoundException
+     */
+    public function testLoadByIdFailed()
+    {
+        $id = 123;
+
+        $object = $this->getObject();
+        $object->getGroupRepository()->expects($this->once())->method('find')
+            ->with($id)->will($this->returnValue(false));
+
+        $object->loadById($id);
+    }
+
+    public function testSearch()
+    {
+        $criteria = ['id' => 123];
+        $result = [new Group()];
+
+        $object = $this->getObject();
+        $object->getGroupRepository()->expects($this->once())->method('findBy')
+            ->with($criteria)->will($this->returnValue($result));
+
+        $this->assertSame($result, $object->search($criteria));
+    }
+
+    public function testSave()
+    {
+        $entity = new Group();
+
+        $object = $this->getObject();
+        $object->getEntityManager()->expects($this->once())->method('persist')->with($entity);
+        $object->save($entity);
+    }
+
+    public function testDelete()
+    {
+        $entity = new Group();
+
+        $object = $this->getObject();
+        $object->getEntityManager()->expects($this->once())->method('remove')->with($entity);
+        $object->delete($entity);
+    }
+
+    /**
+     * @param array $methods
+     * @return \PHPUnit_Framework_MockObject_MockObject|GroupService
+     */
+    public function getObject(array $methods = array())
+    {
+        if (count($methods)) {
+            $object = $this->getMockBuilder('User\Service\GroupService')
+                ->disableOriginalConstructor()
+                ->setMethods($methods)
+                ->getMock();
+        }
+        else {
+            $object = new GroupService($this->getServiceManager());
+        }
+
+        $object->setGroupRepository($this->getRepository());
+        $object->setEntityManager($this->getEntityManager());
+
+        return $object;
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|GroupRepository
+     */
+    public function getRepository()
+    {
+        return $this->getMockBuilder('User\Repository\GroupRepository')
+            ->disableOriginalConstructor()
+            ->getMock();
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|EntityManager
+     */
+    public function getEntityManager()
+    {
+        return $this->getMockBuilder('Doctrine\ORM\EntityManager')
+            ->disableOriginalConstructor()
+            ->getMock();
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|ServiceManager
+     */
+    public function getServiceManager()
+    {
+        return $this->getMock('Zend\ServiceManager\ServiceManager');
+    }
+
+
+}
