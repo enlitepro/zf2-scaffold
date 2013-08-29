@@ -1,4 +1,4 @@
-Scaffold for Zend Framework 2 [![Build Status](https://travis-ci.org/enlitepro/zf2-scaffold.png?branch=master)](https://travis-ci.org/enlitepro/zf2-scaffold)
+Scaffold for Zend Framework 2 [![Build Status](https://travis-ci.org/enlitepro/zf2-scaffold.png?branch=master)](https://travis-ci.org/enlitepro/zf2-scaffold)[![Coverage Status](https://coveralls.io/repos/enlitepro/zf2-scaffold/badge.png?branch=master)](https://coveralls.io/r/enlitepro/zf2-scaffold?branch=master)
 =============================
 
 
