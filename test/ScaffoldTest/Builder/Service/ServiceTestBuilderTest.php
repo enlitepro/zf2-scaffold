@@ -5,11 +5,9 @@
 
 namespace ScaffoldTest\Builder\Service;
 
-
 use Scaffold\Builder\Container\ExceptionContainer;
 use Scaffold\Builder\Entity\EntityBuilder;
 use Scaffold\Builder\Repository\RepositoryBuilder;
-use Scaffold\Builder\Repository\RepositoryTraitBuilder;
 use Scaffold\Builder\Service\ServiceBuilder;
 use Scaffold\Builder\Service\ServiceTestBuilder;
 use Scaffold\Builder\SimpleContainer;
@@ -58,4 +56,3 @@ class ServiceTestBuilderTest extends AbstractBuilderTestCase
         $this->assertEquals($fixture, $state->getModel('service-test')->getGenerator()->generate());
     }
 }
- 

@@ -5,7 +5,6 @@
 
 namespace Scaffold\Console;
 
-
 use Scaffold\State;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -38,6 +37,5 @@ class RepositoryCommand extends AbstractCommand
 
         parent::write($writeState, $input, $output);
     }
-
 
 }

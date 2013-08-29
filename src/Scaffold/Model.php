@@ -5,7 +5,6 @@
 
 namespace Scaffold;
 
-
 use Zend\Code\Generator\GeneratorInterface;
 
 class Model
@@ -117,6 +116,7 @@ class Model
     public function getClassName()
     {
         $parts = explode('\\', $this->getName());
+
         return array_pop($parts);
     }
 
@@ -130,7 +130,7 @@ class Model
         $module = array_shift($parts);
         $name = array_pop($parts);
 
-        foreach(['Factory' => '', 'Controller' => ''] as $search => $replace) {
+        foreach (['Factory' => '', 'Controller' => ''] as $search => $replace) {
             if (substr($name, -strlen($search)) == $search) {
                 $name = substr($name, 0, -strlen($search)) . $replace;
                 break;

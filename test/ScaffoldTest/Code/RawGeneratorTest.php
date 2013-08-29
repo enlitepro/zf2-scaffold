@@ -5,7 +5,6 @@
 
 namespace ScaffoldTest\Code;
 
-
 use Scaffold\Code\Generator\RawGenerator;
 
 class RawGeneratorTest extends \PHPUnit_Framework_TestCase
@@ -16,4 +15,3 @@ class RawGeneratorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Test', $generator->generate());
     }
 }
- 

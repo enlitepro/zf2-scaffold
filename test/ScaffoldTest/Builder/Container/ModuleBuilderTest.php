@@ -5,7 +5,6 @@
 
 namespace ScaffoldTest\Builder\Container;
 
-
 use Scaffold\Builder\Container\ModuleContainer;
 use ScaffoldTest\Builder\AbstractBuilderTestCase;
 
@@ -19,4 +18,3 @@ class ModuleBuilderTest extends AbstractBuilderTestCase
         $this->assertCount(10, $builders);
     }
 }
- 

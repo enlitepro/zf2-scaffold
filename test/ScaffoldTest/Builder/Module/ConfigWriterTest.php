@@ -25,6 +25,7 @@ class ConfigWriterTest extends AbstractBuilderTestCase
             $this->callback(
                 function (Model $model) use ($config) {
                     $this->assertEquals('module/User/' . $config, $model->getPath());
+
                     return true;
                 }
             ),
@@ -67,4 +68,3 @@ class ConfigWriterTest extends AbstractBuilderTestCase
     }
 
 }
- 

@@ -5,12 +5,10 @@
 
 namespace Scaffold\Writer;
 
-
+use Scaffold\Code\Generator\ValueGenerator;
 use Scaffold\Config;
 use Scaffold\PathBuilder;
-use Scaffold\Writer\AbstractWriter;
 use Symfony\Component\Console\Output\OutputInterface;
-use Scaffold\Code\Generator\ValueGenerator;
 use Zend\Stdlib\ArrayUtils;
 
 class ConfigWriter extends AbstractWriter

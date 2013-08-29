@@ -50,4 +50,3 @@ class EntityBuilderTest extends AbstractBuilderTestCase
     }
 
 }
- 

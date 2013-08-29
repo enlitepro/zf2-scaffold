@@ -5,8 +5,7 @@
 
 namespace Scaffold\Builder;
 
-
 class SimpleContainer extends AbstractContainer
 {
 
-} 
+}

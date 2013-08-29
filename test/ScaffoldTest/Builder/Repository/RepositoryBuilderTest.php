@@ -5,7 +5,6 @@
 
 namespace ScaffoldTest\Builder\Repository;
 
-
 use Scaffold\Builder\Entity\EntityBuilder;
 use Scaffold\Builder\Repository\RepositoryBuilder;
 use Scaffold\Builder\SimpleContainer;
@@ -51,4 +50,3 @@ class RepositoryBuilderTest extends AbstractBuilderTestCase
         $this->assertEquals($fixture, $state->getModel('repository')->getGenerator()->generate());
     }
 }
- 

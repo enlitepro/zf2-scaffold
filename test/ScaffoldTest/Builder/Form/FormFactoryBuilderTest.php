@@ -5,7 +5,6 @@
 
 namespace ScaffoldTest\Builder\Form;
 
-
 use Scaffold\Builder\Entity\EntityBuilder;
 use Scaffold\Builder\Form\FormFactoryBuilder;
 use Scaffold\Builder\SimpleContainer;
@@ -62,4 +61,3 @@ class FormFactoryBuilderTest extends AbstractBuilderTestCase
     }
 
 }
- 

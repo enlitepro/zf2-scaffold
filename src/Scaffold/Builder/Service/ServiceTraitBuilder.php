@@ -5,13 +5,11 @@
 
 namespace Scaffold\Builder\Service;
 
-
 use Scaffold\Builder\AbstractBuilder;
-use Scaffold\State;
 use Scaffold\Code\Generator\TraitGenerator;
 use Scaffold\Config;
 use Scaffold\Model;
-use Zend\Code\Generator\ClassGenerator;
+use Scaffold\State;
 use Zend\Code\Generator\DocBlock\Tag;
 
 class ServiceTraitBuilder extends AbstractBuilder
@@ -53,11 +51,10 @@ class ServiceTraitBuilder extends AbstractBuilder
         $this->model = $model;
     }
 
-
     /**
      * Build generators
      *
-     * @param State|\Scaffold\State $state
+     * @param  State|\Scaffold\State $state
      * @return \Scaffold\State|void
      */
     public function build(State $state)

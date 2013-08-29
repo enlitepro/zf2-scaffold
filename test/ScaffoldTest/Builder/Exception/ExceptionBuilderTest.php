@@ -5,10 +5,7 @@
 
 namespace ScaffoldTest\Builder\Form;
 
-
-use Scaffold\Builder\Entity\EntityBuilder;
 use Scaffold\Builder\Exception\ExceptionBuilder;
-use Scaffold\Builder\Form\FormFactoryBuilder;
 use Scaffold\Builder\SimpleContainer;
 use Scaffold\Model;
 use ScaffoldTest\Builder\AbstractBuilderTestCase;
@@ -52,4 +49,3 @@ class ExceptionBuilderTest extends AbstractBuilderTestCase
     }
 
 }
- 

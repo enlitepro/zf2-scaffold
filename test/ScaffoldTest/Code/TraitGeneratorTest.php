@@ -5,7 +5,6 @@
 
 namespace ScaffoldTest\Code;
 
-
 use Scaffold\Code\Generator\TraitGenerator;
 
 class TraitGeneratorTest extends \PHPUnit_Framework_TestCase
@@ -25,4 +24,3 @@ EOF;
         $this->assertEquals($code, $generator->generate());
     }
 }
- 

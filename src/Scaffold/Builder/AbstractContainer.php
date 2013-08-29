@@ -5,7 +5,6 @@
 
 namespace Scaffold\Builder;
 
-
 use Scaffold\State;
 
 abstract class AbstractContainer implements BuilderInterface

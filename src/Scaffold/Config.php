@@ -5,7 +5,6 @@
 
 namespace Scaffold;
 
-
 use Zend\Stdlib\AbstractOptions;
 
 class Config extends AbstractOptions

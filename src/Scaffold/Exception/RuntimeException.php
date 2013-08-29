@@ -5,8 +5,7 @@
 
 namespace Scaffold\Exception;
 
-
 class RuntimeException extends \RuntimeException
 {
 
-} 
+}

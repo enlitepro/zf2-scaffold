@@ -5,7 +5,6 @@
 
 namespace ScaffoldTest\Builder\Entity;
 
-
 use Scaffold\Builder\Entity\EntityBuilder;
 use Scaffold\Builder\Entity\EntityTestBuilder;
 use Scaffold\Builder\SimpleContainer;
@@ -50,4 +49,3 @@ class EntityTestBuilderTest extends AbstractBuilderTestCase
         $this->assertEquals($fixture, $state->getModel('entity-test')->getGenerator()->generate());
     }
 }
- 

@@ -5,7 +5,6 @@
 
 namespace Scaffold\Builder\Controller;
 
-
 use Scaffold\Builder\AbstractBuilder;
 use Scaffold\Code\Generator\ClassGenerator;
 use Scaffold\Config;
@@ -60,7 +59,7 @@ class ControllerBuilder extends AbstractBuilder
     /**
      * Build generators
      *
-     * @param State|State $state
+     * @param  State|State          $state
      * @return \Scaffold\State|void
      */
     public function build(State $state)

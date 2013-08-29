@@ -6,11 +6,10 @@
 namespace Scaffold\Builder\Exception;
 
 use Scaffold\Builder\AbstractBuilder;
-use Scaffold\State;
 use Scaffold\Config;
 use Scaffold\Model;
+use Scaffold\State;
 use Zend\Code\Generator\ClassGenerator;
-
 
 class ExceptionBuilder extends AbstractBuilder
 {

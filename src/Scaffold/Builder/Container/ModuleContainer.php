@@ -5,10 +5,9 @@
 
 namespace Scaffold\Builder\Container;
 
-
 use Scaffold\Builder\AbstractContainer;
-use Scaffold\Config;
 use Scaffold\Builder\Module;
+use Scaffold\Config;
 
 class ModuleContainer extends AbstractContainer
 {

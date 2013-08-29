@@ -5,7 +5,6 @@
 
 namespace ScaffoldTest\Builder\Service;
 
-
 use Scaffold\Builder\Container\ExceptionContainer;
 use Scaffold\Builder\Service\ServiceBuilder;
 use Scaffold\Builder\Service\ServiceTraitBuilder;
@@ -53,4 +52,3 @@ class ServiceTraitBuilderTest extends AbstractBuilderTestCase
         $this->assertEquals($fixture, $state->getModel('service-trait')->getGenerator()->generate());
     }
 }
- 

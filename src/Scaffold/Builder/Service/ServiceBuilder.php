@@ -5,18 +5,15 @@
 
 namespace Scaffold\Builder\Service;
 
-
 use Scaffold\Builder\AbstractBuilder;
-use Scaffold\Builder\Service\ServiceFactoryBuilder;
-use Scaffold\State;
 use Scaffold\Code\Generator\ClassGenerator;
 use Scaffold\Config;
 use Scaffold\Model;
+use Scaffold\State;
 use Zend\Code\Generator\DocBlock\Tag;
 use Zend\Code\Generator\DocBlockGenerator;
 use Zend\Code\Generator\MethodGenerator;
 use Zend\Code\Generator\ParameterGenerator;
-use Zend\Code\Generator\PropertyGenerator;
 
 class ServiceBuilder extends AbstractBuilder
 {
@@ -53,7 +50,7 @@ class ServiceBuilder extends AbstractBuilder
     /**
      * Build generators
      *
-     * @param State|\Scaffold\State $state
+     * @param  State|\Scaffold\State $state
      * @return \Scaffold\State|void
      */
     public function build(State $state)
@@ -90,7 +87,7 @@ class ServiceBuilder extends AbstractBuilder
     /**
      * Build method factory
      *
-     * @param ClassGenerator $generator
+     * @param ClassGenerator  $generator
      * @param \Scaffold\State $state
      */
     public function buildFactory(ClassGenerator $generator, State $state)

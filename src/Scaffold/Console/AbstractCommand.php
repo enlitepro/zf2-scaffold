@@ -5,7 +5,6 @@
 
 namespace Scaffold\Console;
 
-
 use Scaffold\Builder\BuilderInterface;
 use Scaffold\Builder\Container\FullContainer;
 use Scaffold\Config;
@@ -35,8 +34,8 @@ abstract class AbstractCommand extends Command
     protected $state;
 
     /**
-     * @param InputInterface $input
-     * @param OutputInterface $output
+     * @param  InputInterface  $input
+     * @param  OutputInterface $output
      * @return int|null|void
      */
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -76,8 +75,8 @@ abstract class AbstractCommand extends Command
     }
 
     /**
-     * @param State $state
-     * @param InputInterface $input
+     * @param State           $state
+     * @param InputInterface  $input
      * @param OutputInterface $output
      */
     protected function write(State $state, InputInterface $input, OutputInterface $output)

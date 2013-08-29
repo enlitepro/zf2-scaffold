@@ -5,7 +5,6 @@
 
 namespace ScaffoldTest;
 
-
 use Scaffold\NamespaceBuilder;
 
 class NamespaceBuilderTest extends \PHPUnit_Framework_TestCase
@@ -25,4 +24,3 @@ class NamespaceBuilderTest extends \PHPUnit_Framework_TestCase
     }
 
 }
- 

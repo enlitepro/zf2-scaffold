@@ -5,7 +5,6 @@
 
 namespace Scaffold\Code\Generator;
 
-
 use Zend\Code\Generator\GeneratorInterface;
 
 class RawGenerator implements GeneratorInterface

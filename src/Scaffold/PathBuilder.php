@@ -5,7 +5,6 @@
 
 namespace Scaffold;
 
-
 class PathBuilder
 {
     /**
@@ -17,11 +16,6 @@ class PathBuilder
      * @var string
      */
     protected $module;
-
-    /**
-     * @var string
-     */
-    protected $type = 'src';
 
     /**
      * @param string $part
@@ -46,17 +40,6 @@ class PathBuilder
     }
 
     /**
-     * @param string $type
-     * @return $this
-     * @deprecated
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-        return $this;
-    }
-
-    /**
      * @return string
      */
     public function getSourcePath()
@@ -66,7 +49,7 @@ class PathBuilder
     }
 
     /**
-     * @param string $extension
+     * @param  string $extension
      * @return string
      */
     public function getRawPath($extension = 'php')
@@ -75,6 +58,7 @@ class PathBuilder
         if ($extension) {
             return $path . '.' . $extension;
         }
+
         return $path;
     }
 
@@ -93,27 +77,5 @@ class PathBuilder
     public function getModuleBase()
     {
         return 'module/' . ucfirst($this->module);
-    }
-
-    /**
-     * @return string
-     * @deprecated
-     */
-    public function getPath()
-    {
-        $path = implode("/", $this->parts);
-        if ($this->type == 'src') {
-            $path = 'module/' . ucfirst($this->module) . '/' . $this->type . '/' .
-                ucfirst($this->module) . '/' . $path . '.php';
-        } elseif ($this->type == 'raw') {
-            $path = 'module/' . ucfirst($this->module) . '/' . $path . '.php';
-        } elseif ($this->type == 'bin') {
-            $path = 'module/' . ucfirst($this->module) . '/' . $path;
-        } else {
-            $path = 'module/' . ucfirst($this->module) . '/' . $this->type . '/' .
-                ucfirst($this->module) . 'Test/' . $path . 'Test.php';
-        }
-
-        return $path;
     }
 }

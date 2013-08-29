@@ -5,14 +5,11 @@
 
 namespace Scaffold\Builder\Repository;
 
-
 use Scaffold\Builder\AbstractBuilder;
-use Scaffold\State;
 use Scaffold\Code\Generator\TraitGenerator;
 use Scaffold\Config;
 use Scaffold\Model;
-use Zend\Code\Generator\ClassGenerator;
-use Zend\Code\Generator\DocBlock\Tag;
+use Scaffold\State;
 
 class RepositoryTraitBuilder extends AbstractBuilder
 {
@@ -44,7 +41,7 @@ class RepositoryTraitBuilder extends AbstractBuilder
             ->setModule($this->config->getModule())
             ->addPart('Repository')
             ->addPart($this->config->getName() . 'RepositoryTrait')
-            ->getPath();
+            ->getSourcePath();
 
         $model->setName($name);
         $model->setPath($path);
@@ -53,11 +50,10 @@ class RepositoryTraitBuilder extends AbstractBuilder
         $this->model = $model;
     }
 
-
     /**
      * Build generators
      *
-     * @param State|\Scaffold\State $state
+     * @param  State|\Scaffold\State $state
      * @return \Scaffold\State|void
      */
     public function build(State $state)

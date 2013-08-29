@@ -5,7 +5,6 @@
 
 namespace ScaffoldTest\Code;
 
-
 use Scaffold\Code\Generator\ClassGenerator;
 
 class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
@@ -44,8 +43,6 @@ abstract class Test extends ParentClass implements ITestA, ITestB
 
 EOF;
 
-
         $this->assertEquals($data, $generator->generate());
     }
 }
- 

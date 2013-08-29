@@ -6,7 +6,6 @@
 namespace ScaffoldTest\Builder\Module;
 
 use Scaffold\Builder\Entity\EntityBuilder;
-use Scaffold\Builder\Module\ConfigBuilder;
 use Scaffold\Builder\Module\TestBuilder;
 use Scaffold\Builder\SimpleContainer;
 use Scaffold\Model;
@@ -26,6 +25,7 @@ class TestBuilderTest extends AbstractBuilderTestCase
             $this->callback(
                 function (Model $model) use ($config) {
                     $this->assertEquals('module/User/' . $config, $model->getPath());
+
                     return true;
                 }
             ),
@@ -64,4 +64,3 @@ class TestBuilderTest extends AbstractBuilderTestCase
         );
     }
 }
- 

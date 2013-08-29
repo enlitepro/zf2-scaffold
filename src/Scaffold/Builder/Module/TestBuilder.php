@@ -5,7 +5,6 @@
 
 namespace Scaffold\Builder\Module;
 
-
 use Scaffold\Builder\AbstractBuilder;
 use Scaffold\Code\Generator\BinGenerator;
 use Scaffold\Config;

@@ -5,7 +5,6 @@
 
 namespace ScaffoldTest\Builder\Container;
 
-
 use Scaffold\Builder\Container\FullContainer;
 use ScaffoldTest\Builder\AbstractBuilderTestCase;
 
@@ -31,4 +30,3 @@ class FullContainerTest extends AbstractBuilderTestCase
     }
 
 }
- 

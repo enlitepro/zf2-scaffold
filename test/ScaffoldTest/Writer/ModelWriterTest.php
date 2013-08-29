@@ -5,9 +5,7 @@
 
 namespace ScaffoldTest\Writer;
 
-
 use Scaffold\Code\Generator\BinGenerator;
-use Scaffold\Code\Generator\ValueGenerator;
 use Scaffold\Config;
 use Scaffold\Model;
 use Scaffold\State;
@@ -35,7 +33,6 @@ class ModelWriterTest extends \PHPUnit_Framework_TestCase
     {
         $writer = $this->getWriter(['writeData']);
 
-
         $model = new Model();
         $model->setPath('Model.php');
         $model->setGenerator(new ClassGenerator('Test'));
@@ -61,7 +58,6 @@ EOF;
     public function testWriteModelBin()
     {
         $writer = $this->getWriter(['writeData']);
-
 
         $model = new Model();
         $model->setPath('Model.php');
@@ -102,8 +98,8 @@ EOF;
             ->disableOriginalConstructor()
             ->setMethods($methods)
             ->getMock();
+
         return $writer;
     }
 
 }
- 

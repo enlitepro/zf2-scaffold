@@ -5,12 +5,10 @@
 
 namespace Scaffold\Writer;
 
-
 use Scaffold\Code\Generator\BinGenerator;
 use Scaffold\Config;
-use Scaffold\State;
 use Scaffold\Model;
-use Scaffold\Writer\AbstractWriter;
+use Scaffold\State;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class ModelWriter extends AbstractWriter
@@ -30,7 +28,7 @@ class ModelWriter extends AbstractWriter
     }
 
     /**
-     * @param State $state
+     * @param State           $state
      * @param OutputInterface $output
      */
     public function write(State $state, OutputInterface $output)
@@ -42,8 +40,8 @@ class ModelWriter extends AbstractWriter
     }
 
     /**
-     * @param Model $model
-     * @param OutputInterface $output
+     * @param  Model             $model
+     * @param  OutputInterface   $output
      * @throws \RuntimeException
      */
     public function writeModel(Model $model, OutputInterface $output)
@@ -57,8 +55,8 @@ class ModelWriter extends AbstractWriter
     }
 
     /**
-     * @param State $state
-     * @param Model $model
+     * @param State           $state
+     * @param Model           $model
      * @param OutputInterface $output
      */
     public function mergeConfig(State $state, Model $model, OutputInterface $output)

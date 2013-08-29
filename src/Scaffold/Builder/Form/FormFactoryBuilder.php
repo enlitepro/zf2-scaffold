@@ -5,11 +5,10 @@
 
 namespace Scaffold\Builder\Form;
 
-
 use Scaffold\Builder\AbstractBuilder;
-use Scaffold\State;
 use Scaffold\Config;
 use Scaffold\Model;
+use Scaffold\State;
 use Zend\Code\Generator\ClassGenerator;
 use Zend\Code\Generator\DocBlockGenerator;
 use Zend\Code\Generator\MethodGenerator;
@@ -59,7 +58,7 @@ class FormFactoryBuilder extends AbstractBuilder
     /**
      * Build generators
      *
-     * @param State $state
+     * @param  State $state
      * @return void
      */
     public function build(State $state)

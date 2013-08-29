@@ -76,8 +76,7 @@ class GroupServiceTest extends \PHPUnit_Framework_TestCase
                 ->disableOriginalConstructor()
                 ->setMethods($methods)
                 ->getMock();
-        }
-        else {
+        } else {
             $object = new GroupService($this->getServiceManager());
         }
 

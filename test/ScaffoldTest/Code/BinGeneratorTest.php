@@ -5,7 +5,6 @@
 
 namespace ScaffoldTest\Code;
 
-
 use Scaffold\Code\Generator\BinGenerator;
 
 class BinGeneratorTest extends \PHPUnit_Framework_TestCase
@@ -18,4 +17,3 @@ class BinGeneratorTest extends \PHPUnit_Framework_TestCase
     }
 
 }
- 

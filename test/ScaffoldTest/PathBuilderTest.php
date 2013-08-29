@@ -5,7 +5,6 @@
 
 namespace ScaffoldTest;
 
-
 use Scaffold\PathBuilder;
 
 class PathBuilderTest extends \PHPUnit_Framework_TestCase
@@ -54,4 +53,3 @@ class PathBuilderTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('module/User/test/UserTest/Group/MemberTest.php', $builder->getTestPath());
     }
 }
- 

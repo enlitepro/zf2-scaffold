@@ -5,7 +5,6 @@
 
 namespace ScaffoldTest\Builder;
 
-
 use Scaffold\Config;
 use Scaffold\Model;
 use Scaffold\State;
@@ -53,4 +52,4 @@ abstract class AbstractBuilderTestCase extends \PHPUnit_Framework_TestCase
         return $model;
     }
 
-} 
+}

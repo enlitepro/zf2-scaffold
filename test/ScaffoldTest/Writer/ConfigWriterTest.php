@@ -5,7 +5,6 @@
 
 namespace ScaffoldTest\Writer;
 
-
 use Scaffold\Config;
 use Scaffold\Writer\ConfigWriter;
 use Symfony\Component\Console\Output\NullOutput;
@@ -60,7 +59,6 @@ return array(
 );
 EOF;
 
-
         $output = new NullOutput();
         $writer->expects($this->once())->method('getPath')->will($this->returnValue("config.php"));
         $writer->expects($this->once())->method('writeData')->with(
@@ -74,4 +72,3 @@ EOF;
     }
 
 }
- 

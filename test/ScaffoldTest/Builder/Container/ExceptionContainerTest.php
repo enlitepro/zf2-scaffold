@@ -5,7 +5,6 @@
 
 namespace ScaffoldTest\Builder\Container;
 
-
 use Scaffold\Builder\Container\ExceptionContainer;
 use ScaffoldTest\Builder\AbstractBuilderTestCase;
 
@@ -20,4 +19,3 @@ class ExceptionContainerTest extends AbstractBuilderTestCase
     }
 
 }
- 

@@ -5,11 +5,10 @@
 
 namespace Scaffold\Builder\Entity;
 
-
 use Scaffold\Builder\AbstractBuilder;
-use Scaffold\State;
 use Scaffold\Config;
 use Scaffold\Model;
+use Scaffold\State;
 use Zend\Code\Generator\ClassGenerator;
 use Zend\Code\Generator\DocBlock\Tag;
 use Zend\Code\Generator\DocBlockGenerator;
@@ -45,9 +44,8 @@ class EntityBuilder extends AbstractBuilder
         $state->addModel($model, 'entity');
     }
 
-
     /**
-     * @param State|\Scaffold\State $state
+     * @param  State|\Scaffold\State $state
      * @return State|void
      */
     public function build(State $state)

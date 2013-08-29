@@ -5,8 +5,6 @@
 
 namespace ScaffoldTest\Builder\Service;
 
-
-use Scaffold\Builder\Container\ExceptionContainer;
 use Scaffold\Builder\Service\ServiceBuilder;
 use Scaffold\Builder\Service\ServiceFactoryBuilder;
 use Scaffold\Builder\SimpleContainer;
@@ -62,4 +60,3 @@ class ServiceFactoryBuilderTest extends AbstractBuilderTestCase
         $this->assertEquals($fixture, $state->getModel('service-factory')->getGenerator()->generate());
     }
 }
- 

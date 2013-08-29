@@ -5,7 +5,6 @@
 
 namespace ScaffoldTest\Builder\Controller;
 
-
 use Scaffold\Builder\Controller\ControllerBuilder;
 use Scaffold\Builder\Entity\EntityBuilder;
 use Scaffold\Builder\Form\FormFactoryBuilder;
@@ -66,4 +65,3 @@ class ControllerBuilderTest extends AbstractBuilderTestCase
         $this->assertEquals($fixture, $state->getModel('controller')->getGenerator()->generate());
     }
 }
- 

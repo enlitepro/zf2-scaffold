@@ -5,7 +5,6 @@
 
 namespace Scaffold;
 
-
 use Scaffold\Exception\RuntimeException;
 use Scaffold\Writer\ConfigWriter;
 
@@ -136,7 +135,7 @@ class State
     }
 
     /**
-     * @param Model $model
+     * @param Model  $model
      * @param string $alias
      */
     public function addModel(Model $model, $alias = null)
@@ -149,7 +148,7 @@ class State
     }
 
     /**
-     * @param string $alias
+     * @param  string           $alias
      * @return Model
      * @throws RuntimeException
      */

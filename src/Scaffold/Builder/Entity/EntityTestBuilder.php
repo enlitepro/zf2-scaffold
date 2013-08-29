@@ -5,11 +5,10 @@
 
 namespace Scaffold\Builder\Entity;
 
-
 use Scaffold\Builder\AbstractBuilder;
-use Scaffold\State;
 use Scaffold\Code\Generator\ClassGenerator;
 use Scaffold\Model;
+use Scaffold\State;
 use Zend\Code\Generator\MethodGenerator;
 
 class EntityTestBuilder extends AbstractBuilder
@@ -44,9 +43,8 @@ class EntityTestBuilder extends AbstractBuilder
         $this->model = $model;
     }
 
-
     /**
-     * @param State|\Scaffold\State $state
+     * @param  State|\Scaffold\State $state
      * @return State|void
      */
     public function build(State $state)

@@ -5,7 +5,6 @@
 
 namespace ScaffoldTest;
 
-
 use Scaffold\Model;
 use Scaffold\State;
 
@@ -53,8 +52,8 @@ class StateTest extends \PHPUnit_Framework_TestCase
         $writer = $this->getMockBuilder('Scaffold\Writer\ConfigWriter')
             ->disableOriginalConstructor()
             ->getMock();
+
         return $writer;
     }
 
 }
- 

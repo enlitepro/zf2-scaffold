@@ -6,7 +6,6 @@
 namespace ScaffoldTest\Builder\Module;
 
 use Scaffold\Builder\Entity\EntityBuilder;
-use Scaffold\Builder\Module\ConfigBuilder;
 use Scaffold\Builder\Module\ModuleBuilder;
 use Scaffold\Builder\SimpleContainer;
 use Scaffold\Model;
@@ -24,6 +23,7 @@ class ModuleBuilderTest extends AbstractBuilderTestCase
                 function (Model $model) {
                     $this->assertEquals('module/User/Module.php', $model->getPath());
                     $this->assertEquals('User\Module', $model->getName());
+
                     return true;
                 }
             ),
@@ -50,4 +50,3 @@ class ModuleBuilderTest extends AbstractBuilderTestCase
         $this->assertEquals($fixture, $state->getModel('module')->getGenerator()->generate());
     }
 }
- 

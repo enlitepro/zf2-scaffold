@@ -5,12 +5,11 @@
 
 namespace Scaffold\Code\Generator;
 
-use Zend\Code\Generator\ValueGenerator as ZendValueGenerator;
 use Zend\Code\Generator\Exception;
+use Zend\Code\Generator\ValueGenerator as ZendValueGenerator;
 
 class ValueGenerator extends ZendValueGenerator
 {
-
 
     /**
      * @throws Exception\RuntimeException
