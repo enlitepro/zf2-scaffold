@@ -25,6 +25,7 @@ class EntityCommand extends AbstractCommand
     {
         $writeState = new State($this->configWriter);
         $writeState->addModel($state->getEntityModel());
+        $writeState->addModel($state->getModel('entity-test'));
 
         parent::write($writeState, $input, $output);
     }
