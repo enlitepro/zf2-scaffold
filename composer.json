@@ -17,7 +17,7 @@
         "phpunit/phpunit": "~3.7",
         "satooshi/php-coveralls": "dev-master"
     },
-    "bin": ["bin/scaffold.php"],
+    "bin": ["bin/scaffold"],
     "autoload": {
         "psr-0": {
             "Scaffold": "src/"
