@@ -24,11 +24,25 @@ class ModelTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('UserGroupService', $model->getServiceName());
     }
 
+    public function testGetServiceNameWithComplexClass()
+    {
+        $model = new Model();
+        $model->setName('User\Service\Masson\MemberService');
+        $this->assertEquals('UserMassonMemberService', $model->getServiceName());
+    }
+
     public function testGetServiceNameWhenModuleSameName()
     {
         $model = new Model();
         $model->setName('User\Service\UserService');
         $this->assertEquals('UserService', $model->getServiceName());
+    }
+
+    public function testGetServiceNameWhenModuleSameNameWithComplexClass()
+    {
+        $model = new Model();
+        $model->setName('User\Service\Masson\UserService');
+        $this->assertEquals('UserMassonUserService', $model->getServiceName());
     }
 
     public function testGetServiceNameForForm()

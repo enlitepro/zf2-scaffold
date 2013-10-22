@@ -23,7 +23,7 @@ class PathBuilder
      */
     public function addPart($part)
     {
-        $this->parts[] = $part;
+        $this->parts[] = str_replace('\\', '/', $part);
 
         return $this;
     }

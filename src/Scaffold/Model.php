@@ -125,10 +125,11 @@ class Model
      */
     public function getServiceName()
     {
-        $parts = explode('\\', $this->getName());
+        $parts = explode('\\', $this->getName(), 3);
 
         $module = array_shift($parts);
         $name = array_pop($parts);
+        $name = str_replace('\\', '', $name);
 
         foreach (['Factory' => '', 'Controller' => ''] as $search => $replace) {
             if (substr($name, -strlen($search)) == $search) {

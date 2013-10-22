@@ -34,6 +34,16 @@ class PathBuilderTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('module/User/src/User/Group/Member.php', $builder->getSourcePath());
     }
 
+    public function testGetSourcePathWithComplexClass()
+    {
+        $builder = new PathBuilder();
+        $builder->setModule('User');
+        $builder->addPart('Group');
+        $builder->addPart('Masson\Member');
+
+        $this->assertSame('module/User/src/User/Group/Masson/Member.php', $builder->getSourcePath());
+    }
+
     public function testGetRawPath()
     {
         $builder = new PathBuilder();

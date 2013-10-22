@@ -23,4 +23,11 @@ class NamespaceBuilderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('User\Entity\UsEr', $builder->getNamespace());
     }
 
+    public function testGetNamespaceWithComplexClass()
+    {
+        $builder = new NamespaceBuilder();
+        $builder->addPart('user')->addPart('Entity')->addPart('Masson\Member');
+        $this->assertEquals('User\Entity\Masson\Member', $builder->getNamespace());
+    }
+
 }
