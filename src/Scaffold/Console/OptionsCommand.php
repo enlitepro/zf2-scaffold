@@ -26,7 +26,7 @@ class OptionsCommand extends AbstractCommand
         $this->setName('options');
         $this->setDescription('Generate options, options DI trait, options factory and write to service.config.php');
         $this->addArgument('module', InputArgument::REQUIRED, 'Module name');
-        $this->addArgument('name', InputArgument::REQUIRED, 'Options name (will be append Options postfix');
+        $this->addArgument('name', InputArgument::REQUIRED, 'Options name (will be append Options postfix)');
         $this->addOption(
             'no-options',
             null,

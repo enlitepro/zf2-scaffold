@@ -10,7 +10,7 @@ The recommended way to install is through composer.
 ```json
 {
     "require": {
-        "enlitepro/zf2-scaffold": "1.*"
+        "enlitepro/zf2-scaffold": "~1.0.0"
     }
 }
 ```
@@ -19,7 +19,7 @@ USAGE
 =====
 
 ```
-./vendor/bin/scaffold.php
+./vendor/bin/scaffold
 
 Available commands:
   controller   Generate controller
@@ -28,11 +28,12 @@ Available commands:
   form         Generate form factory and write to service.config.php
   full         Generate all available (without module skeleton)
   module       Generate module skeleton
+  options      Generate options, options DI trait, options factory and write to service.config.php
   repository   Generate repository and repository DI trait
   service      Generate service, service DI trait, service factory, service test and write to service.config.php
 
 
-./vendor/bin/scaffold.php service [--no-service] [--no-trait] [--no-factory]
+./vendor/bin/scaffold service [--no-service] [--no-trait] [--no-factory]
     [--no-test] [--only-service] [--only-trait]
     [--only-factory] [--only-test] <module> <name>
  <module>              Name of module
@@ -46,4 +47,15 @@ Available commands:
  --only-factory        Generate only factory
  --only-test           Generate only test
 
+
+./vendor/bin/scaffold options [--no-options] [--no-trait] [--no-factory]
+    [--only-options] [--only-trait] [--only-factory] <module> <name>
+ <module>              Name of module
+ <name>                Options name (will be append Options postfix)
+ --no-options          Disable options generation
+ --no-trait            Disable trait generation
+ --no-factory          Disable factory generation
+ --only-options        Generate only options
+ --only-trait          Generate only trait
+ --only-factory        Generate only factory
 ```
