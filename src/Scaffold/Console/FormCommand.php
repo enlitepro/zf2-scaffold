@@ -15,6 +15,8 @@ class FormCommand extends AbstractCommand
 
     protected function configure()
     {
+        parent::configure();
+
         $this->setName('form');
         $this->setDescription('Generate form factory and write to service.config.php');
         $this->addArgument('module', InputArgument::REQUIRED, 'Module name');

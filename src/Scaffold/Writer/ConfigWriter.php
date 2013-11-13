@@ -38,7 +38,7 @@ class ConfigWriter extends AbstractWriter
      */
     public function getPath()
     {
-        $builder = new PathBuilder();
+        $builder = new PathBuilder($this->config);
         $builder->setModule($this->config->getModule());
         $builder->addPart('config');
         $builder->addPart('service.config');

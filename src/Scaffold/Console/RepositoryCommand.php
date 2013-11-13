@@ -15,6 +15,8 @@ class RepositoryCommand extends AbstractCommand
 {
     protected function configure()
     {
+        parent::configure();
+
         $this->setName('repository');
         $this->setDescription('Generate repository and repository DI trait');
         $this->addArgument('module', InputArgument::REQUIRED, 'Module name');

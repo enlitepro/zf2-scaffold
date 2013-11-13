@@ -7,6 +7,12 @@ namespace Scaffold;
 
 class PathBuilder
 {
+
+    /**
+     * @var Config
+     */
+    protected $config;
+
     /**
      * @var string
      */
@@ -16,6 +22,14 @@ class PathBuilder
      * @var string
      */
     protected $module;
+
+    /**
+     * @param Config $config
+     */
+    public function __construct(Config $config)
+    {
+        $this->config = $config;
+    }
 
     /**
      * @param string $part
@@ -44,7 +58,7 @@ class PathBuilder
      */
     public function getSourcePath()
     {
-        return $this->getModuleBase() . '/src/' .
+        return $this->getModuleBase() . 'src/' .
         ucfirst($this->module) . '/' . implode("/", $this->parts) . '.php';
     }
 
@@ -54,7 +68,7 @@ class PathBuilder
      */
     public function getRawPath($extension = 'php')
     {
-        $path = $this->getModuleBase() . '/' . implode("/", $this->parts);
+        $path = $this->getModuleBase() . implode("/", $this->parts);
         if ($extension) {
             return $path . '.' . $extension;
         }
@@ -67,7 +81,7 @@ class PathBuilder
      */
     public function getTestPath()
     {
-        return $this->getModuleBase() . '/test/' . ucfirst($this->module) .
+        return $this->getModuleBase() . 'test/' . ucfirst($this->module) .
         'Test/' . implode("/", $this->parts) . 'Test.php';
     }
 
@@ -76,6 +90,12 @@ class PathBuilder
      */
     public function getModuleBase()
     {
-        return 'module/' . ucfirst($this->module);
+        $module = ucfirst($this->module);
+
+        if ($this->config->getBare()) {
+            return '';
+        }
+
+        return 'module/' . $module . '/';
     }
 }

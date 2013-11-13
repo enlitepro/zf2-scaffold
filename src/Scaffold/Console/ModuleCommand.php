@@ -13,12 +13,15 @@ use Scaffold\Writer\ModelWriter;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class ModuleCommand extends Command
+class ModuleCommand extends AbstractCommand
 {
     protected function configure()
     {
+        parent::configure();
+
         $this->setName('module');
         $this->setDescription('Generate module skeleton');
         $this->addArgument('module', InputArgument::REQUIRED, 'Module name');
@@ -29,6 +32,7 @@ class ModuleCommand extends Command
         $config = new Config();
         $config->setBasePath(getcwd());
         $config->setFromArray($input->getArguments());
+        $config->setFromArray($input->getOptions());
 
         $moduleConfig = new ConfigWriter($config);
 

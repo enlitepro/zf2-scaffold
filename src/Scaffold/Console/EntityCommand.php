@@ -15,6 +15,8 @@ class EntityCommand extends AbstractCommand
 
     protected function configure()
     {
+        parent::configure();
+
         $this->setName('entity');
         $this->setDescription('Generate entity');
         $this->addArgument('module', InputArgument::REQUIRED, 'Module name');

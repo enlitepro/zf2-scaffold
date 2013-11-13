@@ -6,10 +6,7 @@
 namespace Scaffold\Console;
 
 use Scaffold\Builder\Container\ExceptionContainer;
-use Scaffold\Builder\Container\FullContainer;
 use Scaffold\Builder\Container\OptionsContainer;
-use Scaffold\Builder\Entity\EntityBuilder;
-use Scaffold\Builder\SimpleContainer;
 use Scaffold\Config;
 use Scaffold\State;
 use Scaffold\Writer\ConfigWriter;
@@ -23,6 +20,8 @@ class OptionsCommand extends AbstractCommand
 {
     protected function configure()
     {
+        parent::configure();
+
         $this->setName('options');
         $this->setDescription('Generate options, options DI trait, options factory and write to service.config.php');
         $this->addArgument('module', InputArgument::REQUIRED, 'Module name');
@@ -71,6 +70,7 @@ class OptionsCommand extends AbstractCommand
         $config = new Config();
         $config->setBasePath(getcwd());
         $config->setFromArray($input->getArguments());
+        $config->setFromArray($input->getOptions());
 
         $moduleConfig = new ConfigWriter($config);
 

@@ -59,7 +59,7 @@ abstract class AbstractBuilder implements BuilderInterface
      */
     protected function buildPath()
     {
-        return new PathBuilder();
+        return new PathBuilder($this->config);
     }
 
     /**

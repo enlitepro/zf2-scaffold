@@ -12,6 +12,8 @@ class FullCommand extends AbstractCommand
 
     protected function configure()
     {
+        parent::configure();
+
         $this->setName('full');
         $this->setDescription('Generate all available (without module skeleton)');
         $this->addArgument('module', InputArgument::REQUIRED, 'Module name');

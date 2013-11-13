@@ -12,6 +12,8 @@ class ExceptionCommand extends AbstractCommand
 {
     protected function configure()
     {
+        parent::configure();
+
         $this->setName('exception');
         $this->setDescription('Generate exceptions (RuntimeException, NotFoundException and other)');
         $this->addArgument('module', InputArgument::REQUIRED, 'Module name');

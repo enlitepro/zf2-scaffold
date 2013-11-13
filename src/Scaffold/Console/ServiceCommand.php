@@ -19,6 +19,8 @@ class ServiceCommand extends AbstractCommand
 {
     protected function configure()
     {
+        parent::configure();
+
         $this->setName('service');
         $this->setDescription('Generate service, service DI trait, service factory, service test and write to service.config.php');
         $this->addArgument('module', InputArgument::REQUIRED, 'Module name');
@@ -79,6 +81,7 @@ class ServiceCommand extends AbstractCommand
         $config = new Config();
         $config->setBasePath(getcwd());
         $config->setFromArray($input->getArguments());
+        $config->setFromArray($input->getOptions());
 
         $moduleConfig = new ConfigWriter($config);
 
