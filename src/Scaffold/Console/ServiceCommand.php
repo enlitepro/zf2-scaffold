@@ -22,7 +22,9 @@ class ServiceCommand extends AbstractCommand
         parent::configure();
 
         $this->setName('service');
-        $this->setDescription('Generate service, service DI trait, service factory, service test and write to service.config.php');
+        $this->setDescription(
+            'Generate service, service DI trait, service factory, service test and write to service.config.php'
+        );
         $this->addArgument('module', InputArgument::REQUIRED, 'Module name');
         $this->addArgument('name', InputArgument::REQUIRED, 'Service name');
         $this->addOption(
@@ -81,7 +83,11 @@ class ServiceCommand extends AbstractCommand
         $config = new Config();
         $config->setBasePath(getcwd());
         $config->setFromArray($input->getArguments());
-        $config->setFromArray($input->getOptions());
+        $config->setFromArray(
+            array(
+                 'bare' => $input->getOption('bare')
+            )
+        );
 
         $moduleConfig = new ConfigWriter($config);
 

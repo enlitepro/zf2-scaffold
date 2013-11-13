@@ -25,8 +25,17 @@ class ModuleContainer extends AbstractContainer
         $this->addBuilder(new Module\ConfigBuilder($config, 'config/auth.config.php'));
         $this->addBuilder(new Module\ConfigBuilder($config, 'config/assetic.config.php'));
         $this->addBuilder(new Module\TestBuilder($config, 'test/bootstrap.php'));
-        $this->addBuilder(new Module\TestBuilder($config, 'test/phpunit.xml'));
         $this->addBuilder(new Module\TestBuilder($config, 'test/TestConfig.php.dist'));
+
+        if ($config->getBare()) {
+            $this->addBuilder(new Module\RootBuilder($config, 'Module.php'));
+            $this->addBuilder(new Module\RootBuilder($config, 'phpunit.xml'));
+            $this->addBuilder(new Module\RootBuilder($config, 'composer.json'));
+            $this->addBuilder(new Module\RootBuilder($config, '.gitignore'));
+        }
+        else {
+            $this->addBuilder(new Module\TestBuilder($config, 'test/phpunit.xml'));
+        }
     }
 
 }

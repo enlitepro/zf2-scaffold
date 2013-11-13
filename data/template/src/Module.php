@@ -1,4 +1,6 @@
-namespace User;
+<?php
+
+namespace __NAMESPACE_PLACEHOLDER__;
 
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;

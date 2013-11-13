@@ -43,7 +43,7 @@ abstract class AbstractCommand extends Command
     }
 
     /**
-     * @param  InputInterface  $input
+     * @param  InputInterface $input
      * @param  OutputInterface $output
      * @return int|null|void
      */
@@ -85,8 +85,8 @@ abstract class AbstractCommand extends Command
     }
 
     /**
-     * @param State           $state
-     * @param InputInterface  $input
+     * @param State $state
+     * @param InputInterface $input
      * @param OutputInterface $output
      */
     protected function write(State $state, InputInterface $input, OutputInterface $output)

@@ -1,0 +1,10 @@
+{
+    "name": "",
+    "require": {},
+
+    "autoload": {
+        "psr-0": {
+            "__NAMESPACE_PLACEHOLDER__": "src/"
+        }
+    }
+}

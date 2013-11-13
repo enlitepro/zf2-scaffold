@@ -1,4 +1,6 @@
-namespace User;
+<?php
+
+namespace __NAMESPACE_PLACEHOLDER__;
 
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
@@ -15,7 +17,7 @@ class Module implements
     public function getConfig()
     {
         $config = [];
-        foreach (glob(__DIR__ . '/config/*.config.php') as $file) {
+        foreach (glob(__DIR__ . '/../../config/*.config.php') as $file) {
             /** @noinspection PhpIncludeInspection */
             $config = array_merge($config, include $file);
         }

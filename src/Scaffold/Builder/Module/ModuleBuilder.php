@@ -32,8 +32,14 @@ class ModuleBuilder extends AbstractBuilder
             ->addPart('Module')
             ->getNamespace();
 
-        $path = $this->buildPath()
-            ->setModule($this->config->getModule())
+        $pathBuilder = $this->buildPath();
+
+        if ($this->config->getBare()) {
+            $pathBuilder->addPart('src');
+            $pathBuilder->addPart($this->config->getModule());
+        }
+
+        $path = $pathBuilder->setModule($this->config->getModule())
             ->addPart('Module')
             ->getRawPath();
 
@@ -50,7 +56,12 @@ class ModuleBuilder extends AbstractBuilder
     public function build(State $state)
     {
         $model = $state->getModel('module');
-        $data = file_get_contents(SCAFFOLD_ROOT . "/data/template/Module.php");
+        if ($this->config->getBare()) {
+            $data = file_get_contents(SCAFFOLD_ROOT . "/data/template/src/Module.bare.php");
+        }
+        else {
+            $data = file_get_contents(SCAFFOLD_ROOT . "/data/template/src/Module.php");
+        }
         $data = str_replace('__NAMESPACE_PLACEHOLDER__', ucfirst($this->config->getModule()), $data);
         $data = substr($data, 7);
         $model->setGenerator(new RawGenerator($data));

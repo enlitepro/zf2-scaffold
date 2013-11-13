@@ -59,3 +59,17 @@ Available commands:
  --only-trait          Generate only trait
  --only-factory        Generate only factory
 ```
+
+Creating bare module
+====================
+
+If you want create separate module, you can use --bare option, which create following folder struct
+
+```
+config/
+src/
+    ModuleName/
+        Module.php
+test/
+phpunit.xml
+```
