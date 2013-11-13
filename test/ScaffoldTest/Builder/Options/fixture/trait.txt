@@ -1,0 +1,47 @@
+namespace User;
+
+use User\GroupOptions;
+use User\Exception\RuntimeException;
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
+
+trait GroupOptionsTrait
+{
+
+    /**
+     * @var GroupOptions
+     */
+    protected $groupOptions = null;
+
+    /**
+     * @param GroupOptions $groupOptions
+     */
+    public function setGroupOptions(GroupOptions $groupOptions)
+    {
+        $this->groupOptions = $groupOptions;
+    }
+
+    /**
+     * @return GroupOptions
+     * @throws RuntimeException
+     */
+    public function getGroupOptions()
+    {
+        if (null === $this->groupOptions) {
+            if ($this instanceof ServiceLocatorAwareInterface || method_exists($this, 'getServiceLocator')) {
+                $this->groupOptions = $this->getServiceLocator()->get('UserGroupOptions');
+            } else {
+                if (property_exists($this, 'serviceLocator')
+                    && $this->serviceLocator instanceof ServiceLocatorInterface
+                ) {
+                    $this->groupOptions = $this->serviceLocator->get('UserGroupOptions');
+                } else {
+                    throw new RuntimeException('Service locator not found');
+                }
+            }
+        }
+        return $this->groupOptions;
+    }
+
+
+}

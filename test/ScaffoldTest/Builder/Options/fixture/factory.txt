@@ -1,0 +1,23 @@
+namespace User;
+
+use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
+
+class GroupOptionsFactory implements FactoryInterface
+{
+
+    /**
+     * @inhertidoc
+     */
+    public function createService(ServiceLocatorInterface $serviceLocator)
+    {
+        $config = $serviceLocator->get('Config');
+        return new GroupOptions(
+            isset($config['UserGroup'])
+                ? $config['UserGroup']
+                : []
+        );
+    }
+
+
+}
