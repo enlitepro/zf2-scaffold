@@ -9,7 +9,7 @@ The recommended way to install is through composer.
 
 ```json
 {
-    "require": {
+    "require-dev": {
         "enlitepro/zf2-scaffold": "~1.0.0"
     }
 }
@@ -63,7 +63,7 @@ Available commands:
 Creating bare module
 ====================
 
-If you want create separate module, you can use --bare option, which create following folder struct
+If you want create separate module, you can use `--bare` option, which create following folder struct
 
 ```
 config/

@@ -58,6 +58,11 @@ class Config extends AbstractOptions
     protected $verbose = false;
 
     /**
+     * @var bool
+     */
+    protected $rest = false;
+
+    /**
      * @var string
      */
     protected $version;
@@ -228,12 +233,28 @@ class Config extends AbstractOptions
     }
 
     /**
+     * @param boolean $rest
+     */
+    public function setRest($rest)
+    {
+        $this->rest = $rest;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getRest()
+    {
+        return $this->rest;
+    }
+
+    /**
      * @param array|Traversable|AbstractOptions $options
      * @return AbstractOptions
      */
     public function setFromArray($options)
     {
-        foreach(array_keys($options) as $key) {
+        foreach (array_keys($options) as $key) {
             if (strpos($key, 'no-') === 0 || strpos($key, 'only-') === 0) {
                 unset($options[$key]);
             }

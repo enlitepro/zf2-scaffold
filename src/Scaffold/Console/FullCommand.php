@@ -6,6 +6,7 @@
 namespace Scaffold\Console;
 
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 
 class FullCommand extends AbstractCommand
 {
@@ -18,6 +19,7 @@ class FullCommand extends AbstractCommand
         $this->setDescription('Generate all available (without module skeleton)');
         $this->addArgument('module', InputArgument::REQUIRED, 'Module name');
         $this->addArgument('name', InputArgument::REQUIRED, 'Entity name');
+        $this->addOption('rest', 'r', InputOption::VALUE_NONE, 'Generate RESTful controller');
     }
 
 }

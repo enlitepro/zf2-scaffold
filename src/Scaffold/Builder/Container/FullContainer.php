@@ -29,9 +29,15 @@ class FullContainer extends AbstractContainer
         $this->addBuilder(new Entity\EntityTestBuilder($config));
         $this->addBuilder(new Repository\RepositoryBuilder($config));
         $this->addBuilder(new Repository\RepositoryTraitBuilder($config));
-        $this->addBuilder(new Controller\ControllerBuilder($config));
         $this->addBuilder(new Form\FormFactoryBuilder($config));
         $this->addBuilder(new ExceptionContainer($config));
+
+        if ($config->getRest()) {
+            $this->addBuilder(new Controller\RESTControllerBuilder($config));
+        }
+        else {
+            $this->addBuilder(new Controller\ControllerBuilder($config));
+        }
     }
 
 }
