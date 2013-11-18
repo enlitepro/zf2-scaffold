@@ -233,7 +233,11 @@ class Config extends AbstractOptions
      */
     public function setFromArray($options)
     {
-        unset($options['no-ansi'], $options['no-interaction']);
+        foreach(array_keys($options) as $key) {
+            if (strpos($key, 'no-') === 0 || strpos($key, 'only-') === 0) {
+                unset($options[$key]);
+            }
+        }
 
         return parent::setFromArray($options);
     }
