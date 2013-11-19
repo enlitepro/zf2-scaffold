@@ -24,9 +24,9 @@ class FullContainerTest extends AbstractBuilderTestCase
         $this->assertInstanceOf('Scaffold\Builder\Entity\EntityTestBuilder', $builders[$i++]);
         $this->assertInstanceOf('Scaffold\Builder\Repository\RepositoryBuilder', $builders[$i++]);
         $this->assertInstanceOf('Scaffold\Builder\Repository\RepositoryTraitBuilder', $builders[$i++]);
-        $this->assertInstanceOf('Scaffold\Builder\Controller\ControllerBuilder', $builders[$i++]);
         $this->assertInstanceOf('Scaffold\Builder\Form\FormFactoryBuilder', $builders[$i++]);
         $this->assertInstanceOf('Scaffold\Builder\Container\ExceptionContainer', $builders[$i++]);
+        $this->assertInstanceOf('Scaffold\Builder\Controller\ControllerBuilder', $builders[$i++]);
     }
 
 }
