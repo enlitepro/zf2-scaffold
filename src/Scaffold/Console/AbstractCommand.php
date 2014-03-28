@@ -5,7 +5,6 @@
 
 namespace Scaffold\Console;
 
-
 use Scaffold\Builder\BuilderInterface;
 use Scaffold\Builder\Container\FullContainer;
 use Scaffold\Config;
@@ -14,6 +13,7 @@ use Scaffold\Writer\ConfigWriter;
 use Scaffold\Writer\ModelWriter;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 abstract class AbstractCommand extends Command
@@ -35,8 +35,16 @@ abstract class AbstractCommand extends Command
     protected $state;
 
     /**
-     * @param InputInterface $input
-     * @param OutputInterface $output
+     *
+     */
+    protected function configure()
+    {
+        $this->addOption("bare", "b", InputOption::VALUE_NONE, 'Bare module');
+    }
+
+    /**
+     * @param  InputInterface $input
+     * @param  OutputInterface $output
      * @return int|null|void
      */
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -63,6 +71,7 @@ abstract class AbstractCommand extends Command
         $this->config = new Config();
         $this->config->setBasePath(getcwd());
         $this->config->setFromArray($input->getArguments());
+        $this->config->setFromArray($input->getOptions());
 
         $this->configWriter = new ConfigWriter($this->config);
     }

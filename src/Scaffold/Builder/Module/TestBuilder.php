@@ -5,7 +5,6 @@
 
 namespace Scaffold\Builder\Module;
 
-
 use Scaffold\Builder\AbstractBuilder;
 use Scaffold\Code\Generator\BinGenerator;
 use Scaffold\Config;
@@ -47,8 +46,7 @@ class TestBuilder extends AbstractBuilder
             ->setModule($this->config->getModule())
             ->addPart('test')
             ->addPart(basename($this->name))
-            ->setType('bin')
-            ->getPath();
+            ->getRawPath('');
 
         $model->setPath($path);
         $state->addModel($model, $this->name);

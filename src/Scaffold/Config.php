@@ -5,8 +5,9 @@
 
 namespace Scaffold;
 
-
+use Traversable;
 use Zend\Stdlib\AbstractOptions;
+use Zend\Stdlib\Exception;
 
 class Config extends AbstractOptions
 {
@@ -37,8 +38,41 @@ class Config extends AbstractOptions
     protected $command = '';
 
     /**
-     * Set value of BasePath
-     *
+     * @var bool
+     */
+    protected $bare = false;
+
+    /**
+     * @var bool
+     */
+    protected $help = false;
+
+    /**
+     * @var bool
+     */
+    protected $quiet = false;
+
+    /**
+     * @var bool
+     */
+    protected $verbose = false;
+
+    /**
+     * @var bool
+     */
+    protected $rest = false;
+
+    /**
+     * @var string
+     */
+    protected $version;
+
+    /**
+     * @var bool
+     */
+    protected $ansi;
+
+    /**
      * @param string $basePath
      */
     public function setBasePath($basePath)
@@ -47,8 +81,6 @@ class Config extends AbstractOptions
     }
 
     /**
-     * Return value of BasePath
-     *
      * @return string
      */
     public function getBasePath()
@@ -57,8 +89,6 @@ class Config extends AbstractOptions
     }
 
     /**
-     * Set value of Command
-     *
      * @param string $command
      */
     public function setCommand($command)
@@ -67,8 +97,6 @@ class Config extends AbstractOptions
     }
 
     /**
-     * Return value of Command
-     *
      * @return string
      */
     public function getCommand()
@@ -77,8 +105,6 @@ class Config extends AbstractOptions
     }
 
     /**
-     * Set value of Module
-     *
      * @param string $module
      */
     public function setModule($module)
@@ -87,8 +113,6 @@ class Config extends AbstractOptions
     }
 
     /**
-     * Return value of Module
-     *
      * @return string
      */
     public function getModule()
@@ -97,8 +121,6 @@ class Config extends AbstractOptions
     }
 
     /**
-     * Set value of Name
-     *
      * @param string $name
      */
     public function setName($name)
@@ -107,13 +129,139 @@ class Config extends AbstractOptions
     }
 
     /**
-     * Return value of Name
-     *
      * @return string
      */
     public function getName()
     {
         return $this->name;
     }
+
+    /**
+     * @param boolean $bare
+     */
+    public function setBare($bare)
+    {
+        $this->bare = $bare;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getBare()
+    {
+        return $this->bare;
+    }
+
+    /**
+     * @param boolean $quite
+     */
+    public function setQuiet($quite)
+    {
+        $this->quiet = $quite;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getQuiet()
+    {
+        return $this->quiet;
+    }
+
+    /**
+     * @param boolean $help
+     */
+    public function setHelp($help)
+    {
+        $this->help = $help;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getHelp()
+    {
+        return $this->help;
+    }
+
+    /**
+     * @param boolean $verbose
+     */
+    public function setVerbose($verbose)
+    {
+        $this->verbose = $verbose;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getVerbose()
+    {
+        return $this->verbose;
+    }
+
+    /**
+     * @param string $version
+     */
+    public function setVersion($version)
+    {
+        $this->version = $version;
+    }
+
+    /**
+     * @return string
+     */
+    public function getVersion()
+    {
+        return $this->version;
+    }
+
+    /**
+     * @param boolean $ansi
+     */
+    public function setAnsi($ansi)
+    {
+        $this->ansi = $ansi;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getAnsi()
+    {
+        return $this->ansi;
+    }
+
+    /**
+     * @param boolean $rest
+     */
+    public function setRest($rest)
+    {
+        $this->rest = $rest;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getRest()
+    {
+        return $this->rest;
+    }
+
+    /**
+     * @param array|Traversable|AbstractOptions $options
+     * @return AbstractOptions
+     */
+    public function setFromArray($options)
+    {
+        foreach (array_keys($options) as $key) {
+            if (strpos($key, 'no-') === 0 || strpos($key, 'only-') === 0) {
+                unset($options[$key]);
+            }
+        }
+
+        return parent::setFromArray($options);
+    }
+
 
 }

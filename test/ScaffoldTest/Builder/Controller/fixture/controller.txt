@@ -1,0 +1,91 @@
+namespace User\Controller;
+
+use Zend\Mvc\Controller\AbstractActionController;
+use Doctrine\ORM\EntityManager;
+use Zend\Form\Form;
+use User\Service\GroupServiceTrait;
+
+class GroupController extends AbstractActionController
+{
+
+    use GroupServiceTrait;
+
+    /**
+     * @var EntityManager
+     */
+    protected $entityManager = null;
+
+    /**
+     * Show one entity
+     */
+    public function indexAction()
+    {
+        $id = $this->params()->fromRoute('id');
+        $group = $this->getGroupService()->loadById($id);
+
+        return array(
+            'group' => $group
+        );
+    }
+
+    /**
+     * Show list of entities
+     */
+    public function listAction()
+    {
+        $groups = $this->getGroupService()->search();
+
+        return array(
+            'groups' => $groups
+        );
+    }
+
+    /**
+     * Show one entity
+     */
+    public function editAction()
+    {
+        $id = $this->params()->fromRoute('id');
+        $group = $this->getGroupService()->loadById($id);
+        /** @var Form $form */
+        $form = $this->getServiceLocator()->get('UserGroupForm');
+        $form->bind($group);
+
+        if ($this->getRequest()->isPost()) {
+            $form->setData($this->params()->fromPost());
+            if ($form->isValid()) {
+                $this->getGroupService()->save($group);
+                $this->getEntityManager()->flush();
+
+                $this->flashMessenger()->addSuccessMessage('Saved');
+                $this->redirect()->toRoute('home');
+            }
+        }
+
+        return array(
+            'form' => $form
+        );
+    }
+
+    /**
+     * @param EntityManager $entityManager
+     */
+    public function setEntityManager(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
+    /**
+     * @return EntityManager
+     */
+    public function getEntityManager()
+    {
+        if (null === $this->entityManager) {
+            $this->entityManager = $this->getServiceLocator()->get('entity_manager');
+        }
+
+        return $this->entityManager;
+    }
+
+
+}

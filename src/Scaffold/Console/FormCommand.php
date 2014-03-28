@@ -5,7 +5,6 @@
 
 namespace Scaffold\Console;
 
-
 use Scaffold\State;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -16,8 +15,10 @@ class FormCommand extends AbstractCommand
 
     protected function configure()
     {
+        parent::configure();
+
         $this->setName('form');
-        $this->setDescription('Create form factory');
+        $this->setDescription('Generate form factory and write to service.config.php');
         $this->addArgument('module', InputArgument::REQUIRED, 'Module name');
         $this->addArgument('name', InputArgument::REQUIRED, 'Form name');
     }
@@ -29,6 +30,5 @@ class FormCommand extends AbstractCommand
 
         parent::write($writeState, $input, $output);
     }
-
 
 }

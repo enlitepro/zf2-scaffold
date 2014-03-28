@@ -5,7 +5,6 @@
 
 namespace Scaffold\Writer;
 
-
 use Scaffold\Config;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -27,8 +26,8 @@ abstract class AbstractWriter
 
     /**
      * @param $pathToWrite
-     * @param string $data
-     * @param OutputInterface $output
+     * @param  string            $data
+     * @param  OutputInterface   $output
      * @throws \RuntimeException
      */
     protected function writeData($pathToWrite, $data, OutputInterface $output)

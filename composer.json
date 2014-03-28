@@ -13,7 +13,12 @@
         "zendframework/zend-stdlib": ">=2.3.0",
         "symfony/console": ">=2.0.7"
     },
-    "bin": ["bin/scaffold.php"],
+    "require-dev": {
+        "phpunit/phpunit":              "~3.7",
+        "satooshi/php-coveralls":       "dev-master",
+        "zendframework/zend-mvc":       ">=2.2.1"
+    },
+    "bin": ["bin/scaffold"],
     "autoload": {
         "psr-0": {
             "Scaffold": "src/"

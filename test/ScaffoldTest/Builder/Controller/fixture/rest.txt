@@ -1,0 +1,39 @@
+namespace User\Controller;
+
+use Zend\Mvc\Controller\AbstractRestfulController;
+use Doctrine\ORM\EntityManager;
+use Zend\Form\Form;
+use User\Service\GroupServiceTrait;
+
+class GroupController extends AbstractRestfulController
+{
+
+    use GroupServiceTrait;
+
+    /**
+     * @var EntityManager
+     */
+    protected $entityManager = null;
+
+    /**
+     * @param EntityManager $entityManager
+     */
+    public function setEntityManager(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
+    /**
+     * @return EntityManager
+     */
+    public function getEntityManager()
+    {
+        if (null === $this->entityManager) {
+            $this->entityManager = $this->getServiceLocator()->get('entity_manager');
+        }
+
+        return $this->entityManager;
+    }
+
+
+}

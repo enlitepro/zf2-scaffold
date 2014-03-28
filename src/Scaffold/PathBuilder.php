@@ -5,9 +5,14 @@
 
 namespace Scaffold;
 
-
 class PathBuilder
 {
+
+    /**
+     * @var Config
+     */
+    protected $config;
+
     /**
      * @var string
      */
@@ -19,9 +24,12 @@ class PathBuilder
     protected $module;
 
     /**
-     * @var string
+     * @param Config $config
      */
-    protected $type = 'src';
+    public function __construct(Config $config)
+    {
+        $this->config = $config;
+    }
 
     /**
      * @param string $part
@@ -29,7 +37,7 @@ class PathBuilder
      */
     public function addPart($part)
     {
-        $this->parts[] = $part;
+        $this->parts[] = str_replace('\\', '/', $part);
 
         return $this;
     }
@@ -46,34 +54,48 @@ class PathBuilder
     }
 
     /**
-     * @param string $type
-     * @return $this
+     * @return string
      */
-    public function setType($type)
+    public function getSourcePath()
     {
-        $this->type = $type;
-        return $this;
+        return $this->getModuleBase() . 'src/' .
+        ucfirst($this->module) . '/' . implode("/", $this->parts) . '.php';
     }
 
+    /**
+     * @param  string $extension
+     * @return string
+     */
+    public function getRawPath($extension = 'php')
+    {
+        $path = $this->getModuleBase() . implode("/", $this->parts);
+        if ($extension) {
+            return $path . '.' . $extension;
+        }
+
+        return $path;
+    }
 
     /**
      * @return string
      */
-    public function getPath()
+    public function getTestPath()
     {
-        $path = implode("/", $this->parts);
-        if ($this->type == 'src') {
-            $path = 'module/' . ucfirst($this->module) . '/' . $this->type . '/' .
-                ucfirst($this->module) . '/' . $path . '.php';
-        } elseif ($this->type == 'raw') {
-            $path = 'module/' . ucfirst($this->module) . '/' . $path . '.php';
-        } elseif ($this->type == 'bin') {
-            $path = 'module/' . ucfirst($this->module) . '/' . $path;
-        } else {
-            $path = 'module/' . ucfirst($this->module) . '/' . $this->type . '/' .
-                ucfirst($this->module) . 'Test/' . $path . 'Test.php';
+        return $this->getModuleBase() . 'test/' . ucfirst($this->module) .
+        'Test/' . implode("/", $this->parts) . 'Test.php';
+    }
+
+    /**
+     * @return string
+     */
+    public function getModuleBase()
+    {
+        $module = ucfirst($this->module);
+
+        if ($this->config->getBare()) {
+            return '';
         }
 
-        return $path;
+        return 'module/' . $module . '/';
     }
 }

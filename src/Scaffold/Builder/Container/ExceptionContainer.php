@@ -5,7 +5,6 @@
 
 namespace Scaffold\Builder\Container;
 
-
 use Scaffold\Builder\AbstractContainer;
 use Scaffold\Builder\Exception\ExceptionBuilder;
 use Scaffold\Config;

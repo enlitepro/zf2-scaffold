@@ -5,7 +5,6 @@
 
 namespace Scaffold;
 
-
 use Zend\Code\Generator\GeneratorInterface;
 
 class Model
@@ -117,6 +116,7 @@ class Model
     public function getClassName()
     {
         $parts = explode('\\', $this->getName());
+
         return array_pop($parts);
     }
 
@@ -125,10 +125,22 @@ class Model
      */
     public function getServiceName()
     {
-        $parts = explode('\\', $this->getName());
+        $parts = explode('\\', $this->getName(), 3);
 
         $module = array_shift($parts);
         $name = array_pop($parts);
+        $name = str_replace('\\', '', $name);
+
+        foreach (['Factory' => '', 'Controller' => ''] as $search => $replace) {
+            if (substr($name, -strlen($search)) == $search) {
+                $name = substr($name, 0, -strlen($search)) . $replace;
+                break;
+            }
+        }
+
+        if (substr($name, -11) == 'FormFactory') {
+            $name = substr($name, 0, -7);
+        }
 
         foreach (['Service', 'Form'] as $postfix) {
             if (substr($name, -strlen($postfix)) == $postfix) {
@@ -143,6 +155,7 @@ class Model
 
     /**
      * @return string
+     * @deprecated
      */
     public function getControllerName()
     {

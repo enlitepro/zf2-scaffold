@@ -5,11 +5,10 @@
 
 namespace Scaffold\Writer;
 
-
-use Scaffold\Config;
-use Scaffold\Writer\AbstractWriter;
-use Symfony\Component\Console\Output\OutputInterface;
 use Scaffold\Code\Generator\ValueGenerator;
+use Scaffold\Config;
+use Scaffold\PathBuilder;
+use Symfony\Component\Console\Output\OutputInterface;
 use Zend\Stdlib\ArrayUtils;
 
 class ConfigWriter extends AbstractWriter
@@ -37,15 +36,20 @@ class ConfigWriter extends AbstractWriter
     /**
      * @return string
      */
-    protected function getPath()
+    public function getPath()
     {
-        return 'module/' . ucfirst($this->config->getModule()) . '/config/service.config.php';
+        $builder = new PathBuilder($this->config);
+        $builder->setModule($this->config->getModule());
+        $builder->addPart('config');
+        $builder->addPart('service.config');
+
+        return $builder->getRawPath();
     }
 
     /**
      * Open config
      */
-    protected function open()
+    public function open()
     {
         $path = $this->getPath();
 
@@ -74,6 +78,16 @@ class ConfigWriter extends AbstractWriter
         $data = '<?php' . PHP_EOL . PHP_EOL . 'return ' . $config->generate() . ';';
 
         $this->writeData($this->getPath(), $data, $output);
+    }
+
+    /**
+     * Return value of ModuleConfig
+     *
+     * @return array
+     */
+    public function getModuleConfig()
+    {
+        return $this->moduleConfig;
     }
 
 }

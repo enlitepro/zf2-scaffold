@@ -5,11 +5,10 @@
 
 namespace Scaffold\Builder\Repository;
 
-
 use Scaffold\Builder\AbstractBuilder;
-use Scaffold\State;
 use Scaffold\Config;
 use Scaffold\Model;
+use Scaffold\State;
 use Zend\Code\Generator\ClassGenerator;
 use Zend\Code\Generator\DocBlockGenerator;
 use Zend\Code\Generator\MethodGenerator;
@@ -39,18 +38,17 @@ class RepositoryBuilder extends AbstractBuilder
             ->setModule($this->config->getModule())
             ->addPart('Repository')
             ->addPart($this->config->getName() . 'Repository')
-            ->getPath();
+            ->getSourcePath();
 
         $model->setName($name);
         $model->setPath($path);
-        $state->setRepositoryModel($model);
-        $state->addModel($model);
+        $state->addModel($model, 'repository');
     }
 
     /**
      * Build generators
      *
-     * @param State|\Scaffold\State $state
+     * @param  State|\Scaffold\State $state
      * @return \Scaffold\State|void
      */
     public function build(State $state)

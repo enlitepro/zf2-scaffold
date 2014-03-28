@@ -5,21 +5,14 @@
 
 namespace Scaffold\Builder\Entity;
 
-
 use Scaffold\Builder\AbstractBuilder;
-use Scaffold\State;
 use Scaffold\Code\Generator\ClassGenerator;
-use Scaffold\Config;
 use Scaffold\Model;
+use Scaffold\State;
 use Zend\Code\Generator\MethodGenerator;
 
 class EntityTestBuilder extends AbstractBuilder
 {
-    /**
-     * @var Config
-     */
-    protected $config;
-
     /**
      * @var Model
      */
@@ -38,22 +31,20 @@ class EntityTestBuilder extends AbstractBuilder
             ->getNamespace();
 
         $path = $this->buildPath()
-            ->setType('test')
             ->setModule($this->config->getModule())
             ->addPart('Entity')
             ->addPart($this->config->getName())
-            ->getPath();
+            ->getTestPath();
 
         $model->setName($name);
         $model->setPath($path);
-        $state->addModel($model);
+        $state->addModel($model, 'entity-test');
 
         $this->model = $model;
     }
 
-
     /**
-     * @param State|\Scaffold\State $state
+     * @param  State|\Scaffold\State $state
      * @return State|void
      */
     public function build(State $state)

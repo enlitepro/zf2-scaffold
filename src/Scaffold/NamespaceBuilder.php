@@ -5,7 +5,6 @@
 
 namespace Scaffold;
 
-
 class NamespaceBuilder
 {
 

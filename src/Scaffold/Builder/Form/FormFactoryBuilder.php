@@ -5,11 +5,10 @@
 
 namespace Scaffold\Builder\Form;
 
-
 use Scaffold\Builder\AbstractBuilder;
-use Scaffold\State;
 use Scaffold\Config;
 use Scaffold\Model;
+use Scaffold\State;
 use Zend\Code\Generator\ClassGenerator;
 use Zend\Code\Generator\DocBlockGenerator;
 use Zend\Code\Generator\MethodGenerator;
@@ -40,27 +39,26 @@ class FormFactoryBuilder extends AbstractBuilder
             ->setModule($this->config->getModule())
             ->addPart('Form')
             ->addPart($this->config->getName() . 'FormFactory')
-            ->getPath();
+            ->getSourcePath();
 
         $model->setName($name);
         $model->setPath($path);
-        $state->setFormFactoryModel($model);
-        $state->addModel($model);
 
         $config = array(
             'service_manager' => array(
                 'factories' => array(
-                    substr($model->getServiceName(), 0, -7) => $name
+                    $model->getServiceName() => $name
                 )
             )
         );
         $model->setServiceConfig($config);
+        $state->addModel($model, 'form-factory');
     }
 
     /**
      * Build generators
      *
-     * @param State $state
+     * @param  State $state
      * @return void
      */
     public function build(State $state)

@@ -5,7 +5,6 @@
 
 namespace Scaffold\Builder;
 
-
 use Scaffold\State;
 
 interface BuilderInterface

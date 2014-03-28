@@ -1,0 +1,9 @@
+namespace User;
+
+use Zend\Stdlib\AbstractOptions;
+
+class GroupOptions extends AbstractOptions
+{
+
+
+}

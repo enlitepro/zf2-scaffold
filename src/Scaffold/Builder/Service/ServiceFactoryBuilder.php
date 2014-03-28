@@ -5,11 +5,10 @@
 
 namespace Scaffold\Builder\Service;
 
-
 use Scaffold\Builder\AbstractBuilder;
-use Scaffold\State;
 use Scaffold\Config;
 use Scaffold\Model;
+use Scaffold\State;
 use Zend\Code\Generator\ClassGenerator;
 use Zend\Code\Generator\DocBlock\Tag;
 use Zend\Code\Generator\DocBlockGenerator;
@@ -46,27 +45,28 @@ class ServiceFactoryBuilder extends AbstractBuilder
             ->setModule($this->config->getModule())
             ->addPart('Service')
             ->addPart($this->config->getName() . 'ServiceFactory')
-            ->getPath();
+            ->getSourcePath();
 
         $model->setName($name);
         $model->setPath($path);
-        $state->addModel($model, 'service-factory');
 
         $config = array(
             'service_manager' => array(
                 'factories' => array(
-                    $state->getServiceModel()->getServiceName() => $name
+                    $model->getServiceName() => $name
                 )
             )
         );
         $model->setServiceConfig($config);
+        $state->addModel($model, 'service-factory');
+
         $this->model = $model;
     }
 
     /**
      * Build generators
      *
-     * @param State|\Scaffold\State $state
+     * @param  State|\Scaffold\State $state
      * @return \Scaffold\State|void
      */
     public function build(State $state)

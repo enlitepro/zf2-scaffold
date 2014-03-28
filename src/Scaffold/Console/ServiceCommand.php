@@ -5,13 +5,11 @@
 
 namespace Scaffold\Console;
 
-
 use Scaffold\Builder\Container\FullContainer;
 use Scaffold\Config;
 use Scaffold\State;
 use Scaffold\Writer\ConfigWriter;
 use Scaffold\Writer\ModelWriter;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -21,8 +19,12 @@ class ServiceCommand extends AbstractCommand
 {
     protected function configure()
     {
+        parent::configure();
+
         $this->setName('service');
-        $this->setDescription('Create service');
+        $this->setDescription(
+            'Generate service, service DI trait, service factory, service test and write to service.config.php'
+        );
         $this->addArgument('module', InputArgument::REQUIRED, 'Module name');
         $this->addArgument('name', InputArgument::REQUIRED, 'Service name');
         $this->addOption(
@@ -81,6 +83,11 @@ class ServiceCommand extends AbstractCommand
         $config = new Config();
         $config->setBasePath(getcwd());
         $config->setFromArray($input->getArguments());
+        $config->setFromArray(
+            array(
+                 'bare' => $input->getOption('bare')
+            )
+        );
 
         $moduleConfig = new ConfigWriter($config);
 

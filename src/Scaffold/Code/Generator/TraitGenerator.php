@@ -18,5 +18,4 @@ class TraitGenerator extends ClassGenerator
         return $code;
     }
 
-
 }

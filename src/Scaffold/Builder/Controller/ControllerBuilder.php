@@ -5,7 +5,6 @@
 
 namespace Scaffold\Builder\Controller;
 
-
 use Scaffold\Builder\AbstractBuilder;
 use Scaffold\Code\Generator\ClassGenerator;
 use Scaffold\Config;
@@ -41,27 +40,26 @@ class ControllerBuilder extends AbstractBuilder
             ->setModule($this->config->getModule())
             ->addPart('Controller')
             ->addPart($filename)
-            ->getPath();
+            ->getSourcePath();
 
         $model->setName($name);
         $model->setPath($path);
-        $state->setControllerModel($model);
-        $state->addModel($model);
 
         $config = array(
             'controllers' => array(
                 'invokables' => array(
-                    $model->getControllerName() => $model->getName()
+                    $model->getServiceName() => $model->getName()
                 )
             )
         );
         $model->setServiceConfig($config);
+        $state->addModel($model, 'controller');
     }
 
     /**
      * Build generators
      *
-     * @param State|State $state
+     * @param  State|State          $state
      * @return \Scaffold\State|void
      */
     public function build(State $state)

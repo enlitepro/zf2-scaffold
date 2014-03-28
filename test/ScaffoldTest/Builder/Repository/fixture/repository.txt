@@ -1,0 +1,18 @@
+namespace User\Repository;
+
+use Doctrine\ORM\EntityRepository;
+use User\Entity\Group;
+
+class GroupRepository extends EntityRepository
+{
+
+    /**
+     * @return Group
+     */
+    public function factory()
+    {
+        return new Group();
+    }
+
+
+}

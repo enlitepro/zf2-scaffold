@@ -5,7 +5,6 @@
 
 namespace Scaffold\Builder;
 
-
 use Scaffold\State;
 
 abstract class AbstractContainer implements BuilderInterface
@@ -42,6 +41,16 @@ abstract class AbstractContainer implements BuilderInterface
     public function addBuilder(BuilderInterface $builder)
     {
         $this->builders[] = $builder;
+    }
+
+    /**
+     * Return value of Builders
+     *
+     * @return \Scaffold\Builder\BuilderInterface[]
+     */
+    public function getBuilders()
+    {
+        return $this->builders;
     }
 
 }

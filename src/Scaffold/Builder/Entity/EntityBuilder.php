@@ -5,11 +5,10 @@
 
 namespace Scaffold\Builder\Entity;
 
-
 use Scaffold\Builder\AbstractBuilder;
-use Scaffold\State;
 use Scaffold\Config;
 use Scaffold\Model;
+use Scaffold\State;
 use Zend\Code\Generator\ClassGenerator;
 use Zend\Code\Generator\DocBlock\Tag;
 use Zend\Code\Generator\DocBlockGenerator;
@@ -38,17 +37,15 @@ class EntityBuilder extends AbstractBuilder
             ->setModule($this->config->getModule())
             ->addPart('Entity')
             ->addPart($this->config->getName())
-            ->getPath();
+            ->getSourcePath();
 
         $model->setName($name);
         $model->setPath($path);
-        $state->setEntityModel($model);
-        $state->addModel($model);
+        $state->addModel($model, 'entity');
     }
 
-
     /**
-     * @param State|\Scaffold\State $state
+     * @param  State|\Scaffold\State $state
      * @return State|void
      */
     public function build(State $state)

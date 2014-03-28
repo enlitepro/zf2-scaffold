@@ -5,12 +5,11 @@
 
 namespace Scaffold\Builder\Module;
 
-
-use Scaffold\State;
 use Scaffold\Builder\AbstractBuilder;
 use Scaffold\Code\Generator\RawGenerator;
 use Scaffold\Config;
 use Scaffold\Model;
+use Scaffold\State;
 
 class ConfigBuilder extends AbstractBuilder
 {
@@ -47,8 +46,7 @@ class ConfigBuilder extends AbstractBuilder
             ->setModule($this->config->getModule())
             ->addPart('config')
             ->addPart(basename($this->name, '.php'))
-            ->setType('raw')
-            ->getPath();
+            ->getRawPath();
 
         $model->setPath($path);
         $state->addModel($model, $this->name);

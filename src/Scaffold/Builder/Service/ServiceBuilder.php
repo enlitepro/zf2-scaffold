@@ -5,18 +5,15 @@
 
 namespace Scaffold\Builder\Service;
 
-
 use Scaffold\Builder\AbstractBuilder;
-use Scaffold\Builder\Service\ServiceFactoryBuilder;
-use Scaffold\State;
 use Scaffold\Code\Generator\ClassGenerator;
 use Scaffold\Config;
 use Scaffold\Model;
+use Scaffold\State;
 use Zend\Code\Generator\DocBlock\Tag;
 use Zend\Code\Generator\DocBlockGenerator;
 use Zend\Code\Generator\MethodGenerator;
 use Zend\Code\Generator\ParameterGenerator;
-use Zend\Code\Generator\PropertyGenerator;
 
 class ServiceBuilder extends AbstractBuilder
 {
@@ -24,20 +21,6 @@ class ServiceBuilder extends AbstractBuilder
      * @var Config
      */
     protected $config;
-
-    /**
-     * @var ServiceFactoryBuilder
-     */
-    protected $factory;
-
-    /**
-     * @param Config $config
-     */
-    public function __construct(Config $config)
-    {
-        $this->factory = new ServiceFactoryBuilder($config);
-        parent::__construct($config);
-    }
 
     /**
      * Prepare models
@@ -57,20 +40,17 @@ class ServiceBuilder extends AbstractBuilder
             ->setModule($this->config->getModule())
             ->addPart('Service')
             ->addPart($this->config->getName() . 'Service')
-            ->getPath();
+            ->getSourcePath();
 
         $model->setName($name);
         $model->setPath($path);
-        $state->setServiceModel($model);
-        $state->addModel($model);
-
-        $this->factory->prepare($state);
+        $state->addModel($model, 'service');
     }
 
     /**
      * Build generators
      *
-     * @param State|\Scaffold\State $state
+     * @param  State|\Scaffold\State $state
      * @return \Scaffold\State|void
      */
     public function build(State $state)
@@ -102,13 +82,12 @@ class ServiceBuilder extends AbstractBuilder
         $this->buildFactory($generator, $state);
 
         $model->setGenerator($generator);
-        $this->factory->build($state);
     }
 
     /**
      * Build method factory
      *
-     * @param ClassGenerator $generator
+     * @param ClassGenerator  $generator
      * @param \Scaffold\State $state
      */
     public function buildFactory(ClassGenerator $generator, State $state)

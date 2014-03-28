@@ -5,7 +5,6 @@
 
 namespace Scaffold\Console;
 
-
 use Scaffold\State;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -16,8 +15,10 @@ class EntityCommand extends AbstractCommand
 
     protected function configure()
     {
+        parent::configure();
+
         $this->setName('entity');
-        $this->setDescription('Create entity');
+        $this->setDescription('Generate entity');
         $this->addArgument('module', InputArgument::REQUIRED, 'Module name');
         $this->addArgument('name', InputArgument::REQUIRED, 'Entity name');
     }
@@ -26,9 +27,9 @@ class EntityCommand extends AbstractCommand
     {
         $writeState = new State($this->configWriter);
         $writeState->addModel($state->getEntityModel());
+        $writeState->addModel($state->getModel('entity-test'));
 
         parent::write($writeState, $input, $output);
     }
-
 
 }

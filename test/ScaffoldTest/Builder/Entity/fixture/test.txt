@@ -1,0 +1,16 @@
+namespace UserTest\Entity;
+
+use User\Entity\Group;
+
+class GroupTest extends \PHPUnit_Framework_TestCase
+{
+
+    public function testGetSetId()
+    {
+        $object = new Group();
+        $object->setId(123);
+        $this->assertEquals(123, $object->getId());
+    }
+
+
+}

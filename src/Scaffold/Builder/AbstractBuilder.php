@@ -5,11 +5,9 @@
 
 namespace Scaffold\Builder;
 
-
 use Scaffold\Config;
 use Scaffold\NamespaceBuilder;
 use Scaffold\PathBuilder;
-use Scaffold\State;
 use Zend\Code\Generator\ClassGenerator;
 use Zend\Code\Generator\DocBlock\Tag;
 use Zend\Code\Generator\DocBlockGenerator;
@@ -61,7 +59,7 @@ abstract class AbstractBuilder implements BuilderInterface
      */
     protected function buildPath()
     {
-        return new PathBuilder();
+        return new PathBuilder($this->config);
     }
 
     /**
@@ -76,8 +74,8 @@ abstract class AbstractBuilder implements BuilderInterface
 
     /**
      * @param ClassGenerator $generator
-     * @param string $name
-     * @param string $type
+     * @param string         $name
+     * @param string         $type
      */
     protected function addProperty(ClassGenerator $generator, $name, $type)
     {
@@ -85,8 +83,8 @@ abstract class AbstractBuilder implements BuilderInterface
     }
 
     /**
-     * @param string $name
-     * @param string $type
+     * @param  string            $name
+     * @param  string            $type
      * @return PropertyGenerator
      */
     protected function getProperty($name, $type)
@@ -99,8 +97,8 @@ abstract class AbstractBuilder implements BuilderInterface
 
     /**
      * @param ClassGenerator $generator
-     * @param string $name
-     * @param string $type
+     * @param string         $name
+     * @param string         $type
      */
     public function addGetter(ClassGenerator $generator, $name, $type)
     {
@@ -108,8 +106,8 @@ abstract class AbstractBuilder implements BuilderInterface
     }
 
     /**
-     * @param string $name
-     * @param string $type
+     * @param  string                               $name
+     * @param  string                               $type
      * @return \Zend\Code\Generator\MethodGenerator
      */
     protected function getGetter($name, $type)
@@ -124,9 +122,9 @@ abstract class AbstractBuilder implements BuilderInterface
 
     /**
      * @param ClassGenerator $generator
-     * @param string $name
-     * @param string $type
-     * @param string $lazy
+     * @param string         $name
+     * @param string         $type
+     * @param string         $lazy
      */
     public function addLazyGetter(ClassGenerator $generator, $name, $type, $lazy)
     {
@@ -134,9 +132,9 @@ abstract class AbstractBuilder implements BuilderInterface
     }
 
     /**
-     * @param string $name
-     * @param string $type
-     * @param string $lazy
+     * @param  string                               $name
+     * @param  string                               $type
+     * @param  string                               $lazy
      * @return \Zend\Code\Generator\MethodGenerator
      */
     protected function getLazyGetter($name, $type, $lazy)
@@ -158,8 +156,8 @@ EOF;
 
     /**
      * @param ClassGenerator $generator
-     * @param string $name
-     * @param string $type
+     * @param string         $name
+     * @param string         $type
      */
     public function addSetter(ClassGenerator $generator, $name, $type)
     {
@@ -167,8 +165,8 @@ EOF;
     }
 
     /**
-     * @param string $name
-     * @param string $type
+     * @param  string                               $name
+     * @param  string                               $type
      * @return \Zend\Code\Generator\MethodGenerator
      */
     protected function getSetter($name, $type)

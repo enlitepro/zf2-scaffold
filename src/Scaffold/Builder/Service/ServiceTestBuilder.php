@@ -5,12 +5,11 @@
 
 namespace Scaffold\Builder\Service;
 
-
 use Scaffold\Builder\AbstractBuilder;
-use Scaffold\State;
 use Scaffold\Code\Generator\ClassGenerator;
 use Scaffold\Config;
 use Scaffold\Model;
+use Scaffold\State;
 use Zend\Code\Generator\MethodGenerator;
 use Zend\Code\Generator\ParameterGenerator;
 
@@ -39,11 +38,10 @@ class ServiceTestBuilder extends AbstractBuilder
             ->getNamespace();
 
         $path = $this->buildPath()
-            ->setType('test')
             ->setModule($this->config->getModule())
             ->addPart('Service')
             ->addPart($this->config->getName() . 'Service')
-            ->getPath();
+            ->getTestPath();
 
         $model->setName($name);
         $model->setPath($path);
@@ -52,9 +50,8 @@ class ServiceTestBuilder extends AbstractBuilder
         $this->model = $model;
     }
 
-
     /**
-     * @param State|State $state
+     * @param  State|State $state
      * @return State|void
      */
     public function build(State $state)
@@ -70,7 +67,6 @@ class ServiceTestBuilder extends AbstractBuilder
         $generator->addUse('Zend\ServiceManager\ServiceManager');
         $generator->addUse('Doctrine\ORM\EntityManager');
 
-
         $this->addLoadById($generator, $state);
         $this->addSearch($generator, $state);
         $this->addSave($generator, $state);
@@ -84,7 +80,7 @@ class ServiceTestBuilder extends AbstractBuilder
 
     /**
      * @param ClassGenerator $generator
-     * @param State $state
+     * @param State          $state
      */
     public function addLoadById(ClassGenerator $generator, State $state)
     {
@@ -147,7 +143,7 @@ EOF;
 
     /**
      * @param ClassGenerator $generator
-     * @param State $state
+     * @param State          $state
      */
     public function addSave(ClassGenerator $generator, State $state)
     {
@@ -168,7 +164,7 @@ EOF;
 
     /**
      * @param ClassGenerator $generator
-     * @param State $state
+     * @param State          $state
      */
     public function addDelete(ClassGenerator $generator, State $state)
     {
@@ -188,7 +184,7 @@ EOF;
     }
 
     /**
-     * @param ClassGenerator $generator
+     * @param ClassGenerator  $generator
      * @param \Scaffold\State $state
      */
     public function addGetServiceManager(ClassGenerator $generator, State $state)
@@ -202,7 +198,7 @@ EOF;
 
     /**
      * @param ClassGenerator $generator
-     * @param State $state
+     * @param State          $state
      */
     public function addGetObject(ClassGenerator $generator, State $state)
     {
@@ -219,8 +215,7 @@ if (count(\$methods)) {
         ->disableOriginalConstructor()
         ->setMethods(\$methods)
         ->getMock();
-}
-else {
+} else {
     \$object = new $className(\$this->getServiceManager());
 }
 
@@ -237,7 +232,7 @@ EOF;
 
     /**
      * @param ClassGenerator $generator
-     * @param State $state
+     * @param State          $state
      */
     public function addGetRepository(ClassGenerator $generator, State $state)
     {
@@ -258,7 +253,7 @@ EOF;
 
     /**
      * @param ClassGenerator $generator
-     * @param State $state
+     * @param State          $state
      */
     public function addGetEntityManager(ClassGenerator $generator, State $state)
     {

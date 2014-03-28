@@ -5,7 +5,6 @@
 
 namespace Scaffold\Console;
 
-
 use Scaffold\State;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -16,8 +15,10 @@ class RepositoryCommand extends AbstractCommand
 {
     protected function configure()
     {
+        parent::configure();
+
         $this->setName('repository');
-        $this->setDescription('Create controller');
+        $this->setDescription('Generate repository and repository DI trait');
         $this->addArgument('module', InputArgument::REQUIRED, 'Module name');
         $this->addArgument('name', InputArgument::REQUIRED, 'Repository name');
         $this->addOption('no-trait', null, InputOption::VALUE_NONE, 'Generate without trait');
@@ -38,6 +39,5 @@ class RepositoryCommand extends AbstractCommand
 
         parent::write($writeState, $input, $output);
     }
-
 
 }
