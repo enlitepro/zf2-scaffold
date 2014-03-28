@@ -9,8 +9,8 @@
         }
     ],
     "require": {
-        "zendframework/zend-code": ">=2.2.1",
-        "zendframework/zend-stdlib": ">=2.2.1",
+        "zendframework/zend-code": ">=2.3.0",
+        "zendframework/zend-stdlib": ">=2.3.0",
         "symfony/console": ">=2.0.7"
     },
     "bin": ["bin/scaffold.php"],

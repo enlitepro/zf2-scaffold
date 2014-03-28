@@ -116,7 +116,7 @@ class ServiceBuilder extends AbstractBuilder
         $repository = ucfirst($state->getRepositoryModel()->getClassName());
 
         $docBlock = new DocBlockGenerator();
-        $docBlock->setTag(new Tag(['name' => 'return', 'description' => $this->config->getName()]));
+        $docBlock->setTag(new Tag\GenericTag('return', $this->config->getName()));
 
         $factory = new MethodGenerator();
         $factory->setDocBlock($docBlock);
@@ -131,7 +131,7 @@ class ServiceBuilder extends AbstractBuilder
         $method->setParameter(new ParameterGenerator('serviceLocator', 'ServiceLocatorInterface'));
         $method->setDocBlock(new DocBlockGenerator());
         $method->getDocBlock()->setTag(
-            new Tag(['name' => 'param', 'description' => 'ServiceLocatorInterface $serviceLocator'])
+            new Tag\GenericTag('param', 'ServiceLocatorInterface $serviceLocator')
         );
         $method->setBody('$this->serviceLocator = $serviceLocator;');
 
@@ -154,10 +154,10 @@ EOF;
         $method = new MethodGenerator('loadById');
         $method->setParameter(new ParameterGenerator('id'));
         $method->setDocBlock(new DocBlockGenerator());
-        $method->getDocBlock()->setTag(new Tag(['name' => 'param', 'description' => 'int $id']));
-        $method->getDocBlock()->setTag(new Tag(['name' => 'throws', 'description' => 'NotFoundException']));
+        $method->getDocBlock()->setTag(new Tag\GenericTag('param', 'int $id'));
+        $method->getDocBlock()->setTag(new Tag\GenericTag('throws', 'NotFoundException'));
         $method->getDocBlock()->setTag(
-            new Tag(['name' => 'return', 'description' => $state->getEntityModel()->getClassName()])
+            new Tag\GenericTag('return', $state->getEntityModel()->getClassName())
         );
         $method->setBody($body);
 
@@ -172,9 +172,9 @@ EOF;
         $method = new MethodGenerator('search');
         $method->setParameter(new ParameterGenerator('criteria', 'array', []));
         $method->setDocBlock(new DocBlockGenerator());
-        $method->getDocBlock()->setTag(new Tag(['name' => 'param', 'description' => 'array $criteria']));
+        $method->getDocBlock()->setTag(new Tag\GenericTag('param', 'array $criteria'));
         $method->getDocBlock()->setTag(
-            new Tag(['name' => 'return', 'description' => $state->getEntityModel()->getClassName() . '[]'])
+            new Tag\GenericTag('return', $state->getEntityModel()->getClassName() . '[]')
         );
         $method->setBody($body);
 
@@ -189,7 +189,7 @@ EOF;
         $method->setParameter(new ParameterGenerator('model', $state->getEntityModel()->getClassName()));
         $method->setDocBlock(new DocBlockGenerator());
         $method->getDocBlock()->setTag(
-            new Tag(['name' => 'param', 'description' => $state->getEntityModel()->getClassName() . ' $model'])
+            new Tag\GenericTag('param', $state->getEntityModel()->getClassName() . ' $model')
         );
         $method->setBody($body);
 
@@ -204,7 +204,7 @@ EOF;
         $method->setParameter(new ParameterGenerator('model', $state->getEntityModel()->getClassName()));
         $method->setDocBlock(new DocBlockGenerator());
         $method->getDocBlock()->setTag(
-            new Tag(['name' => 'param', 'description' => $state->getEntityModel()->getClassName() . ' $model'])
+            new Tag\GenericTag('param', $state->getEntityModel()->getClassName() . ' $model')
         );
         $method->setBody($body);
 

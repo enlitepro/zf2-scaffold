@@ -85,8 +85,8 @@ class ServiceFactoryBuilder extends AbstractBuilder
         $method->setBody('return new ' . $state->getServiceModel()->getClassName() . '($serviceLocator);');
 
         $doc = new DocBlockGenerator('Create service');
-        $doc->setTag(new Tag(['name' => 'param', 'description' => 'ServiceLocatorInterface|ServiceManager $serviceLocator']));
-        $doc->setTag(new Tag(['name' => 'return', 'description' => $state->getServiceModel()->getClassName()]));
+        $doc->setTag(new Tag\GenericTag('param', 'ServiceLocatorInterface|ServiceManager $serviceLocator'));
+        $doc->setTag(new Tag\GenericTag('return', $state->getServiceModel()->getClassName()));
         $method->setDocBlock($doc);
 
         $generator->addMethodFromGenerator($method);

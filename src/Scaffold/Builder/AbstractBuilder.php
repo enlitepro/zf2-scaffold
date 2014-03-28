@@ -93,7 +93,7 @@ abstract class AbstractBuilder implements BuilderInterface
     {
         $property = new PropertyGenerator($name, null, PropertyGenerator::FLAG_PROTECTED);
         $property->setDocBlock(new DocBlockGenerator());
-        $property->getDocBlock()->setTag(new Tag(['name' => 'var', 'description' => $type]));
+        $property->getDocBlock()->setTag(new Tag\GenericTag('var', $type));
         return $property;
     }
 
@@ -116,7 +116,7 @@ abstract class AbstractBuilder implements BuilderInterface
     {
         $method = new MethodGenerator('get' . ucfirst($name));
         $method->setDocBlock(new DocBlockGenerator());
-        $method->getDocBlock()->setTag(new Tag(['name' => 'return', 'description' => $type]));
+        $method->getDocBlock()->setTag(new Tag\GenericTag('return', $type));
         $method->setBody('return $this->' . $name . ';');
 
         return $method;
@@ -177,7 +177,7 @@ EOF;
         $method->setParameter(new ParameterGenerator($name, $type));
 
         $method->setDocBlock(new DocBlockGenerator());
-        $method->getDocBlock()->setTag(new Tag(['name' => 'param', 'description' => $type . ' $' . $name]));
+        $method->getDocBlock()->setTag(new Tag\GenericTag('param', $type . ' $' . $name));
         $method->setBody('$this->' . $name . ' = $' . $name . ';');
 
         return $method;

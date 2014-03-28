@@ -69,8 +69,8 @@ class EntityBuilder extends AbstractBuilder
         $repository = $state->getRepositoryModel()->getName();
 
         $doc = new DocBlockGenerator();
-        $doc->setTag(new Tag(['name' => 'ORM\Entity(repositoryClass="' . $repository . '")']));
-        $doc->setTag(new Tag(['name' => 'ORM\Table(name="' . strtolower($this->config->getName()) . '")']));
+        $doc->setTag(new Tag\GenericTag('ORM\Entity(repositoryClass="' . $repository . '")'));
+        $doc->setTag(new Tag\GenericTag('ORM\Table(name="' . strtolower($this->config->getName()) . '")'));
 
         return $doc;
     }
@@ -82,10 +82,10 @@ class EntityBuilder extends AbstractBuilder
     {
         $id = new PropertyGenerator('id', null, PropertyGenerator::FLAG_PROTECTED);
         $id->setDocBlock(new DocBlockGenerator());
-        $id->getDocBlock()->setTag(new Tag(['name' => 'var', 'description' => 'int']));
-        $id->getDocBlock()->setTag(new Tag(['name' => 'ORM\Id']));
-        $id->getDocBlock()->setTag(new Tag(['name' => 'ORM\GeneratedValue']));
-        $id->getDocBlock()->setTag(new Tag(['name' => 'ORM\Column(type="integer")']));
+        $id->getDocBlock()->setTag(new Tag\GenericTag('var', 'int'));
+        $id->getDocBlock()->setTag(new Tag\GenericTag('ORM\Id'));
+        $id->getDocBlock()->setTag(new Tag\GenericTag('ORM\GeneratedValue'));
+        $id->getDocBlock()->setTag(new Tag\GenericTag('ORM\Column(type="integer")'));
 
         return $id;
     }

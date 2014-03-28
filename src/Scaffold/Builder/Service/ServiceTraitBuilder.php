@@ -99,7 +99,7 @@ EOF;
         $getter = $this->getGetter($property, $class);
         $getter->setBody($code);
         $getter->getDocBlock()->setTag(
-            new Tag(['name' => 'throws', 'description' => $state->getModel('RuntimeException')->getClassName()])
+            new Tag\GenericTag('throws', $state->getModel('RuntimeException')->getClassName())
         );
         $generator->addMethodFromGenerator($getter);
 //
